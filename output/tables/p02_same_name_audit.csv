@@ -1,0 +1,4 @@
+scope,distinct_names,names_shared_by_multiple_persons,max_persons_per_name,persons_with_shared_name
+cbdb_universe,22947,52,3,108
+cgedq_universe,37509,1134,7,2602
+cbdb_qing_population,211686,20143,17,46283

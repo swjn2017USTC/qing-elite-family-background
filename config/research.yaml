@@ -1,0 +1,86 @@
+# 研究参数与 codebook（P06）
+#
+# 本文件是**唯一**的"寒门 / 官宦"判定来源：所有分类都由 Python 按此处的规则计算，
+# 不交给任何 LLM。改动此文件必须重新跑 `uv run python -m qing_elite.build_analysis`
+# 并在 P06.md 记录变更理由。
+#
+# 依据：OMP_PLAN.md §八（核心变量）、§九（家世指标）、§十（旗籍与地域）、§十一（coverage 优先）。
+
+version: 1
+phase: P06
+
+time_windows:
+  study: {start: 1644, end: 1820}
+  # D 层（CGED-Q JSL）只覆盖 1760-1798，因此 A/B/C/D 的共同分析限定在该窗口
+  d_layer: {start: 1760, end: 1798}
+
+# 时代分组：以人物在窗口内的最早任职年（无任职年则用索引年，并在输出中标注）
+cohorts:
+  - {label: "1644-1700", start: 1644, end: 1700}
+  - {label: "1701-1760", start: 1701, end: 1760}
+  - {label: "1761-1820", start: 1761, end: 1820}
+
+groups:
+  # 地域探索变量（计划书 §十）：第一版只做这一个
+  jiangnan_core: [江蘇, 浙江, 安徽]
+  # 旗籍分组口径：只有"有旗籍证据"与"旗籍未知"两类；
+  # **unknown 不得当作"非旗人"**（missing != commoner）
+  banner_groups:
+    manchu_banner: 滿洲旗人
+    mongol_banner: 蒙古旗人
+    han_bannerman: 漢軍旗人
+    booi_bannerman: 內務府包衣旗人
+    banner_unspecified: 旗人（未分族）
+    bannerman_ethnicity_unknown: 旗人（來源未分族）
+    unknown: 旗籍未知
+
+indicators:
+  # 槽位层面：某一位祖先"有功名 / 有任官"
+  slot_degree_known:
+    rule: "该槽位有明确功名记载（CBDB ENTRY_DATA，或 LLM 抽取且证据逐字命中）"
+  slot_office_known:
+    rule: "该槽位有明确任官记载（CBDB POSTED_TO_OFFICE_DATA，或 LLM 抽取且证据逐字命中）"
+  slot_sufficient:
+    rule: >
+      该槽位"信息充分"= 已知这位祖先是谁（CBDB 有明确亲属 ID，或 LLM 抽取出姓名且证据逐字命中）。
+      注意：已知祖先而无功名/任官记录 ≠ 已知其无功名（该区别由 strict_commoner_3g 的 NA 规则承担）。
+
+  # 人物层面（计划书 §九）
+  ancestor_official_any:
+    rule: "三代中至少一位有任官记载"
+    na_rule: "三人皆无任官记载时为 0；若三人皆未知则为 NA"
+  ancestor_degree_any:
+    rule: "三代中至少一位有科举功名记载"
+    na_rule: "同上"
+  ancestor_high_official:
+    rule: "三代中至少一位担任过属于指定 tier 的官职"
+    # 预注册：primary = 本研究 tier 表中的 A1/A2/A3/B/C（中枢与省级以上）
+    primary_tiers: [A1, A2, A3, B, C]
+    # 敏感性：只算中枢与六部（A1/A2/A3/B）
+    sensitivity_tiers: [A1, A2, A3, B]
+    na_rule: "无任何祖先任官记载时为 NA（不计入 0）"
+  elite_generations_count:
+    rule: "父、祖、曾祖三代中，有'功名或任官'的代数（0–3）"
+    na_rule: "三位祖先皆未知时为 NA"
+  strict_commoner_3g:
+    rule: >
+      仅当三代**都**信息充分（slot_sufficient），且三代**都**无功名、**都**无任官记载时记为 1。
+      三代中任何一位有功名/任官 → 0；信息不充分 → NA。
+    na_rule: "信息不足一律 NA，禁止用 0 填充（unknown != 0；missing != commoner）"
+
+models:
+  # 简单、可解释：二值/logit 与线性概率，不做因果识别
+  common_window:
+    window: d_layer
+    formula: "ancestor_official_any ~ C(tier_group) + C(cohort) + C(banner_group)"
+    note: "A/B/C/D 共同分析只在 1760-1798（D 层的时间范围）"
+  long_run:
+    window: study
+    formula: "ancestor_official_any ~ C(tier_group) + C(cohort)"
+    note: "1644-1820 只做 A/B/C 的长时段趋势"
+  tier_grouping:
+    # 细分层人数过少（A2=11、A3=21），建模时合并为中枢组，细分结果单独出描述表
+    A: [A1, A2, A3]
+    B: [B]
+    C: [C]
+    D: [D]

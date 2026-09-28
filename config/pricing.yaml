@@ -1,0 +1,16 @@
+# Cost guardrails in RMB, for the official DeepSeek research channel.
+# Enforced by the local pipeline before each batch, never by the provider.
+
+currency: CNY
+soft_budget_rmb: 20
+hard_budget_rmb: 30
+target_input_tokens: 5000000
+target_output_tokens: 800000
+
+rules:
+  - "No batch API spend before P04."
+  - "P03 must re-estimate cost from the real source-window lengths before P04."
+  - "P04 is a 30-50 person pilot only; batching starts at P05."
+  - "Soft budget reached: stop launching new batches, print a warning and the remaining task count."
+  - "Hard budget reached: stop all new requests immediately and save a checkpoint."
+  - "Never settle the bill after the run; count tokens and RMB before each batch."

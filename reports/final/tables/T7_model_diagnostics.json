@@ -1,0 +1,141 @@
+[
+  {
+    "model": "common_window",
+    "n_persons": 442,
+    "n_with_outcome": 442,
+    "n_missing_outcome": 0,
+    "cells": [
+      {
+        "tier_group": "A",
+        "cohort": "1701-1760",
+        "n": 1,
+        "n_yes": 1
+      },
+      {
+        "tier_group": "A",
+        "cohort": "1761-1820",
+        "n": 10,
+        "n_yes": 5
+      },
+      {
+        "tier_group": "B",
+        "cohort": "1701-1760",
+        "n": 1,
+        "n_yes": 0
+      },
+      {
+        "tier_group": "B",
+        "cohort": "1761-1820",
+        "n": 38,
+        "n_yes": 8
+      },
+      {
+        "tier_group": "C",
+        "cohort": "1701-1760",
+        "n": 2,
+        "n_yes": 0
+      },
+      {
+        "tier_group": "C",
+        "cohort": "1761-1820",
+        "n": 19,
+        "n_yes": 3
+      },
+      {
+        "tier_group": "D",
+        "cohort": "1701-1760",
+        "n": 64,
+        "n_yes": 33
+      },
+      {
+        "tier_group": "D",
+        "cohort": "1761-1820",
+        "n": 307,
+        "n_yes": 173
+      }
+    ],
+    "min_cell": 1,
+    "spec": {
+      "window": "d_layer",
+      "formula": "ancestor_official_any ~ C(tier_group) + C(cohort) + C(banner_group)",
+      "note": "A/B/C/D 共同分析只在 1760-1798（D 层的时间范围）"
+    },
+    "formulas_attempted": [
+      "ancestor_official_any ~ C(tier_group) + C(cohort) + C(banner_group)",
+      "ancestor_official_any ~ C(tier_group) + C(cohort)"
+    ],
+    "formula_used": "ancestor_official_any ~ C(tier_group) + C(cohort)"
+  },
+  {
+    "model": "long_run",
+    "n_persons": 235,
+    "n_with_outcome": 235,
+    "n_missing_outcome": 0,
+    "cells": [
+      {
+        "tier_group": "A",
+        "cohort": "1644-1700",
+        "n": 14,
+        "n_yes": 7
+      },
+      {
+        "tier_group": "A",
+        "cohort": "1701-1760",
+        "n": 21,
+        "n_yes": 13
+      },
+      {
+        "tier_group": "A",
+        "cohort": "1761-1820",
+        "n": 11,
+        "n_yes": 6
+      },
+      {
+        "tier_group": "B",
+        "cohort": "1644-1700",
+        "n": 30,
+        "n_yes": 12
+      },
+      {
+        "tier_group": "B",
+        "cohort": "1701-1760",
+        "n": 43,
+        "n_yes": 16
+      },
+      {
+        "tier_group": "B",
+        "cohort": "1761-1820",
+        "n": 57,
+        "n_yes": 11
+      },
+      {
+        "tier_group": "C",
+        "cohort": "1644-1700",
+        "n": 9,
+        "n_yes": 2
+      },
+      {
+        "tier_group": "C",
+        "cohort": "1701-1760",
+        "n": 22,
+        "n_yes": 8
+      },
+      {
+        "tier_group": "C",
+        "cohort": "1761-1820",
+        "n": 28,
+        "n_yes": 5
+      }
+    ],
+    "min_cell": 9,
+    "spec": {
+      "window": "study",
+      "formula": "ancestor_official_any ~ C(tier_group) + C(cohort)",
+      "note": "1644-1820 只做 A/B/C 的长时段趋势"
+    },
+    "formulas_attempted": [
+      "ancestor_official_any ~ C(tier_group) + C(cohort)"
+    ],
+    "formula_used": "ancestor_official_any ~ C(tier_group) + C(cohort)"
+  }
+]

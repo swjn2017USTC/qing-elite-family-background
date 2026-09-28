@@ -1,0 +1,45 @@
+# Project-level OMP configuration for qing-elite-family-background.
+#
+# Loaded automatically whenever the working directory is inside this repository
+# (project `.omp/config.yml` merges over the global profile key by key).
+# Verified against OMP 18.1.13 with `omp config list --json` and
+# `omp config get modelRoles`.
+#
+# `modelRoles` values are model-pattern strings. An optional ":<level>" suffix
+# sets that role's explicit thinking level (the same selector syntax accepted by
+# `omp --model` / `omp bench`). All coding roles are pinned to the OpenCode GO
+# provider's DeepSeek V4.1 Flash at the lowest level it supports ("low"; the
+# model exposes only low, high, max).
+
+modelRoleStorage: project
+defaultThinkingLevel: low
+
+modelRoles:
+  default: opencode-go/deepseek-v4.1-flash:low
+  task: opencode-go/deepseek-v4.1-flash:low
+  plan: opencode-go/deepseek-v4.1-flash:low
+  slow: opencode-go/deepseek-v4.1-flash:low
+  smol: opencode-go/deepseek-v4.1-flash:low
+  tiny: opencode-go/deepseek-v4.1-flash:low
+  commit: opencode-go/deepseek-v4.1-flash:low
+  advisor: opencode-go/deepseek-v4.1-flash:low
+
+# First version: no advisor. Subagents are capped and cannot escalate thinking.
+advisor:
+  enabled: false
+
+task:
+  maxConcurrency: 2
+  enableEffort: false
+  agentModelOverrides:
+    task: opencode-go/deepseek-v4.1-flash:low
+    scout: opencode-go/deepseek-v4.1-flash:low
+    reviewer: opencode-go/deepseek-v4.1-flash:low
+    sonic: opencode-go/deepseek-v4.1-flash:low
+    security-reviewer: opencode-go/deepseek-v4.1-flash:low
+  agentAdvisor:
+    task: "off"
+    scout: "off"
+    reviewer: "off"
+    sonic: "off"
+    security-reviewer: "off"

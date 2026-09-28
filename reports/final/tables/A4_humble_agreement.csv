@@ -1,0 +1,11 @@
+definition_a,definition_b,n_overlap,agreement_pct
+def1_strict_commoner_3g,def2_no_elite_among_known,62,100.0
+def1_strict_commoner_3g,def3_no_official_among_known,62,96.77
+def1_strict_commoner_3g,def4_no_high_official,9,33.33
+def1_strict_commoner_3g,def5_zero_elite_generations,62,100.0
+def2_no_elite_among_known,def3_no_official_among_known,698,92.69
+def2_no_elite_among_known,def4_no_high_official,311,27.65
+def2_no_elite_among_known,def5_zero_elite_generations,698,100.0
+def3_no_official_among_known,def4_no_high_official,311,27.65
+def3_no_official_among_known,def5_zero_elite_generations,698,92.69
+def4_no_high_official,def5_zero_elite_generations,311,27.65

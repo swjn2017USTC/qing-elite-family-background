@@ -1,0 +1,332 @@
+{
+  "release": "v0.3-cohort-kin-network",
+  "generated_at": "2026-09-28T00:46:38+00:00",
+  "code_commit": "021f76eb7e4332d75531e2c57fa246161cc36ee6",
+  "code_commit_short": "021f76e",
+  "branch": "upgrade/v0.3-cohort-kin-network",
+  "baseline_tag": "v0.2-u03-frozen-20260927",
+  "environment": {
+    "python": "3.12.14",
+    "platform": "macOS-26.5-arm64-arm-64bit",
+    "machine": "arm64",
+    "lockfile": "uv.lock",
+    "snakemake": "9.27.0"
+  },
+  "contracts": {
+    "research_contract": "v0.3.0",
+    "claim_level": "descriptive_association",
+    "ontology_version": "relations-v2",
+    "review_policy": "review-policy-v1",
+    "rank_table_verification_status": "pending"
+  },
+  "seeds": {
+    "pilot_frame_seed": 20260927,
+    "linkage_seed": 20260927
+  },
+  "thresholds": {
+    "linkage_auto_accept_precision": 0.99,
+    "linkage_ml_threshold": 0.35,
+    "review_budgets": {
+      "manual_link_new_target": 300,
+      "manual_assertion_review_target": 200,
+      "unit": "absolute_count",
+      "on_exceeded": "stage_fail_not_expand"
+    },
+    "extraction_gates": {
+      "min_precision": 0.7,
+      "min_recall": 0.5,
+      "min_kin_name_accuracy": 0.8,
+      "max_ocr_failure_rate": 0.2,
+      "min_attribute_accuracy": 0.7,
+      "action_on_fail": "drop_source",
+      "action_on_attribute_fail": "keep_identity_only"
+    }
+  },
+  "models": {
+    "extraction": "deepseek-flash (official API, thinking disabled, JSON output)",
+    "ocr": "PaddleOCR-VL-1.6 (official service)",
+    "coding": "opencode-go/deepseek-v4.1-flash",
+    "prompt_versions": [
+      "p04-family-v3 (v0.1 lineage)",
+      "u05r-abstain-v1"
+    ]
+  },
+  "upstream": {
+    "linkage_code": {
+      "repo": "bruceyyu/ML-Chinese-record-linkage",
+      "commit": "79fec7e5b7c16a9bb852b00c19dd4f969881d849",
+      "license": "CC BY-NC 4.0 (LICENSE.txt); README badge says CC BY-SA 4.0 — treat the stricter",
+      "use": "ideas only (blocking / supervised matching / active learning / graph clustering / temporal connectivity); no code or binaries vendored"
+    },
+    "literature_pipeline": "ACADEMIC_LITERATURE_PIPELINE_HANDOFF (framework reused, no topic data)"
+  },
+  "literature_registry": {
+    "rows": 713,
+    "core": 10,
+    "path": "sources/literature/registry/literature_registry.jsonl",
+    "sha256": "fcd650e9cee4e2792bdb70190e7cb1a2345020d44792b6bb2b899efa01db7b5e"
+  },
+  "raw_sources": [
+    {
+      "source": "cbdb",
+      "file": "data/raw/cbdb/cbdb_20260926.zip",
+      "release": "cbdb_20260926",
+      "retrieved_at": "2026-09-27",
+      "url": "https://huggingface.co/datasets/cbdb/cbdb-sqlite/resolve/main/history/cbdb_202609/cbdb_20260926.zip",
+      "sha256": "663f00a0aff375c352aa42b7cea6975db8e3a90f2ab96590b7e006bfdc1f1945",
+      "verified_against": "https://raw.githubusercontent.com/cbdb-project/cbdb_sqlite/master/latest.json (sha256 of the contained sqlite)",
+      "notes": "zip 与其中 sqlite3 的 sha256 均与上游 latest.json 一致"
+    },
+    {
+      "source": "cbdb",
+      "file": "data/raw/cbdb/cbdb_20260926.sqlite3",
+      "release": "cbdb_20260926",
+      "retrieved_at": "2026-09-27",
+      "url": "unzipped from the archive above",
+      "sha256": "3b8809b2e57d2ab89c837fd45fd53ec1b64779d2b428bd352ddcd8f730a2a62d",
+      "verified_against": "latest.json sha256 = 3b8809b2e57d2ab89c837fd45fd53ec1b64779d2b428bd352ddcd8f730a2a62d",
+      "notes": "仅本地只读使用；不入 Git；V0.3 使用 20260926 版（v0.1 冻结的是 20260912）"
+    },
+    {
+      "source": "tongguanlu_commons",
+      "file": "data/raw/tongguanlu/tongguanlu_jiangnan_lingshu_jinkuiguang.pdf",
+      "release": "WZLib-DB-143494",
+      "retrieved_at": "2026-09-27",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/58/WZLib-DB-143494_%E6%B1%9F%E5%8D%97%E5%AF%A7%E8%9C%80%E5%90%8C%E5%AE%98%E9%8C%84%E9%87%91%E5%A5%8E%E5%85%89.pdf",
+      "license": "PD-old-100-expired / CC-PD-Mark / PD-scan（Wikimedia Commons 文件页实测）",
+      "sha256": "fe0716c6ff1ec9dd2e260c535b8f3307a408942cb4f737f0c5b56f827f29bf13",
+      "notes": "《江南寧蜀同官錄·金奎光》91 页扫描件；U05R 的 OCR arm 使用；公版可再分发，但本仓库只登记不入 Git"
+    },
+    {
+      "source": "cgedq_jsl",
+      "file": "data/raw/cgeq/cgedq_jsl_public_1760-1912_personid_2026-08-28.tab",
+      "release": "CGED-Q JSL public release, Dataverse file 14184134 (2026-08-28, with person_id)",
+      "retrieved_at": "2026-09-27",
+      "url": "https://dataverse.harvard.edu/api/access/datafile/14184134",
+      "license": "CC0 1.0 (Harvard Dataverse doi:10.7910/DVN/GMQWVZ)",
+      "sha256": "92d74b4dbca2de3ad67a502f2cd2e14815d4ba0cc27776b1c06063873928d476",
+      "verified_against": "v0.1 frozen hash in data/raw/manifest.json",
+      "notes": "与 v0.1/v0.2 冻结的同名文件逐字节一致（sha256 命中）；U06R 据此验证官方 person_id 并建 crosswalk。"
+    },
+    {
+      "source": "cgedq_jsl",
+      "file": "data/raw/cgeq/cgedq_jsl_chushen_recodes.tab",
+      "release": "Dataverse file 5708952 (Chushen Recodes)",
+      "retrieved_at": "2026-09-27",
+      "url": "https://dataverse.harvard.edu/api/access/datafile/5708952",
+      "license": "CC0 1.0",
+      "sha256": "49b7e7f7bc93fb49a3dfaca187053be8b54cfefda35db1024654f51f4d32e7e7",
+      "notes": "出身归并表；v0.2 代码按此文件名读取。 上游原格式是 Stata dta；本地转成 UTF-8 TSV（v0.1 loader 读 UTF-8）。",
+      "upstream_format": "Stata .dta via ?format=original",
+      "local_transformation": "pandas.read_stata → to_csv(sep='\\t', encoding utf-8)"
+    },
+    {
+      "source": "cgedq_jsl",
+      "file": "data/raw/cgeq/cgedq_jsl_province_recodes.tab",
+      "release": "Dataverse file 5708951 (Province of Origin Recodes)",
+      "retrieved_at": "2026-09-27",
+      "url": "https://dataverse.harvard.edu/api/access/datafile/5708951",
+      "license": "CC0 1.0",
+      "sha256": "89905382fbd7d5cc016df8f32c31ad47a7be573381c1a180ee6680fcaa0ac1c3",
+      "notes": "籍贯省归并表。 上游原格式是 Stata dta；本地转成 UTF-8 TSV（v0.1 loader 读 UTF-8）。",
+      "upstream_format": "Stata .dta via ?format=original",
+      "local_transformation": "pandas.read_stata → to_csv(sep='\\t', encoding utf-8)"
+    },
+    {
+      "source": "cgedq_jsl",
+      "file": "data/raw/cgeq/cgedq_user_guide_v4_2025.pdf",
+      "release": "Dataverse file 11704482 (用户指南 v4, 2025-07)",
+      "retrieved_at": "2026-09-27",
+      "url": "https://dataverse.harvard.edu/api/access/datafile/11704482",
+      "license": "CC0 1.0",
+      "sha256": "6da8501a8f859428b14644a37a3c4d4386926eb959eb99889efa3533951ad02c",
+      "notes": "§5.4.16 是官方 person_id 语义的权威说明（U06R 引用）。"
+    }
+  ],
+  "artifacts": {
+    "persons.parquet": {
+      "bytes": 36101,
+      "sha256": "75aeb7cd402457535b20b53a9a9f97d9f36f0281d9aab10b51abd2315e6ed89d",
+      "rows": 1046
+    },
+    "kin_edges.parquet": {
+      "bytes": 48941,
+      "sha256": "9d00f5e68b12cd0a0a27024c01d4d90e7cc94a5d08506cf0a7ca425760a61137",
+      "rows": 768
+    },
+    "credentials.parquet": {
+      "bytes": 28174,
+      "sha256": "7c6a789a20864e41d848b4e3275314de91dc7e3cf5f3ef384736a091afa61870",
+      "rows": 523
+    },
+    "offices.parquet": {
+      "bytes": 19346,
+      "sha256": "347c7347334d53dd055f28cb6bef8b35994a4686f975e6338cec36d28ab5b78b",
+      "rows": 417
+    },
+    "evidence_assertions.parquet": {
+      "bytes": 152815,
+      "sha256": "f2d0c269f03a4532f58863a8c246bbddb23394229c2e99d3763fa1d48ecbf388",
+      "rows": 2775
+    },
+    "career_events.parquet": {
+      "bytes": 4019494,
+      "sha256": "024eee86f4f4472731da6d3aaca7263ade1a18996c93e7c807a8532e0a22a635",
+      "rows": 148288
+    },
+    "career_offices.parquet": {
+      "bytes": 408539,
+      "sha256": "b0994142d5bebf9ad82862dafcc691d49dda8aaf34dc4c773b369478cfb33a6a",
+      "rows": 15725
+    },
+    "career_outcomes.parquet": {
+      "bytes": 3000377,
+      "sha256": "07308c644a4e38a931c7fb4e9892b6d7e7cdd24be24639a24463464ea5c67548",
+      "rows": 53701
+    },
+    "career_validation.parquet": {
+      "bytes": 12804,
+      "sha256": "d89a1fe87c430dc6c2ba751365b51eb69cf9f204aed8d2f2c157a27b49204dd5",
+      "rows": 412
+    },
+    "career_tier_crosswalk.parquet": {
+      "bytes": 344098,
+      "sha256": "2446636ea0ca6ead91e604fc6e5078a76d4d84cb35f32fed88b81bf32cf2e6ed",
+      "rows": 53701
+    },
+    "kin_indicators.parquet": {
+      "bytes": 30989,
+      "sha256": "30702ab53830c7aed6a86751beecb05d5ebebb3f977d117dfa6cdb99c7e70f50",
+      "rows": 300
+    },
+    "kin_validation.parquet": {
+      "bytes": 2953,
+      "sha256": "fd794f1e8f3082a05fa94be46150026c29ba0ca3eac5957662cb0332abcbf4d6",
+      "rows": 7
+    },
+    "kin_coverage_by_source.parquet": {
+      "bytes": 5341,
+      "sha256": "e9bc4eff4c28804c253ea9777701b2a8edadfe46b291c83499769b6f119efac9",
+      "rows": 1
+    },
+    "kin_coverage_by_cohort.parquet": {
+      "bytes": 5774,
+      "sha256": "007306ce597119a515a3c5734d5a059a13f1be00917db06616afb24347b4125c",
+      "rows": 4
+    },
+    "entity_links.parquet": {
+      "bytes": 22595,
+      "sha256": "38d1c3a09380d9fcf27b4bfc4d7c70363a255cd71c932ca9bda65054cef55c95",
+      "rows": 419
+    },
+    "linkage_features.parquet": {
+      "bytes": 22365,
+      "sha256": "2719c774c43ef33cc5d5aa62ea1e09bcea090b75195bdf9809343ca635e3f06b",
+      "rows": 419
+    },
+    "linkage_risk.parquet": {
+      "bytes": 18545,
+      "sha256": "62ad29f0b841af687189dbfbb1d035af527c02e8d020d946333bdedb84b360e7",
+      "rows": 419
+    },
+    "linkage_review_queue.parquet": {
+      "bytes": 9384,
+      "sha256": "8b3e5db3717403f0dba5c8e0043575ec2a85c2625f0252f05ebf8d0b02646db6",
+      "rows": 102
+    },
+    "linkage_crosswalk.parquet": {
+      "bytes": 267355,
+      "sha256": "ef67edbf5e3115c919616ec58990b02f10efdcb16d92b1157b88f02c1a4aea19",
+      "rows": 12682
+    },
+    "analysis_sample.parquet": {
+      "bytes": 158570,
+      "sha256": "44e7b3b63edda787baf8529c0a3e03d5bcfe6749f734666d6de2d1aa91dce9d9",
+      "rows": 1204
+    },
+    "analysis_coverage.parquet": {
+      "bytes": 5077,
+      "sha256": "cd01856eed1c3f943c89b55e1b021fac6aeaa192fba47e6827963fd287010f1d",
+      "rows": 6
+    },
+    "analysis_outcomes.parquet": {
+      "bytes": 3291,
+      "sha256": "64c25a233526db21d32f23fef70a3a0dc617c4cdda7050919bd7e8f84fabe279",
+      "rows": 4
+    },
+    "analysis_sensitivity.parquet": {
+      "bytes": 5585,
+      "sha256": "3aa6648903db2ce21007ff5e0013d4a87e65f34965b2ba4d3ae56905209a7a89",
+      "rows": 6
+    },
+    "extension_early_qing.parquet": {
+      "bytes": 55032,
+      "sha256": "0a235dcc04ee0e28d1543c5182e1bcb2df1e740f7da1fead1261cfed6ba5e17e",
+      "rows": 1179
+    },
+    "extension_variable_mapping.parquet": {
+      "bytes": 4418,
+      "sha256": "d59d5a0d84be499046a193e68d8ef13c6410fb3ac0368e28036c50ae6792c4d1",
+      "rows": 12
+    },
+    "extension_comparisons.parquet": {
+      "bytes": 13441,
+      "sha256": "cc1266c444d0f5b49a27277669ea8b3a53818bf1623567efb712d9631dbc0000",
+      "rows": 30
+    }
+  },
+  "reports": {
+    "U03R.md": {
+      "sha256": "6acf529b7acd44484028b2011af84ff1ebb03bd2d5c1ee4e7c6468f4961af83d",
+      "bytes": 13396
+    },
+    "U04R.md": {
+      "sha256": "2dd35480fba55947bf3890675f0b99351c436d5d57dc2ebfa049900d6d2afdcf",
+      "bytes": 15823
+    },
+    "U05R.md": {
+      "sha256": "df635ac5e1a5c207c806678339f293ba9be29019b524671611f147e08ed7248b",
+      "bytes": 15963
+    },
+    "U06R.md": {
+      "sha256": "d7e0e9f3021d1b928280b20921c5731fc6bef06ba14dfc3ec43f03ab30d02ed5",
+      "bytes": 15637
+    },
+    "U07R.md": {
+      "sha256": "d67dfaa20bdfad5a1f57483d0df622b3ffeefd2c408f22e572178625cdf93e28",
+      "bytes": 10789
+    },
+    "U08R.md": {
+      "sha256": "1a6f2c45da6105d51223b62290cfe85eda56b1d220f3af1103746e7d422b864b",
+      "bytes": 10572
+    },
+    "U09R.md": {
+      "sha256": "ae691e2618b70f2613f6ae3b9dbeb1c8942649e4c04ef586b0527715cf298ecd",
+      "bytes": 6980
+    },
+    "U10R.md": {
+      "sha256": "bef8b85e9a8be9d1e97639133447313b01d6e5845f90e66a4badea286f6d684c",
+      "bytes": 9870
+    },
+    "linkage_benchmark.md": {
+      "sha256": "345ed445b1910e4872450bcf3e9c1efa855ff1372d5a78d6a1c63b9b9b497b25",
+      "bytes": 2523
+    },
+    "kin_coverage.md": {
+      "sha256": "42c4d7ab4b8b14342b11967531716592315df0b4a257b8d5c35b4412d9685a64",
+      "bytes": 644
+    }
+  },
+  "figures": [
+    "u09r_exposure_outcome.pdf",
+    "u09r_exposure_outcome.png",
+    "u09r_sample_flow.pdf",
+    "u09r_sample_flow.png",
+    "u09r_stratified.pdf",
+    "u09r_stratified.png",
+    "u10r_family_capital.pdf",
+    "u10r_family_capital.png",
+    "u10r_observability.pdf",
+    "u10r_observability.png"
+  ]
+}

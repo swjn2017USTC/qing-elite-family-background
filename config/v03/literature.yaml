@@ -1,0 +1,105 @@
+# V0.3 现代学术文献检索计划（config/v03/literature.yaml）
+#
+# 复用 ACADEMIC_LITERATURE_PIPELINE_HANDOFF（三通项目已验证）的框架与 schema，
+# 不复制其 topic data 与研究结论。本文件只定义 V0.3 自己的 query cluster。
+#
+# 用途：U04R 判断"哪些 family-background 来源值得用"，并把现代文献的 claim
+# 映射为 claim → variable → source → testability。
+
+version: 1
+pipeline_version: "0.3-lit-1"
+search_date: 2026-09-27
+providers: [semanticscholar, crossref]
+rows_per_query: 25
+# Crossref 的 polite pool 只要求可识别的 User-Agent；不伪造邮箱地址（Unpaywall 明确拒绝非本人邮箱）。
+user_agent: "qing-elite-family-background/0.3 (https://github.com/swjn2017USTC/qing-elite-family-background)"
+# 已探测但匿名检索不可用的提供方（U04R 记录，见 source_feasibility / U04R.md）
+providers_unavailable:
+  - name: openalex
+    url: "https://api.openalex.org/works?search=Qing"
+    http_status: 503
+    observed: "Search temporarily unavailable — Anonymous search is paused while the search cluster recovers from heavy load"
+
+# 12 个必查 topic（U04R 指令）
+query_clusters:
+  Q1_qing_social_mobility:
+    label_zh: 清代社会流动
+    queries: ["Qing social mobility", "social mobility Qing dynasty China", "清代 社会流动"]
+  Q2_family_background:
+    label_zh: 家世/家族背景
+    queries: ["family background imperial China elites", "家族 科举 清代 家世", "lineage background officials Qing China"]
+  Q3_kin_network:
+    label_zh: 亲属网络
+    queries: ["kinship network Chinese elite families", "宗族 网络 清代 官员", "kin network social capital China historical"]
+  Q4_tongnianchilu:
+    label_zh: 同年齿录
+    queries: ["Tongnianchilu", "同年齿录", "tongnian chilu examination records"]
+  Q5_mingjingtongpu:
+    label_zh: 明经通谱
+    queries: ["Mingjingtongpu", "明经通谱", "mingjing tongpu"]
+  Q6_tongguanlu:
+    label_zh: 同官录
+    queries: ["Tongguanlu", "同官录", "tongguan lu officials roster"]
+  Q7_zhujuan:
+    label_zh: 硃卷
+    queries: ["Zhujuan examination papers China", "硃卷", "zhu juan civil examination China"]
+  Q8_shengyuanlu:
+    label_zh: 生员录
+    queries: ["Shengyuanlu", "生员录", "shengyuan lower degree Qing China"]
+  Q9_jinshenlu:
+    label_zh: 缙绅录
+    queries: ["Jinshenlu", "缙绅录", "jinshen lu Qing officials directory"]
+  Q10_career_mobility:
+    label_zh: 职业流动
+    queries: ["career mobility Qing officials", "bureaucratic careers Qing China", "官员 仕进 清代"]
+  Q11_office_purchase:
+    label_zh: 捐纳/买官
+    queries: ["office purchase Qing China", "捐纳 清代", "juan na sale of office China"]
+  Q12_record_linkage:
+    label_zh: 中文历史人物记录链接
+    queries: ["Chinese historical record linkage", "record linkage historical Chinese names", "中国历史 人物 记录链接"]
+
+# core 选择规则（确定性，脚本执行，不派 subagent）
+core_selection:
+  weights:
+    "qing|ching|清": 3
+    "mobility|elite|elites": 3
+    "family|lineage|kin|kinship|宗族|家族": 3
+    "exam|examination|degree|jinshi|juren|keju|科举|功名": 2
+    "official|bureaucrat|office|career|仕进|官职": 2
+    "tongnianchilu|mingjingtongpu|tongguanlu|zhujuan|shengyuanlu|jinshenlu": 4
+    "record linkage|linkage": 2
+    "china|chinese|中国": 1
+  min_score_for_core: 10
+  core_limit: 16
+  require_abstract_or_fulltext: true
+  # 主题门槛：总分够但完全离题的论文（例如"官员自杀研究""COVID 响应"）不得进 core。
+  # 命中任一 required_any_patterns 才算相关。
+  required_any_patterns:
+    - "mobility"
+    - "elite|elites"
+    - "family|lineage|kin|kinship|宗族|家族"
+    - "exam|examination|jinshi|juren|gongsheng|jiansheng|keju|科举|功名"
+    - "record linkage|nominative linkage|linkage"
+    - "jinshenlu|tongnianchilu|tongguanlu|mingjingtongpu|zhujuan|shengyuanlu|缙绅录|同年齿录|同官录|明经通谱|硃卷|生员录"
+    - "office purchase|捐纳"
+    - "officialdom|bureaucratic career|career mobility"
+
+# digest 与 ledger 的门槛
+digest_requirements:
+  required_sections:
+    - "## THESIS"
+    - "## PRIMARY MATERIALS USED"
+    - "## METHOD / INFERENCE"
+    - "## KEY CLAIMS + LOCATORS"
+    - "## KEY COUNTERCLAIMS"
+    - "## WHAT PAPER REJECTS / REVISES"
+    - "## LIMITATIONS"
+    - "## RELEVANCE TO V03 CLAIMS"
+    - "## NEW LEADS"
+  evidence_levels: [FULLTEXT, ABSTRACT]
+
+# claim → variable → source 的变量白名单取自 research.yaml / relations.yaml
+claim_mapping:
+  variables_from: [config/v03/research.yaml, config/v03/relations.yaml]
+  testability_levels: [TESTABLE_NOW, TESTABLE_WITH_OCR, TESTABLE_WITH_ACCESS_REQUEST, NOT_TESTABLE_IN_V03]

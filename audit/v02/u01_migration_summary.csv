@@ -1,0 +1,20 @@
+table,rows,columns,note
+entities,39988,17,
+source_documents,90,12,
+source_search_log,0,8,
+evidence_assertions,359892,18,
+review_decisions,120,10,
+person_indicators_v02,13345,19,
+legacy_person_indicators,39988,26,
+evidence_assertions[unknown],358309,0,
+evidence_assertions[positive],1583,0,
+person_indicators_v02[documented_ancestor_official_any],13345,0,"{""<NA>"": 13270, ""1"": 75}"
+person_indicators_v02[documented_family_capital_any],13345,0,"{""<NA>"": 13263, ""1"": 82}"
+person_indicators_v02[documented_commoner_explicit],13345,0,"{""<NA>"": 13263, ""0"": 82}"
+acceptance:explicit_negative_rows,0,0,
+acceptance:primary_documented_any_zero,0,0,
+acceptance:legacy_ancestor_official_any_zero,387,0,
+acceptance:unknown_rows_with_a_value,0,0,
+acceptance:positive_rows_without_quote,0,0,
+acceptance:llm_spans_verified,127,0,
+acceptance:pending_entities_with_primary_counts,0,0,

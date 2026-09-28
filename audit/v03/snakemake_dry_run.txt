@@ -1,0 +1,124 @@
+Assuming unrestricted shared filesystem usage.
+
+SNAKEMAKE
+=========
+  Date: 2026-09-28 08:48:25
+  Workflow ID: 268a135a-8ac2-4df7-931b-1c5d535be390
+  Platform: macOS-26.5-arm64-arm-64bit
+  Host: WahrFreiheitdeMacBook-Air.local
+  User: wahrfreiheit
+  Snakemake version: 9.27.0
+  Python version: 3.12.14 (main, Aug 12 2026, 13:57:54) [Clang 21.0.0 (clang-2100.1.1.101)]
+  Command: /Users/wahrfreiheit/OMP/qing-elite-family-background/.venv/bin/snakemake -n -F --snakefile workflow/Snakefile
+  Snakefile: /Users/wahrfreiheit/OMP/qing-elite-family-background/workflow/Snakefile
+  Base directory: /Users/wahrfreiheit/OMP/qing-elite-family-background/workflow
+  Run directory: /Users/wahrfreiheit/OMP/qing-elite-family-background
+  Working directory: /Users/wahrfreiheit/OMP/qing-elite-family-background
+  Config file(s): []
+  Config MD5: 99914b932bd37a50b983c5e7c90ae93b
+
+Building DAG of jobs...
+Job stats:
+job                        count
+-----------------------  -------
+career_panel                   1
+pilot_frame                    1
+extract_and_verify             1
+kin_graph                      1
+indicators_and_analysis        1
+early_qing_extension           1
+figures_and_report             1
+adversarial_audit              1
+release_gate                   1
+all                            1
+total                         10
+
+
+[Mon Sep 28 08:48:25 2026]
+rule career_panel:
+    input: data/processed_v03/pilot_career_events.parquet
+    output: data/processed_v03/career_events.parquet, data/processed_v03/career_outcomes.parquet
+    jobid: 5
+    reason: Forced execution
+    resources: tmpdir=/var/folders/n8/3zfwcbfx7hbgkzktpxgs9qh80000gn/T
+[Mon Sep 28 08:48:25 2026]
+rule pilot_frame:
+    output: data/processed_v03/pilot_frame.parquet
+    jobid: 4
+    reason: Forced execution
+    resources: tmpdir=/var/folders/n8/3zfwcbfx7hbgkzktpxgs9qh80000gn/T
+[Mon Sep 28 08:48:25 2026]
+rule extract_and_verify:
+    input: data/processed_v03/pilot_frame.parquet
+    output: data/processed_v03/pilot_kin_edges.parquet, data/processed_v03/pilot_credentials.parquet, data/processed_v03/pilot_risk.parquet
+    jobid: 3
+    reason: Forced execution
+    resources: tmpdir=/var/folders/n8/3zfwcbfx7hbgkzktpxgs9qh80000gn/T
+[Mon Sep 28 08:48:25 2026]
+rule kin_graph:
+    input: data/processed_v03/pilot_kin_edges.parquet
+    output: data/processed_v03/kin_indicators.parquet, data/processed_v03/kin_coverage_by_cohort.parquet
+    jobid: 2
+    reason: Forced execution
+    resources: tmpdir=/var/folders/n8/3zfwcbfx7hbgkzktpxgs9qh80000gn/T
+[Mon Sep 28 08:48:25 2026]
+rule indicators_and_analysis:
+    input: data/processed_v03/kin_indicators.parquet, data/processed_v03/career_outcomes.parquet
+    output: data/processed_v03/analysis_sample.parquet, data/processed_v03/analysis_sensitivity.parquet, reports/upgrade_v03/U09R.md
+    jobid: 1
+    reason: Forced execution
+    resources: tmpdir=/var/folders/n8/3zfwcbfx7hbgkzktpxgs9qh80000gn/T
+[Mon Sep 28 08:48:25 2026]
+rule early_qing_extension:
+    input: data/processed_v03/analysis_sample.parquet
+    output: data/processed_v03/extension_comparisons.parquet, reports/upgrade_v03/U10R.md
+    jobid: 6
+    reason: Forced execution
+    resources: tmpdir=/var/folders/n8/3zfwcbfx7hbgkzktpxgs9qh80000gn/T
+[Mon Sep 28 08:48:25 2026]
+rule figures_and_report:
+    input: reports/upgrade_v03/U10R.md
+    output: RELEASE_MANIFEST.json
+    jobid: 7
+    reason: Forced execution
+    resources: tmpdir=/var/folders/n8/3zfwcbfx7hbgkzktpxgs9qh80000gn/T
+[Mon Sep 28 08:48:25 2026]
+rule adversarial_audit:
+    input: RELEASE_MANIFEST.json
+    output: audit/v03/final_audit.json
+    jobid: 9
+    reason: Forced execution
+    resources: tmpdir=/var/folders/n8/3zfwcbfx7hbgkzktpxgs9qh80000gn/T
+[Mon Sep 28 08:48:25 2026]
+rule release_gate:
+    input: audit/v03/final_audit.json
+    output: audit/v03/release_gate.json
+    jobid: 8
+    reason: Forced execution
+    resources: tmpdir=/var/folders/n8/3zfwcbfx7hbgkzktpxgs9qh80000gn/T
+[Mon Sep 28 08:48:25 2026]
+rule all:
+    input: data/processed_v03/analysis_sensitivity.parquet, reports/upgrade_v03/U10R.md, RELEASE_MANIFEST.json, audit/v03/release_gate.json
+    jobid: 0
+    reason: Forced execution
+    resources: tmpdir=/var/folders/n8/3zfwcbfx7hbgkzktpxgs9qh80000gn/T
+Job stats:
+job                        count
+-----------------------  -------
+career_panel                   1
+pilot_frame                    1
+extract_and_verify             1
+kin_graph                      1
+indicators_and_analysis        1
+early_qing_extension           1
+figures_and_report             1
+adversarial_audit              1
+release_gate                   1
+all                            1
+total                         10
+
+Reasons:
+    (check individual jobs above for details)
+    forced:
+        adversarial_audit, all, career_panel, early_qing_extension, extract_and_verify, figures_and_report, indicators_and_analysis, kin_graph, pilot_frame, release_gate
+This was a dry-run (flag -n). The order of jobs does not reflect the order of execution.

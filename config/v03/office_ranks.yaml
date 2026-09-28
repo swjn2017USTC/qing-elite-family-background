@@ -1,0 +1,67 @@
+# U08R 官职品级表（config/v03/office_ranks.yaml）
+#
+# 重要限定：
+#   1. **本表是策展表，不是从冻结 release 读出来的**。CGED-Q 公开版没有品级字段
+#      （`官缺等级` 是「衝繁難」类缺分特征、`缺分` 是要缺/簡缺，均非品级），CBDB
+#      OFFICE_CODES 在本 release 也没有 rank 列。
+#   2. 因此每行都带 `basis` 与 `verification_status`；`verification_status: pending`
+#      表示**尚未对照原书核验**，下游若用品级必须显式排除或标注为未核验。
+#   3. 只列研究总体中实际出现的官称；不在表内的官称一律 `rank_class=null` +
+#      `unmapped_reason`，不猜。
+#
+# rank_class 用 1–9 的品级数（正/從合并为级数，如正二品与從二品都记 2）；
+# rank_side 保留正/從。
+
+version: 1
+basis: "《清史稿·職官志》所载清代文职官品（策展，待与原书逐条核验）"
+verification_status: pending
+
+ranks:
+  - {title: 大學士, rank_class: 1, rank_side: 正}
+  - {title: 協辦大學士, rank_class: 1, rank_side: 從}
+  - {title: 尚書, rank_class: 1, rank_side: 從}
+  - {title: 左都御史, rank_class: 1, rank_side: 從}
+  - {title: 總督, rank_class: 2, rank_side: 正}
+  - {title: 侍郎, rank_class: 2, rank_side: 正}
+  - {title: 巡撫, rank_class: 2, rank_side: 從}
+  - {title: 布政使, rank_class: 2, rank_side: 從}
+  - {title: 按察使, rank_class: 3, rank_side: 正}
+  - {title: 鹽運使, rank_class: 3, rank_side: 從}
+  - {title: 道員, rank_class: 4, rank_side: 正}
+  - {title: 知府, rank_class: 4, rank_side: 從}
+  - {title: 同知, rank_class: 5, rank_side: 正}
+  - {title: 直隸州知州, rank_class: 5, rank_side: 正}
+  - {title: 知州, rank_class: 5, rank_side: 從}
+  - {title: 通判, rank_class: 6, rank_side: 正}
+  - {title: 知縣, rank_class: 7, rank_side: 正}
+  - {title: 縣丞, rank_class: 8, rank_side: 正}
+  - {title: 教諭, rank_class: 8, rank_side: 正}
+  - {title: 州同, rank_class: 6, rank_side: 從}
+  - {title: 州判, rank_class: 7, rank_side: 從}
+  - {title: 主簿, rank_class: 9, rank_side: 正}
+  - {title: 巡檢, rank_class: 9, rank_side: 從}
+  - {title: 典史, rank_class: null, rank_side: 未入流}
+  - {title: 吏目, rank_class: null, rank_side: 未入流}
+  - {title: 訓導, rank_class: null, rank_side: 未入流}
+  - {title: 學正, rank_class: 8, rank_side: 正}
+  - {title: 教授, rank_class: 7, rank_side: 正}
+
+# 中央/地方与行政层级的关键词表（制度定义，不是史料主张）
+levels:
+  central: [大學士, 尚書, 侍郎, 郎中, 員外郎, 主事, 御史, 給事中, 編修, 檢討, 庶吉士, 內閣, 軍機, 南書房, 翰林院, 都察院, 理藩院, 內務府]
+  provincial: [總督, 巡撫, 布政使, 按察使, 鹽運使, 道員, 河道, 漕運, 學政]
+  prefectural: [知府, 直隸州知州, 知州, 同知, 通判]
+  county: [知縣, 縣丞, 主簿, 巡檢, 典史, 吏目, 教諭, 訓導, 學正, 教授, 州同, 州判]
+
+authority_types:
+  civil: [知縣, 知府, 巡撫, 總督, 尚書, 侍郎, 布政使, 按察使, 道員, 州縣, 教諭, 訓導, 學正, 教授]
+  military: [提督, 總兵, 副將, 參將, 遊擊, 都司, 守備, 千總, 把總]
+  imperial_household: [內務府, 包衣]
+
+# 任命状态关键词（JSL 選任方式 与官称字符串中出现的实授/署理/候补标记）
+appointment_markers:
+  acting: [署理, 署, 護理, 兼署]
+  expectant: [候補, 候選, 分發, 試用, 學習]
+  concurrent: [兼任, 兼管, 兼署, 管理]
+  honorific: [加銜, 加級, 贈, 誥封, 銜]
+  substantive: [實授, 補授, 題補, 調補, 陞授]

@@ -1,0 +1,114 @@
+# V0.3 文献：来源探测中发现的策展条目（config/v03/literature_manual.yaml）
+#
+# 检索 API 的 query 覆盖有盲区（例如 2026 年《The History of the Family》的
+# Tongguanlu 论文在 Semantic Scholar / Crossref 的关键词检索里都未命中，但它是
+# 本课题最关键的来源论文之一）。因此设一个**策展入口**：
+#
+#   每条必须带 evidence_url（实际读到题录/摘要的页面）与 retrieved_at；元数据
+#   （题名/作者/年/刊/DOI）必须来自该页面或 Crossref，不得凭记忆填写。
+#
+# tier_hint: core 表示该条进入 core（需写 digest）；candidate 表示只登记。
+# 策展条目绕过标题主题门槛，因为它的主题相关性已由人工/agent 明确判定。
+
+version: 1
+
+# 检索 API 未报告 OA 副本、但探针实际找到的公开作者稿（keyed by DOI）。
+# 只有这里列出的位置才会被 acquire 抓取；URL 必须实测可下载。
+oa_urls:
+  - doi: "10.31235/osf.io/s2u3w_v2"
+    url: "https://osf.io/download/69a7f5d4af82b58084797dd6/"
+    evidence_url: "https://api.osf.io/v2/preprints/s2u3w/"
+    verified_at: "2026-09-27"
+    note: "OSF 预印本 primary_file；GET 返回 200 application/octet-stream，PDF 1.6，917,243 bytes。"
+
+entries:
+  - title: "Family Backgrounds of Officials in the Late Qing: Evidence from Tongguanlu Rosters"
+    authors: "Cameron Campbell; Shengbin Wei; Qin Xue (working paper)"
+    year: 2025
+    venue: "SSHA 2025 working paper (ssha2025.ssha.org/uploads/250445)"
+    doi: null
+    url: "https://ssha2025.ssha.org/uploads/250445"
+    oa_url: "https://ssha2025.ssha.org/uploads/250445"
+    language: en
+    query_cluster: "Q6_tongguanlu"
+    tier_hint: core
+    evidence_url: "https://ssha2025.ssha.org/uploads/250445"
+    retrieved_at: "2026-09-27"
+    notes: >
+      会议工作论文 PDF（GET 200 application/pdf, 437,563 bytes）。作者名未在该 PDF 的题录页逐字核对，
+      digest 必须在 evidence_level: FULLTEXT 下、以实际 PDF 首页与正文为准，不得沿用会议页的推定作者。
+
+  - literature_id_hint: null
+    title: "Kin networks of local officials in 19th and Early 20th century China"
+    authors: "Shengbin Wei; Cameron Campbell; Qin Xue"
+    year: 2026
+    venue: "The History of the Family"
+    doi: "10.1080/1081602X.2026.2659970"
+    url: "https://researchportal.hkust.edu.hk/en/publications/kin-networks-of-local-officials-in-19th-and-early-20th-century-ch/"
+    language: en
+    query_cluster: "Q6_tongguanlu"
+    tier_hint: core
+    evidence_url: "https://researchportal.hkust.edu.hk/en/publications/kin-networks-of-local-officials-in-19th-and-early-20th-century-ch/"
+    retrieved_at: "2026-09-27"
+    abstract: >
+      We introduce a new source for the study of the kin networks, qualifications, and careers
+      of officials in China in the late nineteenth and early twentieth centuries: a dataset
+      constructed from Tongguanlu rosters of officials that include their resumes, degree or
+      other qualifications and rosters of their kin. In contrast with other sources that have
+      been used to study the social origins of holders of high examination degrees including
+      national Jinshi, provincial Juren and exam Gongsheng, Tongguanlu include holders of less
+      prestigious purchased degrees and prefectural Shengyuan exam degrees who accounted for a
+      large share of officials, especially local ones, in the nineteenth century. Information
+      about kin includes not only the names and degrees held by paternal kin but also those of
+      maternal kin and affines. We use this dataset to examine the relationship between the
+      degrees that officials held and the degrees held by their kin. We find that officials who
+      held purchased degrees and low-level Shengyuan examination degrees were less likely than
+      holders of higher degrees to have other kin who held degrees and that officials with
+      regular and expectant appointments were more likely to have kin with degrees than
+      officials with acting appointments.
+    notes: >
+      Crossref 校验：The History of the Family，2026，license CC BY-NC-ND 4.0；无摘要字段。
+      摘要在 HKUST 成果页读取。该论文报告同官录编码数据集规模（28 种版本、18,585 条官员
+      记录、80,988 条亲属、90,307 条功名履历），但无公开数据下载入口。
+
+  - title: "Big Data for the Study of Qing Officialdom: The China Government Employee Database-Qing (CGED-Q)"
+    authors: "Bijia Chen; Cameron Campbell; Yuxue Ren; James Lee"
+    year: 2020
+    venue: "Journal of Chinese History"
+    doi: "10.1017/jch.2020.15"
+    url: "https://doi.org/10.1017/jch.2020.15"
+    language: en
+    query_cluster: "Q9_jinshenlu"
+    tier_hint: candidate
+    evidence_url: "https://api.crossref.org/works/10.1017/jch.2020.15"
+    retrieved_at: "2026-09-27"
+    notes: >
+      Crossref 题录校验（DOI 存在、题名与刊年一致）；CGED-Q 缙绅录的方法学论文。
+      tier=candidate：Cambridge Core 2026-09-27 返回 404（站点临时中断），未取得摘要或全文，
+      因此不写 digest、不在 LC ledger 里生成主张。
+
+  - title: "Origins and career patterns of the Qing government officials (1850-1912)"
+    authors: "HKUST thesis (author field not verified)"
+    year: null
+    venue: "HKUST institutional repository (thesis)"
+    doi: "10.14711/thesis-991012812669303412"
+    url: "https://doi.org/10.14711/thesis-991012812669303412"
+    language: en
+    query_cluster: "Q10_career_mobility"
+    tier_hint: candidate
+    evidence_url: "https://api.crossref.org/works?query.bibliographic=Big+Data+for+the+Study+of+Qing+Officialdom+CGED-Q"
+    retrieved_at: "2026-09-27"
+    notes: "Crossref 检索命中（HKUST 学位论文，DOI 10.14711/thesis-991012812669303412）；作者与年份未在该响应中核实，故 tier=candidate，不得在未经核实前引用其结论。"
+
+  - title: "清代缙绅录量化数据库与官员群体研究"
+    authors: "任玉雪; 陈必佳; 郝小雯; 康文林; 李中清"
+    year: 2016
+    venue: "清史研究 2016(4)"
+    doi: null
+    url: "https://qsyj.ruc.edu.cn/EN/Y2016/V0/I4/61"
+    language: zh
+    query_cluster: "Q9_jinshenlu"
+    tier_hint: candidate
+    evidence_url: "https://qsyj.ruc.edu.cn/EN/Y2016/V0/I4/61"
+    retrieved_at: "2026-09-27"
+    notes: "期刊页可访问（HTTP 200）。用于登记缙绅录数据库的建设口径（约 400 种版本、1661–1917），暂列 candidate（正文未逐页核对）。"

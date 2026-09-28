@@ -1,0 +1,15 @@
+task,decision,n
+cross_source,probabilistic_grey,45977
+cross_source,no_match,1367
+cross_source,deterministic_alias,1010
+cross_source,deterministic_multifield,396
+cross_source,probabilistic_high,83
+dedupe,distinct,10257
+dedupe,review,1657
+dedupe,merge,1430
+entity,review_pending,26363
+entity,standalone,12029
+entity,explicit_id,1011
+entity,accepted_cross_link,305
+entity,rejected,157
+entity,merged_into_cbdb,123

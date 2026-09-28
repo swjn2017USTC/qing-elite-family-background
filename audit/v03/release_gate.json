@@ -1,0 +1,32 @@
+{
+  "release": "v0.3-cohort-kin-network",
+  "status": "PASS",
+  "failures": [],
+  "checks": {
+    "required_files": {
+      "status": "PASS",
+      "problems": []
+    },
+    "schemas_and_lineage": {
+      "status": "PASS",
+      "problems": []
+    },
+    "review_state": {
+      "status": "PASS",
+      "problems": []
+    },
+    "public_boundary": {
+      "status": "PASS",
+      "problems": []
+    },
+    "adversarial_audit": {
+      "status": "PASS",
+      "problems": []
+    },
+    "tests": {
+      "status": "PASS",
+      "problems": []
+    }
+  },
+  "checked_at": "2026-09-28T00:59:27+00:00"
+}

@@ -1,0 +1,5 @@
+scenario,persons_needing_llm,mean_biography_chars,mean_window_chars,median_window_chars,p90_window_chars,mean_input_tokens,total_input_tokens,mean_output_tokens,total_output_tokens,rmb_off_peak,rmb_peak,passages_measured,volumes_measured,tokens_per_cjk_char,price_input_per_mtok_off_peak,price_output_per_mtok_off_peak,price_source
+S1_full_universe,39928,685.8,679.5,529.0,1332.6,827.7,33048127.0,246.0,9822288.0,72.34,144.67,129,13,0.6,1.0,4.0,api-docs.deepseek.com/zh-cn/quick_start/pricing (retrieved 2026-09-14)
+S2_ABC_all_tiers,1133,685.8,679.5,529.0,1332.6,827.7,937776.2,246.0,278718.0,2.05,4.11,129,13,0.6,1.0,4.0,api-docs.deepseek.com/zh-cn/quick_start/pricing (retrieved 2026-09-14)
+S3_ABC_plus_D_high_linkage,9568,685.8,679.5,529.0,1332.6,827.7,7919366.8,246.0,2353728.0,17.33,34.67,129,13,0.6,1.0,4.0,api-docs.deepseek.com/zh-cn/quick_start/pricing (retrieved 2026-09-14)
+S4_ABC_excluding_D_persons,1093,685.8,679.5,529.0,1332.6,827.7,904668.5,246.0,268878.0,1.98,3.96,129,13,0.6,1.0,4.0,api-docs.deepseek.com/zh-cn/quick_start/pricing (retrieved 2026-09-14)

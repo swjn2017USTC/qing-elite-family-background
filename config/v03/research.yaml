@@ -1,0 +1,114 @@
+# V0.3 研究契约（config/v03/research.yaml）
+#
+# 这是 V0.3 研究设计的唯一机器可读来源：exposure / outcome / estimand / 抽样规则。
+# 它不复制 v0.2 的 config/research.yaml；v0.2 的口径只保留为 legacy/benchmark。
+#
+# 改动本文件等同于改研究问题，必须同时改 V03_RESEARCH_CONTRACT.md 并在阶段报告中
+# 记录理由。V0.2 的 tier 口径（A1/A2/A3/B/C/D）在 V0.3 只作为 legacy/extension outcome
+# 存在（见 outcome.legacy_only）。
+
+version: 1
+contract_version: v0.3.0
+stage: U03R
+
+primary_question: >
+  在相似的科举/制度进入资格下，家庭政治—教育资本以及更广泛的宗族精英嵌入，
+  与一个人的职业轨迹和最终官位之间有怎样的描述性关联？
+
+claim_level: descriptive_association
+identification: none            # 明确不声称因果识别，不做 IV/RDD/DiD
+unit_of_analysis: person
+
+# ---------------------------------------------------------------- exposure
+exposure:
+  role: independent_variable
+  primary:
+    - direct_3g_degree_count
+    - direct_3g_office_count
+    - direct_elite_generations
+    - max_direct_office_rank
+    - senior_collateral_degree_count
+    - senior_collateral_office_count
+    - all_senior_elite_kin_count
+  secondary:
+    - kin_degree_density
+    - kin_office_density
+    - network_degree
+    - elite_neighbor_share
+  kin_scope:
+    direct_line: [father, grandfather, great_grandfather]
+    extended_kin: [uncle, great_uncle, brother, cousin, son, nephew]
+    reserved_for_later: [mother, grandmother, wife]
+  # LLM/规则都不得输出以下字段；它们是判断，不是事实
+  forbidden_outputs:
+    - is_commoner
+    - commoner_from_absence
+    - ancestor_official_any_from_missing
+
+# ---------------------------------------------------------------- outcome
+outcome:
+  role: dependent_variable
+  primary:
+    - highest_office_rank
+    - highest_admin_level
+    - central_local_route
+  secondary:
+    - first_substantive_office
+    - time_to_rank
+    - career_length
+    - appointment_regular_share
+    - acting_share
+  # A1/A2/A3/B/C/D 保留，但只作为早期/中期清代扩展与来源偏差基准，
+  # 不得作为 V0.3 primary outcome 或分组变量。
+  legacy_only: [highest_tier, tier_group]
+
+# ---------------------------------------------------------------- confounders
+conditioning:
+  must_report_separately: [cohort, credential, region, banner, entry_status]
+  roles:
+    cohort: stratum
+    credential: stratum_and_possible_mediator   # 同时作为分层与可能的中介，必须显式讨论
+    region: stratum
+    banner: stratum
+    entry_status: stratum
+
+# ---------------------------------------------------------------- sampling
+sampling:
+  unit: person
+  # 关键修正：不按最终官位分层，避免在因变量上抽样
+  frame_rule: source_frame
+  frame_dimensions: [source, cohort, region, credential]
+  forbidden: [sampling_on_outcome_tier, oversampling_by_final_office]
+  observability_requirement: >
+    每个分析指标必须同时给出 numerator、denominator 与 observable_kin_count；
+    亲属记录不足时结果为 unknown，不得记为 0。
+
+# ---------------------------------------------------------------- estimands
+estimands:
+  primary: >
+    P(career outcome | family capital, credential class, cohort)：在同一来源框架、
+    同一进入资格层内，家庭资本与职业结果之间的描述性关联（association only）。
+  secondary: >
+    家庭资本分布按 cohort / credential / region 的描述性表格，以及
+    direct-line-only 与 direct+extended 两套 exposure 的对照。
+  legacy_benchmark: >
+    v0.2 的 P(documented ancestor office = 1 | tier) 文档率对比降级为来源偏差基准
+    （early/mid-Qing 与 late-Qing 源覆盖比较）。它可以被报告，但不得作为 V0.3
+    primary estimand，也不得重新变成"寒门率"。
+  not_estimable:
+    - causal effect of family background on career outcome
+    - 清代是否 meritocracy 一类总体判断
+
+# ---------------------------------------------------------------- reporting
+reporting:
+  every_number_needs: [n, denominator, coverage, unknown]
+  unknown_is_not_zero: true
+  missing_is_not_commoner: true
+  mandatory_order:
+    - sample_flow
+    - source_coverage
+    - linkage_quality
+    - family_capital_distribution
+    - career_outcome_distribution
+    - stratified_descriptive_comparison
+    - preregistered_models_and_sensitivity

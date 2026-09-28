@@ -1,0 +1,2 @@
+subjects_with_candidates,subjects_total,coverage_pct,candidate_rows,note,subjects_submitted
+4687,16985,27.59,10867,RapidFuzz 只召回候选；match_status 永不自动置为 accepted,16985

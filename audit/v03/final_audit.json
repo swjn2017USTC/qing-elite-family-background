@@ -1,0 +1,19 @@
+{
+  "checks_run": [
+    "unknown_not_zero",
+    "denominator_drift",
+    "source_selection",
+    "entity_duplication",
+    "linkage_leakage",
+    "chronology",
+    "manual_override",
+    "table_report_mismatch",
+    "figure_data_mismatch",
+    "causal_overclaim",
+    "literature_overclaim"
+  ],
+  "issues": [],
+  "blockers": 0,
+  "majors": 0,
+  "status": "PASS"
+}

@@ -1,0 +1,3 @@
+model,universe_persons,in_tier,in_window,with_outcome,dropped_no_window,dropped_na_outcome,by_tier,by_cohort,by_banner
+common_window,39988,39988,39030,442,958,38588,"{""D"": 371, ""B"": 39, ""C"": 21, ""A"": 11}","{""1761-1820"": 374, ""1701-1760"": 68}","{""unknown"": 404, ""bannerman_ethnicity_unknown"": 24, ""manchu_banner"": 12, ""han_bannerman"": 2}"
+long_run,39988,1179,741,235,438,506,"{""B"": 130, ""C"": 59, ""A"": 46}","{""1761-1820"": 96, ""1701-1760"": 86, ""1644-1700"": 53}","{""unknown"": 188, ""manchu_banner"": 39, ""han_bannerman"": 5, ""mongol_banner"": 2, ""booi_bannerman"": 1}"

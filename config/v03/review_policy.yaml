@@ -1,0 +1,63 @@
+# V0.3 人工审核与自动化政策（config/v03/review_policy.yaml）
+#
+# 原则（见 V03_AUTOMATION_POLICY.md）：
+#   rule-first → machine verification → risk-based review → human only for residual high-risk
+#
+# 明确禁止固定比例人工抽查（v0.2 U06 的 "随机 10% 回源复核" 模式）。
+# 人工预算以**绝对条数**给出，且只消耗在自动裁决无法收敛的高风险残差上。
+
+version: 1
+policy_version: review-policy-v1
+principle: rule_first_machine_second_human_residual
+
+forbidden_review_modes:
+  - fixed_percentage_sample
+
+# 自动化顺序：先便宜、确定的；LLM 与人工只处理前面处理不掉的部分
+automation_order:
+  - deterministic_rule
+  - machine_verifier
+  - llm_second_pass
+  - vision_verifier
+  - human_review
+
+# risk_score 的分量与其权重（U05R/U06R 实现打分；本阶段只冻结定义与权重）
+# total_score = Σ w_i * component_i ，component_i ∈ [0, 1]，total_score ∈ [0, 1]
+components:
+  linkage_uncertainty: {weight: 0.20, source: entity_links.score_and_agreement}
+  ocr_uncertainty: {weight: 0.10, source: ocr_confidence}
+  parser_disagreement: {weight: 0.15, source: rule_parser_vs_llm_verifier}
+  source_conflict: {weight: 0.15, source: conflicting_evidence_assertions}
+  rare_relation: {weight: 0.05, source: relation_frequency}
+  office_unknown: {weight: 0.10, source: office_ontology_mapping_status}
+  chronology_violation: {weight: 0.15, source: career_kin_chronology_validator}
+  evidence_span_failure: {weight: 0.10, source: verbatim_span_verifier}
+
+tiers:
+  LOW: {max_score: 0.25, route: auto_accept}
+  MEDIUM: {max_score: 0.60, route: machine_adjudicate}
+  HIGH: {max_score: 1.00, route: human_review}
+
+routes:
+  auto_accept:
+    requires: all_deterministic_invariants_hold
+  machine_adjudicate:
+    verifiers: [second_rule_parser, deepseek_flash_non_thinking, vision_verifier]
+    on_persistent_disagreement: human_review
+  human_review:
+    queue: manual_review_queue
+
+# 人工预算：绝对条数（不是语料占比）。超预算而不达质量门槛 → stage FAIL，
+# 不得靠扩大人工批量来"修完"。
+budgets:
+  manual_link_new_target: 300
+  manual_assertion_review_target: 200
+  unit: absolute_count
+  on_exceeded: stage_fail_not_expand
+
+# 允许直接复用已有人工证据（v0.2 U02 gold），不重复消耗人工
+reuse_existing_human_evidence: true
+
+quality_gates:
+  linkage_auto_accept_precision: 0.99
+  on_miss: raise_abstention_not_expand_review

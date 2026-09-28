@@ -1,0 +1,2 @@
+run_summary,persons_processed,slots,slots_with_structured_data,slots_new_from_llm,slots_still_unknown,new_information_ratio_pct,unknown_ratio_pct,schema_valid_pct,evidence_verbatim_pct,escalated_persons
+"{""completed_this_run"": 0, ""spent_rmb_total"": 0.6398, ""hard_stop"": false, ""soft_budget_reached"": false, ""persons_skipped_for_budget"": 0}",321,963,125,62,776,6.44,80.58,100.0,98.72,86

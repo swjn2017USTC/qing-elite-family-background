@@ -1,0 +1,9 @@
+linkage_confidence,n_jsl_persons,share_of_jsl_persons_pct
+unmatched,15529,28.63
+medium,15109,27.86
+high,10004,18.44
+unlinkable_no_surname,8829,16.28
+ambiguous,4767,8.79
+reliable_high_only,10004,18.44
+reliable_high_plus_medium,25113,46.3
+total_jsl_persons,54238,100.0

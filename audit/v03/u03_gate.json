@@ -1,0 +1,36 @@
+{
+  "protocol_fingerprint": "cec85da50b5dcd23e9baed7fc505045db3933ad4b26535abad2e56ad269524ba",
+  "source_order": [
+    "cbdb_frozen",
+    "cgedq_frozen",
+    "cbdb_api",
+    "sinica_lod",
+    "wikisource_dump"
+  ],
+  "required_sources": [
+    "cbdb_frozen",
+    "cgedq_frozen",
+    "cbdb_api",
+    "wikisource_dump"
+  ],
+  "optional_sources": [
+    "sinica_lod"
+  ],
+  "run_id": "u03-cec85da5",
+  "per_stratum": 30,
+  "completion_target": 0.8,
+  "information_target": 0.2,
+  "gate_required_sources": {
+    "status": "PASS",
+    "failures": []
+  },
+  "gate_all_sources_including_optional": {
+    "status": "FAIL",
+    "failures": [
+      "A: completion 0.00% < 80%",
+      "B: completion 0.00% < 80%",
+      "C: completion 0.00% < 80%",
+      "D: completion 0.00% < 80%"
+    ]
+  }
+}

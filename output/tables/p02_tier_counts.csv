@@ -1,0 +1,7 @@
+source,tier,n_appointments,n_unknown_year,first_year,last_year
+CBDB,A1,123,0,1588.0,1846.0
+CBDB,A2,11,0,1637.0,1860.0
+CBDB,A3,22,0,1623.0,1840.0
+CBDB,B,1072,67,1582.0,1900.0
+CBDB,C,646,112,1582.0,1875.0
+CGEDQ,D,54472,0,1760.0,1798.0

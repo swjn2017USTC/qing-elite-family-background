@@ -1,0 +1,7 @@
+tier,N_total,N_father_observed,N_2gen_observed,N_3gen_observed,N_any_generation,coverage_rate_any,coverage_rate_3gen
+A1,92,41,13,6,48,52.17,6.52
+A2,9,7,2,1,7,77.78,11.11
+A3,15,7,3,2,7,46.67,13.33
+B,613,141,52,24,171,27.9,3.92
+C,450,72,32,15,94,20.89,3.33
+D,38809,299,38,14,371,0.96,0.04

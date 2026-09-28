@@ -1,0 +1,41 @@
+# U06R entity-resolution 配置（config/v03/linkage.yaml）
+version: 1
+seed: 20260927
+
+# 官方 id 优先：CGED-Q 内部 dedupe 以 person_id 为准，v0.2 dedupe 仅作 audit comparison
+cgedq:
+  official_id_column: person_id
+  legacy_canonical: data/interim_v03/legacy_v02/cgedq_canonical.parquet
+  study_window: {start: 1760, end: 1798}
+
+# 三套 matcher：deterministic（规则）、ml（statsmodels logit）、splink（v0.2 设置）
+matchers:
+  deterministic:
+    require_evidence: true      # 必须至少一条非姓名证据（籍贯/功名/旗籍/同版同职）
+  ml:
+    model: logit
+    features: [name_match_type_score, province_compatible, degree_equal, banner_equal,
+               era_overlap, raw_name_equal, name_freq_log, same_office_same_edition,
+               n_shared_editions_log, pinyin_equal, char_jaccard, surname_equal]
+    train_split: train
+    calibrate_split: held_out
+  splink:
+    block_on: name_norm
+    comparisons: [banner_key, province_key, degree_key]
+
+# auto-accept 区域：必须 held-out precision >= 0.99，且覆盖率最大化
+auto_accept:
+  min_precision: 0.99
+  min_support: 20               # 少于 20 个 held-out 阳性的阈值不接受
+  on_failure: shrink_region     # 缩小 auto-accept 区域，不降低门槛
+
+# active learning：每轮少量、最有信息量的 pair；人工新增预算上限
+active_learning:
+  rounds: 3
+  per_round: 25
+  strategy: uncertainty
+  manual_budget_pairs: 300      # 目标上限；本阶段实际新增 0（只用 U02 gold 标签）
+
+# risk 分层（复用 V0.3 review_policy 权重，linkage 相关分量）
+risk:
+  components: [linkage_uncertainty, source_conflict, chronology_violation, evidence_span_failure]

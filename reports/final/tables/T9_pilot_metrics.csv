@@ -1,0 +1,14 @@
+metric,value,n
+json_validity_pct,100.0,40
+evidence_fidelity_pct,92.86,14
+evidence_unsupported_assertions,1,14
+father_identity_accuracy_pct,100.0,4
+father_wrong_name_cases,0,4
+father_abstention_pct,94.44,18
+hallucination_rate_pct,7.14,14
+office_no_gold_to_compare_cases,3,22
+degree_accuracy_pct,0.0,0
+degree_coverage_note,"gold_present=5, match=0, mismatch=0, abstained=5",5
+office_accuracy_pct,100.0,2
+office_coverage_note,"gold_present=8, match=2, mismatch=0, abstained=3",8
+cases,"total=40, gold_arm=22, target_arm=18",40

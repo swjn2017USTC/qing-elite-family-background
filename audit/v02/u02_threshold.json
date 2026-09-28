@@ -1,0 +1,35 @@
+{
+  "precision_target": 0.99,
+  "cross_source_threshold": 0.003452704399668922,
+  "dedupe_threshold": 1.0,
+  "cross_source_held_out": {
+    "n": 88,
+    "positive": 25,
+    "negative": 63,
+    "tp": 66.17,
+    "fp": 0.0,
+    "fn": 180.85,
+    "tn": 5853.83,
+    "tp_raw": 10,
+    "fp_raw": 0,
+    "precision": 1.0,
+    "recall": 0.2678631671277242,
+    "threshold": 0.003452704399668922
+  },
+  "dedupe_held_out": {
+    "n": 64,
+    "positive": 12,
+    "negative": 52,
+    "tp": 0.0,
+    "fp": 0.0,
+    "fn": 440.05,
+    "tn": 2263.83,
+    "tp_raw": 0,
+    "fp_raw": 0,
+    "precision": null,
+    "recall": 0.0,
+    "threshold": 1.0
+  },
+  "seed": 20260914,
+  "split": "every 5th pair by sha256(seed:pair_id)"
+}

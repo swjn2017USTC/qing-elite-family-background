@@ -1,0 +1,83 @@
+{
+  "seed": 20260914,
+  "strata": {
+    "A": {
+      "population": 85,
+      "sample": 85,
+      "inclusion_probability": 1.0,
+      "weight": 1.0,
+      "capped_by_frame": false,
+      "requested": null
+    },
+    "B": {
+      "population": 531,
+      "sample": 200,
+      "inclusion_probability": 0.376648,
+      "weight": 2.655,
+      "capped_by_frame": false,
+      "requested": 200
+    },
+    "C": {
+      "population": 398,
+      "sample": 200,
+      "inclusion_probability": 0.502513,
+      "weight": 1.99,
+      "capped_by_frame": false,
+      "requested": 200
+    },
+    "D": {
+      "population": 12331,
+      "sample": 400,
+      "inclusion_probability": 0.032439,
+      "weight": 30.8275,
+      "capped_by_frame": false,
+      "requested": 400
+    }
+  },
+  "frame": {
+    "total": 13345,
+    "by_stratum": {
+      "D": 12331,
+      "B": 531,
+      "C": 398,
+      "A": 85
+    }
+  },
+  "estimand": "P(documented ancestor office = 1 | tier group) on the frozen frame: the share of each tier for which the record attests an ancestor who held office. The denominator is the tier itself and the complement includes unknown, so this is a *documentation rate*, never an assertion that an undocumented ancestor held no office. Reported per tier with Wilson intervals and as descriptive contrasts between tiers (association only, no causal claim). For the D tier the frozen frame yields a documentation rate of 0, so D enters this estimand only as an ascertainment result and its upper bound.",
+  "exclusions": [
+    "entities that are not primary_eligible (unresolved link, pending review or merged into another entity) are outside the frame",
+    "no further exclusions: the frame is the frozen primary entity list"
+  ],
+  "ordering": "sort by (cohort, banner_group, entity_id), then systematic step",
+  "tertiary_estimand": "D tier restricted to entities with an accepted CBDB link (link_status = accepted_cross_link): the same documentation rate on that sub-frame. Pre-registered as a secondary quantity because the restriction selects on linkage success, which correlates with documented ancestry; it may be reported only together with that selection caveat and never as the tier's headline number.",
+  "tertiary_frame": {
+    "definition": "tier_group == 'D' and link_status == 'accepted_cross_link'",
+    "population": 302,
+    "caveat": "selection on linkage success; report only with the caveat, never as D's headline"
+  },
+  "observed_documented_official_rate": {
+    "A": 0.18823529411764706,
+    "B": 0.045,
+    "C": 0.07,
+    "D": 0.0
+  },
+  "observed_ascertained": {
+    "A": {
+      "n_ascertained": 34,
+      "rate": 0.47058823529411764
+    },
+    "B": {
+      "n_ascertained": 45,
+      "rate": 0.2
+    },
+    "C": {
+      "n_ascertained": 41,
+      "rate": 0.34146341463414637
+    },
+    "D": {
+      "n_ascertained": 0,
+      "rate": 0.0
+    }
+  },
+  "secondary_estimand": "P(documented ancestor office = 1 | ancestor identity known, tier): the same rate on the ascertained denominator, reported with that denominator per tier."
+}

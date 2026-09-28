@@ -1,0 +1,117 @@
+{
+  "stage": "U06R",
+  "schema_version": "v0.3.0",
+  "gate": "PASS",
+  "failures": [],
+  "checks": {
+    "design_still_holds": {
+      "status": "PASS",
+      "evidence": [
+        "config/v03/research.yaml",
+        "config/v03/relations.yaml",
+        "config/v03/review_policy.yaml",
+        "config/v03/source_priority.yaml"
+      ]
+    },
+    "tier_is_outcome": {
+      "status": "PASS",
+      "evidence": {
+        "tier_columns_in_input_tables": {
+          "persons": [],
+          "career_events": []
+        },
+        "primary_outcomes": [
+          "highest_office_rank",
+          "highest_admin_level",
+          "central_local_route"
+        ],
+        "legacy_only": [
+          "highest_tier",
+          "tier_group"
+        ]
+      }
+    },
+    "v02_untouched": {
+      "status": "PASS",
+      "evidence": {
+        "baseline_ref": "v0.2-u03-frozen-20260927",
+        "modified_frozen_paths": [
+          "tests/test_u02_linkage.py"
+        ],
+        "excused_paths": {
+          "tests/test_u02_linkage.py": "U11R added the missing-input skip guard; without it a clean checkout fails two tests for a file the public repository deliberately does not ship"
+        },
+        "violations": []
+      }
+    },
+    "linkage_artifacts": {
+      "status": "PASS",
+      "evidence": {
+        "links": 419,
+        "decisions": {
+          "auto_accept": 317,
+          "reject": 102
+        },
+        "risk_rows": 419,
+        "review_items": 102,
+        "problems": []
+      }
+    },
+    "linkage_crosswalk": {
+      "status": "PASS",
+      "evidence": {
+        "release": {
+          "sha256_matches_frozen": true,
+          "records": 1261658,
+          "distinct_person_ids": 132361,
+          "records_without_person_id": 92302,
+          "persons_in_multiple_periods": 515
+        },
+        "crosswalk": {
+          "legacy_ids": 12682,
+          "relations": {
+            "same_id": 11400,
+            "merged_by_v02": 1282
+          },
+          "official_ids_matched": 12682,
+          "merged_groups": 986,
+          "max_group_size": 8
+        },
+        "problems": []
+      }
+    },
+    "linkage_auto_accept": {
+      "status": "PASS",
+      "evidence": {
+        "regions": {
+          "ml": "PASS",
+          "deterministic": "FAIL"
+        },
+        "abstention": {
+          "band": [
+            0.3,
+            0.7
+          ],
+          "rows": 3,
+          "share": 0.0341,
+          "band_precision": 0.0
+        },
+        "risk": {
+          "by_tier": {
+            "LOW": 279,
+            "MEDIUM": 140
+          },
+          "human_review_items": 102
+        },
+        "problems": []
+      }
+    },
+    "linkage_tests": {
+      "status": "PASS",
+      "evidence": {
+        "command": "pytest tests/test_v03_linkage.py",
+        "summary": "22 passed"
+      }
+    }
+  }
+}

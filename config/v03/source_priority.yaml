@@ -1,0 +1,55 @@
+# V0.3 来源优先级与可行性标记（config/v03/source_priority.yaml）
+#
+# 本文件只登记**设计优先级**与访问类型枚举。任何来源的实际可行性必须由 U04R 的
+# 机器化 probe 判定并写入 data/processed_v03/source_feasibility.parquet；
+# 在 probe 完成前，所有来源的 probe_status 一律为 pending，
+# **不得假设任何来源可以下载**。
+
+version: 1
+priority_version: source-priority-v1
+probe_owner_stage: U04R
+default_probe_status: pending
+assumption_rule: no_source_is_assumed_downloadable_before_probe
+
+access_types:
+  - PUBLIC_STRUCTURED
+  - PUBLIC_SCAN
+  - PUBLIC_UI_ONLY
+  - ACCESS_REQUEST_REQUIRED
+  - PAPER_TABLE_ONLY
+  - UNAVAILABLE
+
+rights_rules:
+  - "禁止绕过登录、验证码、访问控制或使用条款"
+  - "未取得 bulk 权限的来源只能登记为 ACCESS_REQUEST_REQUIRED，不得抓取"
+  - "论文中存在的数据集不等于本项目可下载的数据集"
+
+tiers:
+  S:
+    definition: "标准化结构化数据，机器可读，直接承担 person / career / kin 主干"
+  A:
+    definition: "标准化家世史料（题名/履历/齿录类），机器可读或可 OCR，承担家族资本暴露"
+  B:
+    definition: "自由文本补充（传记、方志），只用于补缺与交叉验证"
+  C:
+    definition: "在线 UI 查询，仅人工核验用途"
+
+candidates:
+  - {name: cbdb,            tier: S, role: canonical_person_career_kin_degree, probe_status: pending}
+  - {name: cgedq_jsl,       tier: S, role: career_panel_and_credentials,     probe_status: pending}
+  - {name: tongguanlu,      tier: A, role: standardised_office_roster,       probe_status: pending}
+  - {name: tongnianchilu,   tier: A, role: exam_cohort_kin_records,          probe_status: pending}
+  - {name: mingjingtongpu,  tier: A, role: examination_kin_records,          probe_status: pending}
+  - {name: zhujuan,         tier: A, role: exam_kin_records,                 probe_status: pending}
+  - {name: lvli_dangan,     tier: A, role: office_resume_records,            probe_status: pending}
+  - {name: shengyuanlu,     tier: A, role: lower_degree_rosters,             probe_status: pending}
+  - {name: jinshenlu,       tier: A, role: annual_office_roster,             probe_status: pending}
+  - {name: wikisource_dump, tier: B, role: biography_backfill,               probe_status: pending}
+  - {name: sinica_authority, tier: C, role: manual_verification,             probe_status: pending}
+
+# 主家世源（exposure 侧）与职业源（outcome 侧）必须分开登记，
+# 避免又出现"从最终官位回头找家世"的设计
+role_split:
+  exposure_side: [cbdb, tongguanlu, tongnianchilu, mingjingtongpu, zhujuan, lvli_dangan, shengyuanlu]
+  outcome_side: [cgedq_jsl, jinshenlu, cbdb]
+  backfill_only: [wikisource_dump, sinica_authority]

@@ -1,0 +1,107 @@
+{
+  "stage": "U05R",
+  "schema_version": "v0.3.0",
+  "gate": "PASS",
+  "failures": [],
+  "checks": {
+    "design_still_holds": {
+      "status": "PASS",
+      "evidence": [
+        "config/v03/research.yaml",
+        "config/v03/relations.yaml",
+        "config/v03/review_policy.yaml",
+        "config/v03/source_priority.yaml"
+      ]
+    },
+    "tier_is_outcome": {
+      "status": "PASS",
+      "evidence": {
+        "tier_columns_in_input_tables": {
+          "persons": [],
+          "career_events": []
+        },
+        "primary_outcomes": [
+          "highest_office_rank",
+          "highest_admin_level",
+          "central_local_route"
+        ],
+        "legacy_only": [
+          "highest_tier",
+          "tier_group"
+        ]
+      }
+    },
+    "v02_untouched": {
+      "status": "PASS",
+      "evidence": {
+        "baseline_ref": "v0.2-u03-frozen-20260927",
+        "modified_frozen_paths": [
+          "tests/test_u02_linkage.py"
+        ],
+        "excused_paths": {
+          "tests/test_u02_linkage.py": "U11R added the missing-input skip guard; without it a clean checkout fails two tests for a file the public repository deliberately does not ship"
+        },
+        "violations": []
+      }
+    },
+    "pilot_artifacts": {
+      "status": "PASS",
+      "evidence": {
+        "frame": {
+          "focal_persons": 300,
+          "by_cohort": {
+            "1644-1735": 91,
+            "1736-1795": 85,
+            "1796-1860": 82,
+            "1861-1912": 42
+          },
+          "by_region_group": {
+            "jiangnan": 79,
+            "other": 72,
+            "north": 49,
+            "central": 38,
+            "coastal_south": 36,
+            "southwest": 26
+          },
+          "by_credential_class": {
+            "none": 97,
+            "jinshi": 51,
+            "juren": 45,
+            "shengyuan": 38,
+            "gongsheng": 36,
+            "jiansheng": 33
+          },
+          "province_unknown": 72,
+          "cells": 124,
+          "kin_records_in_frame": 821,
+          "mean_inclusion_probability": 0.22942360212170096
+        },
+        "risk_rows": 855,
+        "problems": []
+      }
+    },
+    "pilot_source_gates": {
+      "status": "PASS",
+      "evidence": {
+        "gates": {
+          "cbdb": {
+            "gate": "PASS",
+            "action": "keep"
+          },
+          "ocr_scan": {
+            "gate": "FAIL(attributes)",
+            "action": "keep_identity_only"
+          }
+        },
+        "problems": []
+      }
+    },
+    "pilot_tests": {
+      "status": "PASS",
+      "evidence": {
+        "command": "pytest tests/test_v03_pilot.py",
+        "summary": "29 passed"
+      }
+    }
+  }
+}
