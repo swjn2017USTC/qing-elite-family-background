@@ -1,0 +1,62 @@
+stage: U04R
+literature_pipeline_version: 0.3-lit-1
+scholarship_gate:
+  status: partial
+  metadata_candidates: 713
+  core_shortlist: 10
+  fulltext_core_count: 2
+  abstract_core_count: 8
+  digests: 10
+  literature_claims: 63
+  claim_source_map_rows: 122
+  claim_delta_complete: true
+  historiography_complete: true
+  unresolved_critical_gaps: 3
+  gap_notes:
+  - 中文期刊（CNKI 系）文献缺失：Semantic Scholar 公共池 429、未使用需登录的 CNKI 通道
+  - 缙绅录方法学论文（10.1017/jch.2020.15）仅题录：Cambridge Core 当日 404
+  - 硃卷只有 1 篇 core（单案例分析），缺系统性硃卷研究
+query_clusters:
+  Q1_qing_social_mobility: 3
+  Q2_family_background: 3
+  Q3_kin_network: 3
+  Q4_tongnianchilu: 3
+  Q5_mingjingtongpu: 3
+  Q6_tongguanlu: 3
+  Q7_zhujuan: 3
+  Q8_shengyuanlu: 3
+  Q9_jinshenlu: 3
+  Q10_career_mobility: 3
+  Q11_office_purchase: 3
+  Q12_record_linkage: 3
+providers:
+  crossref:
+    queries: 36
+    ok: 36
+    note: 本阶段候选池的唯一实际来源
+  semanticscholar:
+    queries: 36
+    ok: 0
+    note: 全部 429（公共池限流）；脚本级探测曾 200
+  openalex:
+    queries: 36
+    ok: 0
+    note: 匿名检索暂停（503）
+  unpaywall:
+    queries: 0
+    ok: 0
+    note: API 要求本人邮箱，未使用
+source_feasibility:
+  sources_probed: 13
+  access_type_counts:
+    ACCESS_REQUEST_REQUIRED: 5
+    PUBLIC_UI_ONLY: 4
+    PUBLIC_STRUCTURED: 3
+    UNAVAILABLE: 1
+  default_plan: PLAN_C
+  plan_rule: exposure_side_ui_or_request_only
+claim_testability:
+  TESTABLE_WITH_ACCESS_REQUEST: 103
+  NOT_TESTABLE_IN_V03: 14
+  TESTABLE_NOW: 5
+catalog_version: catalog-v1

@@ -1,0 +1,378 @@
+{
+  "project": "qing-elite-family-background",
+  "release": "v0.1-one-day",
+  "generated_at_utc": "2026-09-14T01:01:46Z",
+  "git": {
+    "commit": "d0dba1f18cded6c38c1a3189dd17a6ea1cfb89b0",
+    "commit_short": "d0dba1f",
+    "branch": "main",
+    "tags": [],
+    "dirty": true
+  },
+  "environment": {
+    "python": "3.12.14",
+    "platform": "macOS-26.5-arm64-arm-64bit",
+    "machine": "arm64"
+  },
+  "sources": [
+    {
+      "id": "cbdb_sqlite_20260912",
+      "release": "cbdb_20260912",
+      "release_date": "2026-09-12",
+      "files": [
+        {
+          "path": "data/raw/cbdb/cbdb_20260912.zip",
+          "sha256": "0f9ff7b93cd6b8b6c172f7edf03eaff66e8a593164f3047c3f4eff434d104678",
+          "verified": true
+        },
+        {
+          "path": "data/raw/cbdb/cbdb_20260912.sqlite3",
+          "sha256": "604a4ce0872776a958b4f5b263ec10133644710524bcb1cb904d8866a04daa62",
+          "verified": true
+        },
+        {
+          "path": "data/raw/cbdb/cbdb_20260912.json",
+          "sha256": "bd215bc3033ab6db533bf3ba0c258479ecd23a6e2701235b4c2b3172bf204f83",
+          "verified": null
+        },
+        {
+          "path": "data/raw/cbdb/cbdb_users_guide_2025-11-04_wayback.pdf",
+          "sha256": "ee222b719232c226fd1b60321aabd6e570110d86898e78134f907f97d6c29c01",
+          "verified": null
+        }
+      ]
+    },
+    {
+      "id": "cgedq_jsl_public_2026_08_28",
+      "release": "DataSpace@HKUST DOI 10.14711/dataset/E9GKRS, version 24.0",
+      "release_date": "2026-08-31",
+      "files": [
+        {
+          "path": "data/raw/cgeq/cgedq_jsl_public_1760-1912_personid_2026-08-28.tab",
+          "sha256": "92d74b4dbca2de3ad67a502f2cd2e14815d4ba0cc27776b1c06063873928d476",
+          "verified": true
+        },
+        {
+          "path": "data/raw/cgeq/cgedq_jsl_chushen_recodes.tab",
+          "sha256": "83860ac33840c22ae2d7aba33952d3d9bce6fe52588a7ad5f6d3e2fa87d20198",
+          "verified": true
+        },
+        {
+          "path": "data/raw/cgeq/cgedq_jsl_province_recodes.tab",
+          "sha256": "ed1a30e5fdf741c3f9084de88866da52261442df08050172859e0a86e4164775",
+          "verified": true
+        },
+        {
+          "path": "data/raw/cgeq/cgedq_jsl_user_guide_v4_2025-07.pdf",
+          "sha256": "6da8501a8f859428b14644a37a3c4d4386926eb959eb99889efa3533951ad02c",
+          "verified": true
+        },
+        {
+          "path": "data/raw/cgeq/cgedq_r_tutorial_v2_2025-06.pdf",
+          "sha256": "2900263db5ff9a3ef473112777b94b40b55c0143e8f745e3c5fb24add1a6a149",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "id": "sinica_person_authority",
+      "release": null,
+      "release_date": null,
+      "files": []
+    },
+    {
+      "id": "sinica_qing_office",
+      "release": null,
+      "release_date": null,
+      "files": []
+    },
+    {
+      "id": "qingshigao_machine_readable",
+      "release": null,
+      "release_date": null,
+      "files": []
+    }
+  ],
+  "derived_data": [
+    {
+      "file": "data/processed/officials_master.parquet",
+      "rows": 39988,
+      "sha256": "d72d9ff2029cd867f214fdce59b9dc524e7a96845cb3c425783e2b0cb36640b3"
+    },
+    {
+      "file": "data/processed/appointments.parquet",
+      "rows": 56346,
+      "sha256": "93274ad37d3ded091fd0c45ac70c7a19fafb763e6b2a448c2c9e5f69ce7e9193"
+    },
+    {
+      "file": "data/processed/family_structured.parquet",
+      "rows": 119964,
+      "sha256": "8c7edb8702317446fac4451a946c640b6dd07246c90231c861818433e67661d6"
+    },
+    {
+      "file": "data/processed/family_enriched.parquet",
+      "rows": 963,
+      "sha256": "58b279b61a62c708c0793f671e90d21e69017f15de1cd470a6afeeccac0b92d2"
+    },
+    {
+      "file": "data/processed/family_final.parquet",
+      "rows": 119964,
+      "sha256": "c419fa5d8c7df14f5b0cec746be6aeec9891dd0030091c6292fa5529e76f81b1"
+    },
+    {
+      "file": "data/processed/person_indicators.parquet",
+      "rows": 39988,
+      "sha256": "9e923d658e879a415c682dc132356cf77e58380633429d022a58fd59e009d5d8"
+    }
+  ],
+  "tables": [
+    {
+      "file": "tables/T1_coverage_by_tier.csv",
+      "source": "output/tables/p06_coverage_by_tier.csv",
+      "rows": 6,
+      "sha256": "6496d5e8450d2b146e985105f555895222fc463927bfa62fbcf207d4dff06d8a",
+      "status": "copied"
+    },
+    {
+      "file": "tables/T2_indicator_prevalence.csv",
+      "source": "output/tables/p06_prevalence.csv",
+      "rows": 53,
+      "sha256": "5b7ee5d73268248c73078888bfca8f2579c86b2ab43a301d5489fc3c0b99503b",
+      "status": "copied"
+    },
+    {
+      "file": "tables/T3_elite_generations.csv",
+      "source": "output/tables/p06_elite_generations.csv",
+      "rows": 6,
+      "sha256": "ca4370bcfbcc13acb4726a472d502d3830c44f7b8b436f2af290a7346c84640c",
+      "status": "copied"
+    },
+    {
+      "file": "tables/T4_na_accounting.csv",
+      "source": "output/tables/p06_na_accounting.csv",
+      "rows": 6,
+      "sha256": "c96d18f50d6deeb9cdd12185c07037b7800c40081ced04c6c18a8205a101ff3c",
+      "status": "copied"
+    },
+    {
+      "file": "tables/T5_visibility_bias.csv",
+      "source": "output/tables/p06_visibility_bias.csv",
+      "rows": 3,
+      "sha256": "6fe274a0a6bb966149fe298a3dc2b47c2a9886b9420cd9d5cc4e31817c91ae5b",
+      "status": "copied"
+    },
+    {
+      "file": "tables/T6_models.csv",
+      "source": "output/tables/p06_models.csv",
+      "rows": 10,
+      "sha256": "2b7a770b39dc0a53361535f855cea0dae20966b567f8581ecd6f538bec60e15d",
+      "status": "copied"
+    },
+    {
+      "file": "tables/T7_model_diagnostics.json",
+      "source": "output/tables/p06_model_diagnostics.json",
+      "rows": null,
+      "sha256": "c274dd78784e7881c10b953bc8c07859daa01122b53aafbd2cef500353199896",
+      "status": "copied"
+    },
+    {
+      "file": "tables/T8_structural_family_coverage.csv",
+      "source": "output/tables/p03_family_coverage.csv",
+      "rows": 18,
+      "sha256": "4e1d480d310ad238db0e3e12502fdf398125655de8d485e35cc5c7ea765bacc9",
+      "status": "copied"
+    },
+    {
+      "file": "tables/T9_pilot_metrics.csv",
+      "source": "output/tables/p04_metrics.csv",
+      "rows": 13,
+      "sha256": "2ac5876ea74057575ea73729eef14cf4e9303bdf7ed38a9afdf0ae501ef13654",
+      "status": "copied"
+    },
+    {
+      "file": "tables/T10_llm_cost_report.csv",
+      "source": "output/tables/cost_report.csv",
+      "rows": 1,
+      "sha256": "478fa2edf0f562a2032569214c15e4abdb9a4f175f4756fda10e4940596fdb8e",
+      "status": "copied"
+    },
+    {
+      "file": "tables/T11_enrichment_plan.csv",
+      "source": "output/tables/p05_enrich_plan.csv",
+      "rows": 1,
+      "sha256": "02875b5056587bd0ce89c58dd9029c81a98768eef7727053e24026e9b0c54aeb",
+      "status": "copied"
+    },
+    {
+      "file": "tables/A1_a_layer_verification.csv",
+      "source": "audit/a_layer_verification.csv",
+      "rows": 116,
+      "sha256": "c2e400c9ef62b4150dac2b6155615b37dec26dce422aa42a9fd500cc9159b4ac",
+      "status": "copied"
+    },
+    {
+      "file": "tables/A2_missing_sensitivity.csv",
+      "source": "audit/p07_missing_sensitivity.csv",
+      "rows": 6,
+      "sha256": "6244926864dc610a269b0364807526b218bda4da9911ed428fa19134cb66cd6f",
+      "status": "copied"
+    },
+    {
+      "file": "tables/A3_humble_definitions.csv",
+      "source": "audit/p07_humble_definitions.csv",
+      "rows": 30,
+      "sha256": "fd04df7e7024b54af30b2c33ec4e6ab9c7233d2f016278ba65b38f3d6e17d07a",
+      "status": "copied"
+    },
+    {
+      "file": "tables/A4_humble_agreement.csv",
+      "source": "audit/p07_humble_agreement.csv",
+      "rows": 10,
+      "sha256": "78f0708714998963a1ce3c3f1ea74c9c49d7db2baad0450ffb5b861b2b99432e",
+      "status": "copied"
+    },
+    {
+      "file": "tables/A5_duplication.csv",
+      "source": "audit/p07_duplication.csv",
+      "rows": 6,
+      "sha256": "48ed255c806e224cd3441bac0de5b89ea82d05cb3fa81c0d92f56aa6fe579c8c",
+      "status": "copied"
+    },
+    {
+      "file": "tables/A6_duplication_sensitivity.csv",
+      "source": "audit/p07_duplication_sensitivity.csv",
+      "rows": 2,
+      "sha256": "1e1117c0488e19f58e0a2582152f319437bf5359e3f59a932b07ddf85cefb88b",
+      "status": "copied"
+    },
+    {
+      "file": "tables/A7_cgedq_quarters.csv",
+      "source": "audit/p07_cgedq_quarters.csv",
+      "rows": 6,
+      "sha256": "8cc774d091b3cf87c5a1de114109085c722a272e5ca5bfa538b4b806b913eebd",
+      "status": "copied"
+    },
+    {
+      "file": "tables/A8_office_tier.csv",
+      "source": "audit/p07_office_tier.csv",
+      "rows": 6,
+      "sha256": "0154b2e697275905869c4274bec52a50851988a1e96c0b0c3645f32d8fd079f8",
+      "status": "copied"
+    },
+    {
+      "file": "tables/A9_time_window.csv",
+      "source": "audit/p07_time_window.csv",
+      "rows": 6,
+      "sha256": "1f20ceabd3d94c3b5647e086696f0c0c0086e8e6dc67cecb535b4a9a45b09e28",
+      "status": "copied"
+    },
+    {
+      "file": "tables/A10_denominators.csv",
+      "source": "audit/p07_denominators.csv",
+      "rows": 2,
+      "sha256": "c697cc0619a116f070cce4f05cbeb70448ad2588a6622aca0cb60b0da51c839a",
+      "status": "copied"
+    },
+    {
+      "file": "tables/A11_unknown_coding.csv",
+      "source": "audit/p07_unknown_coding.csv",
+      "rows": 7,
+      "sha256": "477d01348e27674c2971126b55dcef149e40646d0bf08adbe77da16a2e7ede22",
+      "status": "copied"
+    },
+    {
+      "file": "tables/A12_replication_10pct.csv",
+      "source": "audit/p07_replication_10pct.csv",
+      "rows": 32,
+      "sha256": "9aea3b1f83118e3b0add10aa9f1c92463b59b4619f5c8a6fac62c2e532a667c9",
+      "status": "copied"
+    }
+  ],
+  "figures": [
+    {
+      "file": "figures/p06_coverage_by_tier.pdf",
+      "sha256": "11c3acf63f062fe5247acf82e9ee41fec31d48c0061f1b2a29d7e3b777020d80",
+      "bytes": 34280
+    },
+    {
+      "file": "figures/p06_coverage_by_tier.png",
+      "sha256": "3cd6124b2f6cc3a54863a1c91dc7efbace4884a699e54b4fb8a5b524cea609ad",
+      "bytes": 59681
+    },
+    {
+      "file": "figures/p06_prevalence_by_tier.pdf",
+      "sha256": "8d59f4e96f7d408e908982f64160137758dd5b6cddf4f816e32e47d14b8f74de",
+      "bytes": 33900
+    },
+    {
+      "file": "figures/p06_prevalence_by_tier.png",
+      "sha256": "eef0f0619a2c659cc44d9595a38caa45b90282f8ab543820968ad7b5087ea073",
+      "bytes": 59935
+    },
+    {
+      "file": "figures/p06_elite_generations.pdf",
+      "sha256": "0dca350496f1a9ec9d262cfc32903360292a39304b12b5b99fe571beaeb68b47",
+      "bytes": 23399
+    },
+    {
+      "file": "figures/p06_elite_generations.png",
+      "sha256": "f170cdd3028873b9ff823e057df69a7861216a8537ebb4afacd06a34ce56a2a1",
+      "bytes": 35908
+    },
+    {
+      "file": "figures/p06_cohort_trend_abc.pdf",
+      "sha256": "26679cf1c1251ae186678688db895641e18b4a6dc34ad5d3bdea8bd38a938296",
+      "bytes": 24793
+    },
+    {
+      "file": "figures/p06_cohort_trend_abc.png",
+      "sha256": "1cc22de01e5fc80f97ed5537ecd6bff6f4438a56040906d9b58db2b18a807931",
+      "bytes": 68688
+    }
+  ],
+  "tests": {
+    "exit_code": 0,
+    "tests_collected": 73,
+    "summary": "73 tests, all passed",
+    "command": "uv run pytest -q"
+  },
+  "llm": {
+    "provider": "DeepSeek official API (api.deepseek.com)",
+    "model": "deepseek-flash",
+    "calls_recorded": 690,
+    "estimated_cost_rmb_total": 0.947,
+    "by_prompt_version": {
+      "p04-family-v1": {
+        "calls": 44,
+        "input_tokens": 46146,
+        "output_tokens": 3811,
+        "cost_rmb": 0.061
+      },
+      "p04-family-v2": {
+        "calls": 125,
+        "input_tokens": 166874,
+        "output_tokens": 14641,
+        "cost_rmb": 0.1306
+      },
+      "p04-family-v3": {
+        "calls": 521,
+        "input_tokens": 689650,
+        "output_tokens": 80504,
+        "cost_rmb": 0.7554
+      }
+    }
+  },
+  "commands": [
+    "uv sync",
+    "uv run python -m qing_elite.build_universe",
+    "uv run python -m qing_elite.build_family",
+    "uv run python -m qing_elite.llm.harvest --volumes 250-399",
+    "uv run python -m qing_elite.llm.harvest --build-index",
+    "uv run python -m qing_elite.llm.enrich --plan",
+    "uv run python -m qing_elite.llm.enrich --concurrency 6",
+    "uv run python -m qing_elite.build_analysis",
+    "uv run python -m qing_elite.build_audit [--replicate]",
+    "uv run python -m qing_elite.build_final",
+    "uv run pytest"
+  ]
+}

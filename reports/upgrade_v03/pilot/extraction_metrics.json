@@ -1,0 +1,450 @@
+{
+  "stage": "U05R",
+  "llm_fallback": {
+    "enabled": true,
+    "model": "deepseek-flash",
+    "thinking_mode": "disabled",
+    "abstentions_before": 14,
+    "attempted": 14,
+    "recovered": 10,
+    "rejected": 4,
+    "rejected_reasons": [
+      "quote_not_verbatim",
+      "quote_not_verbatim",
+      "quote_not_verbatim",
+      "quote_not_verbatim"
+    ]
+  },
+  "pilot": {
+    "frame": {
+      "focal_persons": 300,
+      "by_cohort": {
+        "1644-1735": 91,
+        "1736-1795": 85,
+        "1796-1860": 82,
+        "1861-1912": 42
+      },
+      "by_region_group": {
+        "jiangnan": 79,
+        "other": 72,
+        "north": 49,
+        "central": 38,
+        "coastal_south": 36,
+        "southwest": 26
+      },
+      "by_credential_class": {
+        "none": 97,
+        "jinshi": 51,
+        "juren": 45,
+        "shengyuan": 38,
+        "gongsheng": 36,
+        "jiansheng": 33
+      },
+      "province_unknown": 72,
+      "cells": 124,
+      "kin_records_in_frame": 821,
+      "mean_inclusion_probability": 0.22942360212170096
+    },
+    "seed": 20260927,
+    "sources_used": [
+      "cbdb",
+      "tongguanlu_commons_jiangnan_lingshu"
+    ]
+  },
+  "cbdb_structured_arm": {
+    "kin_edges": 768,
+    "credentials": 542,
+    "career_events": 1465,
+    "assertions": 2775,
+    "source_documents": 2828,
+    "unmapped_kin_codes": 53,
+    "relation_distribution": {
+      "son": 218,
+      "father": 143,
+      "grandson": 111,
+      "brother": 89,
+      "grandfather": 60,
+      "great_grandfather": 23,
+      "daughter": 20,
+      "wife": 19,
+      "nephew_paternal": 13,
+      "husband": 11,
+      "mother": 11,
+      "uncle_paternal": 10,
+      "son_in_law": 9,
+      "sister": 9,
+      "father_in_law": 7,
+      "great_great_grandfather": 6,
+      "grandmother": 5,
+      "cousin_paternal": 4
+    },
+    "risk": {
+      "rows": 768,
+      "by_tier": {
+        "LOW": 768
+      },
+      "by_route": {
+        "auto_accept": 768
+      },
+      "human_review_share": 0.0,
+      "top_failure_components": {
+        "source_conflict": 4,
+        "rare_relation": 4
+      }
+    },
+    "schema_error": null
+  },
+  "ocr_scan_arm": {
+    "pages_ocr": 16,
+    "entries": 87,
+    "abstained": 14,
+    "relation_mentions": 110,
+    "convergence": 0.8462,
+    "evaluation": {
+      "scored_pages": [
+        2,
+        4
+      ],
+      "predictions_on_unscored_pages": 77,
+      "scored_page_coverage_of_ocr_arm": 0.1149,
+      "gold_entries": 13,
+      "predicted_entries": 10,
+      "matched": 9,
+      "precision": 0.9,
+      "recall": 0.6923,
+      "f1": 0.7826,
+      "abstention_rate": 0.0,
+      "field_accuracy": {
+        "kin_name": 1.0,
+        "degree_raw": 1.0,
+        "office_raw_promotion_pairs_counted_as_match": 0.6,
+        "office_raw_strict": 0.2
+      },
+      "scoreable_fields": {
+        "degree_raw": 1,
+        "office_raw": 5
+      },
+      "error_classes": {
+        "missed_entry": 3,
+        "office_priority_confusion": 2,
+        "relation_error": 1,
+        "ocr_induced_relation_loss": 1,
+        "office_conflict": 1
+      },
+      "errors": [
+        {
+          "kind": "predicted_not_in_gold",
+          "error_class": "relation_error",
+          "detail": {
+            "page": 4,
+            "kin_name": "煜",
+            "predicted_relation": "grandfather",
+            "gold_relation": "great_grandfather"
+          }
+        },
+        {
+          "kind": "gold_not_predicted",
+          "error_class": "ocr_induced_relation_loss",
+          "detail": {
+            "page": 4,
+            "kin_name": "煜",
+            "gold_relation": "great_grandfather",
+            "relation_term_present_in_ocr_text": false
+          }
+        },
+        {
+          "kind": "gold_not_predicted",
+          "error_class": "missed_entry",
+          "detail": {
+            "page": 4,
+            "kin_name": "仕基",
+            "gold_relation": "grandfather",
+            "relation_term_present_in_ocr_text": true
+          }
+        },
+        {
+          "kind": "gold_not_predicted",
+          "error_class": "missed_entry",
+          "detail": {
+            "page": 4,
+            "kin_name": "萬裕",
+            "gold_relation": "son",
+            "relation_term_present_in_ocr_text": true
+          }
+        },
+        {
+          "kind": "gold_not_predicted",
+          "error_class": "missed_entry",
+          "detail": {
+            "page": 4,
+            "kin_name": "萬安",
+            "gold_relation": "son",
+            "relation_term_present_in_ocr_text": true
+          }
+        },
+        {
+          "kind": "office_mismatch",
+          "error_class": "office_conflict",
+          "detail": {
+            "page": 2,
+            "kin_name": "照",
+            "predicted": "典史",
+            "gold": "縣典史"
+          }
+        },
+        {
+          "kind": "office_mismatch",
+          "error_class": "office_priority_confusion",
+          "detail": {
+            "page": 4,
+            "kin_name": "向榮",
+            "predicted": "知縣",
+            "gold": "縣丞"
+          }
+        },
+        {
+          "kind": "office_mismatch",
+          "error_class": "office_priority_confusion",
+          "detail": {
+            "page": 4,
+            "kin_name": "萬牲",
+            "predicted": "知縣",
+            "gold": "縣丞"
+          }
+        }
+      ]
+    },
+    "risk": {
+      "rows": 87,
+      "by_tier": {
+        "LOW": 47,
+        "MEDIUM": 40
+      },
+      "by_route": {
+        "auto_accept": 47,
+        "machine_adjudicate": 40
+      },
+      "human_review_share": 0.0,
+      "top_failure_components": {
+        "linkage_uncertainty": 87,
+        "source_conflict": 48,
+        "rare_relation": 4,
+        "office_unknown": 62,
+        "evidence_span_failure": 3
+      }
+    }
+  },
+  "gates": {
+    "cbdb": {
+      "source": "cbdb",
+      "kind": "integrity_based",
+      "metrics": {
+        "kin_rows": 821,
+        "mapped": 768,
+        "unmapped": 53,
+        "mapping_rate": 0.9354,
+        "evidence_linkage": 1.0,
+        "document_linkage": 1.0,
+        "schema_conformance": true
+      },
+      "gate": "PASS",
+      "failures": [],
+      "action": "keep"
+    },
+    "ocr_scan": {
+      "source": "tongguanlu_commons_jiangnan_lingshu",
+      "kind": "gold_based",
+      "metrics": {
+        "scored_pages": [
+          2,
+          4
+        ],
+        "predictions_on_unscored_pages": 77,
+        "scored_page_coverage_of_ocr_arm": 0.1149,
+        "gold_entries": 13,
+        "predicted_entries": 10,
+        "matched": 9,
+        "precision": 0.9,
+        "recall": 0.6923,
+        "f1": 0.7826,
+        "abstention_rate": 0.0,
+        "field_accuracy": {
+          "kin_name": 1.0,
+          "degree_raw": 1.0,
+          "office_raw_promotion_pairs_counted_as_match": 0.6,
+          "office_raw_strict": 0.2
+        },
+        "scoreable_fields": {
+          "degree_raw": 1,
+          "office_raw": 5
+        },
+        "error_classes": {
+          "missed_entry": 3,
+          "office_priority_confusion": 2,
+          "relation_error": 1,
+          "ocr_induced_relation_loss": 1,
+          "office_conflict": 1
+        },
+        "errors": [
+          {
+            "kind": "predicted_not_in_gold",
+            "error_class": "relation_error",
+            "detail": {
+              "page": 4,
+              "kin_name": "煜",
+              "predicted_relation": "grandfather",
+              "gold_relation": "great_grandfather"
+            }
+          },
+          {
+            "kind": "gold_not_predicted",
+            "error_class": "ocr_induced_relation_loss",
+            "detail": {
+              "page": 4,
+              "kin_name": "煜",
+              "gold_relation": "great_grandfather",
+              "relation_term_present_in_ocr_text": false
+            }
+          },
+          {
+            "kind": "gold_not_predicted",
+            "error_class": "missed_entry",
+            "detail": {
+              "page": 4,
+              "kin_name": "仕基",
+              "gold_relation": "grandfather",
+              "relation_term_present_in_ocr_text": true
+            }
+          },
+          {
+            "kind": "gold_not_predicted",
+            "error_class": "missed_entry",
+            "detail": {
+              "page": 4,
+              "kin_name": "萬裕",
+              "gold_relation": "son",
+              "relation_term_present_in_ocr_text": true
+            }
+          },
+          {
+            "kind": "gold_not_predicted",
+            "error_class": "missed_entry",
+            "detail": {
+              "page": 4,
+              "kin_name": "萬安",
+              "gold_relation": "son",
+              "relation_term_present_in_ocr_text": true
+            }
+          },
+          {
+            "kind": "office_mismatch",
+            "error_class": "office_conflict",
+            "detail": {
+              "page": 2,
+              "kin_name": "照",
+              "predicted": "典史",
+              "gold": "縣典史"
+            }
+          },
+          {
+            "kind": "office_mismatch",
+            "error_class": "office_priority_confusion",
+            "detail": {
+              "page": 4,
+              "kin_name": "向榮",
+              "predicted": "知縣",
+              "gold": "縣丞"
+            }
+          },
+          {
+            "kind": "office_mismatch",
+            "error_class": "office_priority_confusion",
+            "detail": {
+              "page": 4,
+              "kin_name": "萬牲",
+              "predicted": "知縣",
+              "gold": "縣丞"
+            }
+          }
+        ],
+        "ocr_failure_rate": 0.0625,
+        "attribute_accuracy": 0.6
+      },
+      "gate": "FAIL(attributes)",
+      "failures": [
+        "attribute accuracy 0.6 < 0.7"
+      ],
+      "identity_failures": [],
+      "attribute_failures": [
+        "attribute accuracy 0.6 < 0.7"
+      ],
+      "action": "keep_identity_only"
+    }
+  },
+  "ocr_pages": {
+    "1": {
+      "chars": 0,
+      "quality": 1.0
+    },
+    "2": {
+      "chars": 237,
+      "quality": 0.0
+    },
+    "3": {
+      "chars": 1361,
+      "quality": 0.0
+    },
+    "4": {
+      "chars": 238,
+      "quality": 0.0
+    },
+    "5": {
+      "chars": 962,
+      "quality": 0.0
+    },
+    "6": {
+      "chars": 53655,
+      "quality": 0.0
+    },
+    "7": {
+      "chars": 497,
+      "quality": 0.0
+    },
+    "8": {
+      "chars": 4177,
+      "quality": 0.0
+    },
+    "9": {
+      "chars": 31488,
+      "quality": 0.0
+    },
+    "10": {
+      "chars": 1911,
+      "quality": 0.0
+    },
+    "11": {
+      "chars": 1561,
+      "quality": 0.0
+    },
+    "12": {
+      "chars": 1358,
+      "quality": 0.0
+    },
+    "13": {
+      "chars": 1884,
+      "quality": 0.0
+    },
+    "14": {
+      "chars": 206,
+      "quality": 0.0
+    },
+    "15": {
+      "chars": 154,
+      "quality": 0.0
+    },
+    "16": {
+      "chars": 4258,
+      "quality": 0.0
+    }
+  }
+}

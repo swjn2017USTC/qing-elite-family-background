@@ -1,0 +1,7 @@
+check,value,note
+cgedq_spells,54472.0,按(exact)出版期相邻规则折叠后的任期段数
+cgedq_observations_covered,117850.0,这些任期段覆盖的原始季度观测数
+cgedq_persons,38854.0,D 层人物数
+cgedq_spells_from_single_observation,27451.0,只观测到一次的任期段（可能被低估的连续任职）
+cgedq_median_observations_per_spell,1.0,任期段的观测次数中位数
+cgedq_concurrent_spells,985.0,兼任（同季多职）任期段

@@ -1,0 +1,78 @@
+# V0.3 数据实现方案 A/B/C 与默认方案选择规则（config/v03/source_plan.yaml）
+#
+# 规则按顺序求值，**第一条有支撑来源的规则胜出**；选择结果写入
+# data/processed_v03/source_plan.json 并记录 rule_id 与 supporting_sources。
+# 规则只依据 source_feasibility 的**机器探测或已登记字段**，不依据"听起来更好"。
+
+version: 1
+plan_version: plan-v1
+
+plans:
+  PLAN_A:
+    label: 结构化直做
+    definition: >
+      暴露侧（家世/亲属）已有标准化结构化数据可直接使用；职业侧来自 CBDB / CGED-Q 结构化记录。
+      无需 OCR，无需机构申请。
+    implications:
+      - U05R 直接写字段映射与验证器，不做扫描件 OCR
+      - 人工成本主要在链接与冲突裁决
+  PLAN_B:
+    label: 结构化 + 少量 OCR
+    definition: >
+      暴露侧主干依赖已有结构化数据，但需要 OCR 少量扫描件（标准化题名/履历类）来补齐
+      功名层级或旁系亲属。
+    implications:
+      - U05R 同时维护 rule parser 与 OCR/vision 分支
+      - 必须给出 OCR 字段级 gold 与字符错误率
+  PLAN_C:
+    label: 主要靠扫描 OCR
+    definition: >
+      暴露侧主要来自公开扫描件，缺少结构化索引；自动化可行性取决于 OCR 管线质量。
+    implications:
+      - U05R 的 gate 以 OCR 字段级 precision 为生死线
+      - 若达不到门槛则 drop 来源，不得靠人工录入挽救
+
+plan_selection:
+  rules:
+    - id: exposure_side_broad_kin_high_coverage_structured
+      plan: PLAN_A
+      description: >
+        暴露侧存在**亲属覆盖 BROAD 且机器可读**（可批量或 API）的标准化来源，
+        家世资本可以直接结构化提取。
+      requires:
+        plan_role: exposure_side
+        kin_scope_grade: BROAD
+        kin_population_coverage: HIGH
+        access_type: PUBLIC_STRUCTURED
+        any_of: [bulk_available, api_available]
+    - id: exposure_side_broad_or_partial_covered_bulk
+      plan: PLAN_B
+      description: >
+        暴露侧存在亲属覆盖 BROAD/PARTIAL 且可批量获取的结构化或扫描来源：
+        结构化主干 + 少量 OCR。
+      requires:
+        plan_role: exposure_side
+        kin_scope_grade: [BROAD, PARTIAL]
+        kin_population_coverage: [HIGH, MEDIUM]
+        access_type: [PUBLIC_STRUCTURED, PUBLIC_SCAN]
+        any_of: [bulk_available, api_available]
+    - id: exposure_side_scan_bulk
+      plan: PLAN_B
+      description: 暴露侧存在可批量获取的公开扫描件（无结构化主干）
+      requires:
+        plan_role: exposure_side
+        access_type: PUBLIC_SCAN
+        all_of: [bulk_available]
+    - id: exposure_side_ui_or_request_only
+      plan: PLAN_C
+      description: >
+        亲属丰富的暴露侧来源只有 UI 检索或需机构申请（无批量通道），
+        必须取得扫描件/授权后再 OCR 或抽取。
+      requires:
+        plan_role: exposure_side
+        kin_scope_grade: [BROAD, PARTIAL]
+        access_type: [PUBLIC_UI_ONLY, ACCESS_REQUEST_REQUIRED, UNAVAILABLE]
+  fallback_plan: PLAN_C
+  fallback_reason: >
+    没有匹配到任何暴露侧机器可达来源：按 PLAN_C（扫描 OCR / 先取授权）准备，同时必须在 U05R
+    之前先用 ACCESS_REQUEST_REQUIRED 通道补齐来源或重设 estimand，不得先抽样再补来源。

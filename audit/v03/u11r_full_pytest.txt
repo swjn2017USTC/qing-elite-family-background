@@ -1,0 +1,49 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.12.14, pytest-9.1.1, pluggy-1.6.0
+rootdir: /Users/wahrfreiheit/OMP/qing-elite-family-background
+configfile: pyproject.toml
+testpaths: tests
+plugins: platformdirs-4.12.0, typeguard-4.6.0, anyio-4.15.1
+collected 340 items
+
+tests/test_llm_client.py ...                                             [  0%]
+tests/test_p02_universe.py .......................                       [  7%]
+tests/test_p03_family.py ...............                                 [ 12%]
+tests/test_p04_pilot.py ..............                                   [ 16%]
+tests/test_p05_enrich.py ....                                            [ 17%]
+tests/test_p06_analysis.py ..............                                [ 21%]
+tests/test_u00_defect_repro.py xxxxxxxx                                  [ 23%]
+tests/test_u01_contracts.py ..................                           [ 29%]
+tests/test_u01_migration_indicators.py ........                          [ 31%]
+tests/test_u02_linkage.py ..........ss.sss..                             [ 36%]
+tests/test_u03_sample_protocol.py ...........ss                          [ 40%]
+tests/test_v03_analysis.py .........                                     [ 43%]
+tests/test_v03_career.py ............                                    [ 46%]
+tests/test_v03_contracts.py .............................                [ 55%]
+tests/test_v03_design_contract.py ..........................             [ 62%]
+tests/test_v03_extension.py .........                                    [ 65%]
+tests/test_v03_kin.py ..............                                     [ 69%]
+tests/test_v03_linkage.py ......................                         [ 76%]
+tests/test_v03_literature.py ......................................      [ 87%]
+tests/test_v03_pilot.py .............................                    [ 95%]
+tests/test_v03_release.py ..............                                 [100%]
+
+=============================== warnings summary ===============================
+tests/test_p06_analysis.py::test_model_falls_back_when_the_full_formula_separates
+  /Users/wahrfreiheit/OMP/qing-elite-family-background/.venv/lib/python3.12/site-packages/statsmodels/regression/_tools.py:133: RuntimeWarning: divide by zero encountered in scalar divide
+    scale = np.dot(wresid, wresid) / df_resid
+
+tests/test_p06_analysis.py::test_model_falls_back_when_the_full_formula_separates
+  /Users/wahrfreiheit/OMP/qing-elite-family-background/.venv/lib/python3.12/site-packages/statsmodels/regression/_tools.py:133: RuntimeWarning: invalid value encountered in scalar divide
+    scale = np.dot(wresid, wresid) / df_resid
+
+tests/test_p06_analysis.py: 12 warnings
+  /Users/wahrfreiheit/OMP/qing-elite-family-background/.venv/lib/python3.12/site-packages/statsmodels/genmod/generalized_linear_model.py:1269: PerfectSeparationWarning: Perfect separation or prediction detected, parameter may not be identified
+    return self._fit_irls(
+
+tests/test_p06_analysis.py::test_model_falls_back_when_the_full_formula_separates
+  /Users/wahrfreiheit/OMP/qing-elite-family-background/.venv/lib/python3.12/site-packages/statsmodels/genmod/generalized_linear_model.py:1486: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+    wls_results = wls_model.fit(method=wls_method2)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+============ 325 passed, 7 skipped, 8 xfailed, 15 warnings in 5.59s ============

@@ -1,0 +1,114 @@
+"""V0.3 cohort-and-kin-network DAG.
+
+Each rule calls an existing module entry point — nothing is reimplemented for the workflow. The
+DAG is the *order*, the modules remain the implementation, which is what keeps a dry-run
+meaningful and a re-run reproducible.
+
+    snakemake -n --snakefile workflow/Snakefile        # dry-run: print the DAG
+    snakemake --snakefile workflow/Snakefile research  # run the local, deterministic stages
+    snakemake --snakefile workflow/Snakefile release   # build docs and run the release gate
+"""
+
+from pathlib import Path
+
+PY = "uv run python -m"
+
+PROCESSED = "data/processed_v03"
+INTERIM = "data/interim_v03"
+REPORTS = "reports/upgrade_v03"
+
+rule all:
+    input:
+        f"{PROCESSED}/analysis_sensitivity.parquet",
+        f"{REPORTS}/U10R.md",
+        "RELEASE_MANIFEST.json",
+        "audit/v03/release_gate.json",
+
+# ----------------------------------------------------------------- acquisition / normalize
+
+rule acquisition_registry:
+    """Register the frozen sources and their checksums (no network)."""
+    output: f"{INTERIM}/acquire/manifest_check.json"
+    shell: f"{PY} qing_elite.v03.linkage.cgedq --out {PROCESSED}/linkage_crosswalk.parquet"
+
+rule ocr_pages:
+    """PaddleOCR-VL over the public-domain scan (cached; only missing pages are submitted)."""
+    input: "data/raw/tongguanlu/tongguanlu_jiangnan_lingshu_jinkuiguang.pdf"
+    output: directory(f"{INTERIM}/pilot/ocr")
+    shell: f"{PY} qing_elite.v03.pilot.run"
+
+# ----------------------------------------------------------------- extract / verify
+
+rule pilot_frame:
+    output: f"{PROCESSED}/pilot_frame.parquet"
+    shell: f"{PY} qing_elite.v03.pilot.frame"
+
+rule extract_and_verify:
+    input: f"{PROCESSED}/pilot_frame.parquet"
+    output:
+        f"{PROCESSED}/pilot_kin_edges.parquet",
+        f"{PROCESSED}/pilot_credentials.parquet",
+        f"{PROCESSED}/pilot_risk.parquet",
+    shell: f"{PY} qing_elite.v03.pilot.run"
+
+# ----------------------------------------------------------------- linkage
+
+rule entity_link:
+    input: f"{PROCESSED}/pilot_frame.parquet"
+    output:
+        f"{PROCESSED}/entity_links.parquet",
+        f"{PROCESSED}/linkage_risk.parquet",
+        f"{PROCESSED}/linkage_review_queue.parquet",
+    shell: f"{PY} qing_elite.v03.linkage.run"
+
+# ----------------------------------------------------------------- graph / career
+
+rule kin_graph:
+    input: f"{PROCESSED}/pilot_kin_edges.parquet"
+    output:
+        f"{PROCESSED}/kin_indicators.parquet",
+        f"{PROCESSED}/kin_coverage_by_cohort.parquet",
+    shell: f"{PY} qing_elite.v03.kin.run"
+
+rule career_panel:
+    input: f"{PROCESSED}/pilot_career_events.parquet"
+    output:
+        f"{PROCESSED}/career_events.parquet",
+        f"{PROCESSED}/career_outcomes.parquet",
+    shell: f"{PY} qing_elite.v03.career.run"
+
+# ----------------------------------------------------------------- analysis / figures / report
+
+rule indicators_and_analysis:
+    input:
+        f"{PROCESSED}/kin_indicators.parquet",
+        f"{PROCESSED}/career_outcomes.parquet",
+    output:
+        f"{PROCESSED}/analysis_sample.parquet",
+        f"{PROCESSED}/analysis_sensitivity.parquet",
+        f"{REPORTS}/U09R.md",
+    shell: f"{PY} qing_elite.v03.analysis.run"
+
+rule early_qing_extension:
+    input: f"{PROCESSED}/analysis_sample.parquet"
+    output:
+        f"{PROCESSED}/extension_comparisons.parquet",
+        f"{REPORTS}/U10R.md",
+    shell: f"{PY} qing_elite.v03.extension.run"
+
+rule figures_and_report:
+    input: f"{REPORTS}/U10R.md"
+    output: "RELEASE_MANIFEST.json"
+    shell: f"{PY} qing_elite.v03.release --build-docs --no-tests"
+
+# ----------------------------------------------------------------- audit / release
+
+rule adversarial_audit:
+    input: "RELEASE_MANIFEST.json"
+    output: "audit/v03/final_audit.json"
+    shell: f"{PY} qing_elite.v03.audit"
+
+rule release_gate:
+    input: "audit/v03/final_audit.json"
+    output: "audit/v03/release_gate.json"
+    shell: f"{PY} qing_elite.v03.release"

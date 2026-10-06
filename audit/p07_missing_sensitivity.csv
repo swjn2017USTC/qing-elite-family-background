@@ -1,0 +1,7 @@
+scenario,n,status,Intercept_OR,Intercept_p,tier:B_OR,tier:B_p,tier:C_OR,tier:C_p,tier:D_OR,tier:D_p,cohort:1761-1820_OR,cohort:1761-1820_p,note,cohort:1701-1760_OR,cohort:1701-1760_p
+base_complete_case,442,ok,1.0122,0.9852,0.2124,0.0324,0.1388,0.0232,1.0566,0.9287,1.206,0.4871,,,
+drop_D_layer,71,ok,1.1358,0.9235,0.2142,0.0345,0.1389,0.0232,,,1.0624,0.9628,,,
+require_two_slots,81,failed,,,,,,,,,,,OverflowError: math range error,,
+three_generations_only,24,failed,,,,,,,,,,,OverflowError: math range error,,
+long_run_ABC,235,ok,1.3935,0.3831,0.3706,0.0059,0.2967,0.0048,,,0.5315,0.0984,,1.2067,0.6082
+long_run_ABC_two_slots,101,ok,0.2812,0.0738,0.8383,0.7926,0.4715,0.3503,,,0.3964,0.2676,,2.7421,0.1229

@@ -1,0 +1,31 @@
+# U05R 抽取质量门槛与 source 汰换规则（config/v03/extraction_gates.yaml）
+#
+# 来源不是"抽不出来就人工补"，而是：达不到门槛 → 自动淘汰该来源（drop_source），
+# 并在报告中写明淘汰理由与它还能支撑什么（例如只作 cross-validation）。
+
+version: 1
+gates_version: extraction-gates-v1
+
+#: 针对有独立 gold 的来源（当前离线只有扫描件 arm 有 gold）
+gold_based:
+  min_precision: 0.7
+  min_recall: 0.5
+  min_kin_name_accuracy: 0.8
+  max_ocr_failure_rate: 0.2
+  # 属性（功名/官职）单独设门槛：身份与关系抽得对、属性抽得不对时，
+  # 来源降级为"只用身份/关系、属性一律 unknown"，而不是整源丢弃。
+  min_attribute_accuracy: 0.7
+  action_on_fail: drop_source
+  action_on_attribute_fail: keep_identity_only
+
+#: 针对结构化来源（无可独立核对的 gold 时，用完整性与血缘不变量作为门槛）
+integrity_based:
+  min_kin_mapping_rate: 0.9          # 亲属行能映射到关系本体的比例（其余记 unmapped 而非丢弃）
+  required_evidence_linkage: 1.0     # 每条事实必须回指一条 evidence assertion
+  required_document_linkage: 1.0     # 每条 assertion 必须回指一条 source document
+  required_schema_conformance: true  # 事实表必须通过 V0.3 契约投影校验
+  action_on_fail: drop_source
+
+#: 风险路由门槛（与 review_policy 一致：不设固定人工比例）
+review:
+  high_risk_share_warn: 0.15   # 高于此值只发警告，不自动扩大人工

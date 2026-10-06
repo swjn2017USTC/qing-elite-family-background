@@ -1,0 +1,8 @@
+check,violations,rule,status
+official_any_zero_requires_a_known_generation,0,ancestor_official_any==0 必须至少有一位祖先可考,PASS
+strict_commoner_zero_requires_three_generations,0,strict_commoner_3g==0 必须三代齐全（否则应为 NA）,PASS
+elite_generations_zero_requires_a_known_generation,0,elite_generations_count==0 必须至少有一位祖先可考,PASS
+banner_unknown_not_treated_as_non_banner,0,旗籍 unknown 不得改写为非旗人（结构性检查：unknown 仍是 unknown）,PASS
+province_missing_not_a_category,0,籍贯缺失保持 NA，不生成“未知省”类别参与比例计算,PASS
+family_final_unknown_slots_have_no_values,0,provenance=none 的槽位不得带姓名/功名/官职,PASS
+informational_llm_slots_name_only,8,（信息性）LLM 槽位中只有姓名、无功名/官职的条数,INFO

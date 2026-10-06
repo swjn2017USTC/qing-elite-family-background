@@ -1,0 +1,377 @@
+# V0.3 候选来源目录（config/v03/source_catalog.yaml）
+#
+# 与 source_probes.yaml 分工：
+#   - 本文件 = **curated metadata**：覆盖年代、人群、kin/career 范围、条款、体量估计。
+#     凡是机器可验证的字段（access_type / bulk / api / scan / machine_readable）必须与
+#     data/interim_v03/probe_results.json 的实际观测一致，不得凭印象填写。
+#   - source_probes.yaml + --probe = **machine facts**。
+#
+# kin_coverage_grade 是本阶段新增的关键判断（决定数据方案）：
+#   BROAD   系统记载父/祖/曾祖并大量旁系与姻亲（同年齿录、同官录、硃卷）
+#   PARTIAL 系统记载直系三代，旁系不系统（CBDB 对清代地方官的覆盖）
+#   NARROW  只有配偶或"家族角色"标签，无父—子边（上海图书馆家谱图谱）
+#   NONE    不载亲属（缙绅录、职官库）
+#
+# notes 必须写明判断依据；无法核实的写 evidence_confidence: LOW 并说明待核实项。
+
+version: 1
+catalog_version: catalog-v1
+
+sources:
+  - source_name: cbdb
+    zh_name: 中國歷代人物傳記資料庫（CBDB）
+    tier: S
+    plan_role: exposure_side
+    coverage_years: "先秦–1912；清段 1644–1912"
+    population: "清段约 23.8 万人（本项目 v0.2 计数 237,826）"
+    kin_scope: "KIN_DATA 亲属码：父(75)/祖父(62)/曾祖(48) 及部分旁系；另有社会关系表"
+    kin_scope_grade: PARTIAL
+    kin_population_coverage: LOW
+    career_scope: "POSTED_TO_OFFICE_DATA 任官 + ENTRY_DATA 功名"
+    access_type: PUBLIC_STRUCTURED
+    bulk_available: true
+    api_available: true
+    scan_available: false
+    machine_readable: true
+    terms: "未在本阶段核对条款页（cbdb.fas.harvard.edu 对脚本请求 403）；沿用 v0.1 口径：仅学术使用、不再分发原始数据。落盘前须人工核对条款。"
+    redistribution: "不再分发原始数据库（README 已声明）"
+    local_cache_allowed: true
+    estimated_n: "237826 (清人, v0.2 计数); API 全量 SQLite 约 877 MB"
+    estimated_ocr_pages: "0"
+    automation_score: 0.95
+    research_value: 0.8
+    evidence_confidence: MEDIUM
+    notes: >
+      probe: latest.json 返回 sqlite_filename=cbdb_20260926.sqlite3（比 v0.1 冻结的 20260912 更新）；
+      HF dataset API 200；/api/query_relatives_2 匿名 GET 200 JSON（王安石 58 条亲属）；
+      Harvard Dataverse doi:10.7910/DVN/PAGGQS 全量 200。kin_coverage_grade=PARTIAL 依据：
+      v0.2 U02 显示 D 层（地方官）high-only 链接覆盖仅 0.78%、U03 pilot 祖先信息率 0.0（30 人），
+      即 CBDB 对清代地方官员的亲属覆盖稀疏，不能单独支撑 exposure。
+
+  - source_name: cgedq_jsl
+    zh_name: 中國政府職官資料庫（CGED-Q）縉紳錄
+    tier: S
+    plan_role: outcome_side
+    coverage_years: "1760–1798、1850–1864、1900–1912（2026-08-28 release）"
+    population: "季度名册人物；v0.2 的 1760–1798 切片 54,238 人"
+    kin_scope: "无亲属记录（名册只记本人）"
+    kin_scope_grade: NONE
+    kin_population_coverage: NONE
+    career_scope: "任职、官职、籍贯、旗籍、出身/铨选、季度在任状态；自 2026-08 起含官方 person_id"
+    access_type: PUBLIC_STRUCTURED
+    bulk_available: true
+    api_available: true
+    scan_available: false
+    machine_readable: true
+    terms: "CC0 1.0（Harvard Dataverse 数据集 license 字段实测）"
+    redistribution: "CC0 允许再分发；原始大文件仍不入本仓库"
+    local_cache_allowed: true
+    estimated_n: "含 person_id 的 .tab 233,703,315 bytes；出身/籍贯编码表各 20 KB / 2.8 KB"
+    estimated_ocr_pages: "0"
+    automation_score: 0.95
+    research_value: 0.85
+    evidence_confidence: HIGH
+    notes: >
+      probe: Harvard Dataverse doi:10.7910/DVN/GMQWVZ 返回 200（versionState=RELEASED，version 10.0，
+      releaseTime 2026-08-30，license CC0 1.0，文件含 person_id 全量 .tab）；
+      HKUST DataSpace 同日连续 503。kin=NONE → 只能作 outcome 来源。
+
+  - source_name: shl_genealogy
+    zh_name: 上海圖書館開放數據平台（家譜人物圖 SPARQL）
+    tier: A
+    plan_role: exposure_side
+    coverage_years: "历代（含明清），图谱跨期"
+    population: "家谱人物图 2,395,870 三元组；全平台人名图 37,167,377"
+    kin_scope: "观测到 spouseOf 8,053、roleOfFamily 206,503、orderOfSeniority 5,370、generationCharacter；roleOfFamily 实为宗谱角色标签（始遷祖/顯祖/始祖/房祖/名人…），**不是父—子边**"
+    kin_scope_grade: NARROW
+    kin_population_coverage: LOW
+    career_scope: "弱（人物姓名/字号/性别/宗谱角色；另有姓名/科贡专题端点未逐一实测）"
+    access_type: PUBLIC_STRUCTURED
+    bulk_available: false
+    api_available: true
+    scan_available: false
+    machine_readable: true
+    terms: "平台定位为开放数据（提供 /apitest、/developguide 与 SPARQL 端点）；许可证文本未逐字核对，落盘前须读 /developguide"
+    redistribution: "未载明；再分发前须核对条款"
+    local_cache_allowed: true
+    estimated_n: "gen 图 person 2,395,870 三元组；spouseOf 主语 8,053"
+    estimated_ocr_pages: "0"
+    automation_score: 0.85
+    research_value: 0.3
+    evidence_confidence: HIGH
+    notes: >
+      probe: POST https://data.library.sh.cn/sparql/ 返回 200 application/sparql-results+json；
+      GET 带 query 被 WAF 403（'Forbidden: Malicious request detected'）；jiapu.library.sh.cn 412。
+      关键实证：roleOfFamily 的宾语是宗谱角色词表（非亲属边），谓词分布中未见 father/parent 类谓词
+      → 该源可支撑"家族存在与姓氏/籍贯"，**不能**支撑 exposure 的父系亲属计数。
+
+  - source_name: tongnianchilu_qer
+    zh_name: 同年齒錄（含鄉試錄）— CGED-Q Examination Records 编码数据
+    tier: A
+    plan_role: exposure_side
+    coverage_years: "19 世纪（按科年）；会试同年齿录含 1829–1895 等 18 场会试"
+    population: "进士 6,118 + 同年齿录举人 27,580 + 乡试录举人 29,971（合 73,744 条记录）"
+    kin_scope: "亲属资料完整：34,313 名功名持有者、950,735 条亲属记录（人均 27.7；进士人均 90；举人人均 21.6）；含父/祖/曾祖、伯叔/堂伯叔/伯叔祖、兄弟/堂兄弟、子/姪/孙、母/祖母、妻/女"
+    kin_scope_grade: BROAD
+    kin_population_coverage: HIGH
+    career_scope: "功名、科份、名次、考官；官职较弱"
+    access_type: PUBLIC_UI_ONLY
+    bulk_available: false
+    api_available: false
+    scan_available: true
+    machine_readable: false
+    terms: "原书公版；编码数据仅在 Lee-Campbell 检索平台公开可查，未见批量导出或 API 授权说明 → 使用前须确认条款/取得授权"
+    redistribution: "编码数据未见再分发许可；公版扫描件可再分发"
+    local_cache_allowed: false
+    estimated_n: "950,735 条亲属记录 / 34,313 名功名持有者（2024-08 完成）"
+    estimated_ocr_pages: "未见统计（原书按科年成册）"
+    automation_score: 0.2
+    research_value: 0.95
+    evidence_confidence: HIGH
+    notes: >
+      probe: searchjsl 平台 200（SPA，含 AWS API Gateway 端点，无公开文档）；Harvard Dataverse 检索
+      'Tongnian' 0 命中；出版方 blog 与检索平台均无下载入口。kin 覆盖 BROAD 是 V0.3 exposure 的
+      理想来源，但当前无合法批量通道 → 须 ACCESS_REQUEST_REQUIRED 或 OCR 公版扫描件。
+
+  - source_name: mingjingtongpu_qer
+    zh_name: 明經通譜（贡生同年录）— 同一编码数据集
+    tier: A
+    plan_role: exposure_side
+    coverage_years: "19 世纪（如道光乙酉 1825 科、咸丰十一年 1861 科）"
+    population: "贡生 12,155 人（明经通谱部分）"
+    kin_scope: "与同年齿录共用编码管线：直系三代 + 旁系亲属"
+    kin_scope_grade: BROAD
+    kin_population_coverage: MEDIUM
+    career_scope: "功名、科份；官职有限"
+    access_type: PUBLIC_UI_ONLY
+    bulk_available: false
+    api_available: false
+    scan_available: false
+    machine_readable: false
+    terms: "原书公版；编码数据并入 Lee-Campbell 检索平台，无独立授权/下载说明"
+    redistribution: "未见编码数据再分发许可"
+    local_cache_allowed: false
+    estimated_n: "12155 名贡生"
+    estimated_ocr_pages: "未见统计"
+    automation_score: 0.2
+    research_value: 0.9
+    evidence_confidence: MEDIUM
+    notes: >
+      probe: 国学大师书目页 200（明示只有馆藏线索、无影印）；检索平台 200；出版方 blog 说明
+      12,155 名贡生与同年齿录一并编码。与 tongnianchilu_qer 同源同通道。
+
+  - source_name: tongguanlu
+    zh_name: 同官錄（地方官员履历+亲属名册）
+    tier: A
+    plan_role: exposure_side
+    coverage_years: "约 1832–1924（已编码数据集以 1830–1911 为主）"
+    population: "州县/府/省地方文官及盐漕等专门机构官员；含捐纳监生/贡生、生员等低级功名者"
+    kin_scope: "父/祖/曾祖 + 伯叔/堂伯叔 + 兄弟 + 子/姪/孙 + 母/祖母 + 妻/女；论文口径 80,988 条亲属"
+    kin_scope_grade: BROAD
+    kin_population_coverage: HIGH
+    career_scope: "任官履历、实授/候补/署理/候选状态、功名资格 → 可直接作 outcome"
+    access_type: ACCESS_REQUEST_REQUIRED
+    bulk_available: false
+    api_available: false
+    scan_available: true
+    machine_readable: false
+    terms: "编码数据集（HKUST/华中师大团队）未见公开授权或下载条款；原书公版"
+    redistribution: "编码数据不可再分发；单册公版扫描件（如 Wikimedia Commons）可再分发"
+    local_cache_allowed: false
+    estimated_n: "2026 论文：28 种版本、18,585 条官员记录、80,988 条亲属、90,307 条功名履历"
+    estimated_ocr_pages: "无总册数统计；单册数十至数百页"
+    automation_score: 0.15
+    research_value: 0.95
+    evidence_confidence: HIGH
+    notes: >
+      probe: T&F DOI 403（Cloudflare）；HKUST 成果页 200（题录+摘要）；Harvard Dataverse 'Tongguanlu'
+      0 命中；OSF 预印本仅 PDF；Wikimedia Commons 有单册《江南宁蜀同官录》PDF（零散）。
+      → 无合法批量通道；须向作者/机构申请。V0.3 exposure+outcome 一体化程度最高。
+
+  - source_name: zhujuan
+    zh_name: 硃卷（乡会试及五贡硃卷）
+    tier: A
+    plan_role: exposure_side
+    coverage_years: "康熙–光绪（约 1662–1908），以中后期为主"
+    population: "《清代硃卷集成》约 8,235 份（乡试 5,186 / 会试 1,635 / 五贡 1,576 等），涉进士近 1.2 万人"
+    kin_scope: "履历详载曾祖/祖/父三代、族谱世系、母系与姻亲、师承；家族有功名者全列"
+    kin_scope_grade: BROAD
+    kin_population_coverage: MEDIUM
+    career_scope: "功名、科份、名次、考官批语；官职较少"
+    access_type: ACCESS_REQUEST_REQUIRED
+    bulk_available: false
+    api_available: false
+    scan_available: true
+    machine_readable: false
+    terms: "数字化渠道全部为商业/机构产品（书同文、爱如生、中华科举库、历代进士登科库），无免费公开 bulk"
+    redistribution: "馆藏原卷与商业影像库均不可自由再分发"
+    local_cache_allowed: false
+    estimated_n: "约 8235 份（书同文称八千余种；爱如生称清人朱卷 8000 余件）"
+    estimated_ocr_pages: "约 8000+ 份，每份数十页"
+    automation_score: 0.1
+    research_value: 0.85
+    evidence_confidence: HIGH
+    notes: >
+      probe: 书同文产品页 200、中华科举库登录页 200、北大/复旦馆购通报 200、历代进士登科库帮助页 200
+      （均提示需登录/订阅）。无公开 bulk；须购/订/馆际或 OCR 已出版影印本（受版权约束）。
+
+  - source_name: shengyuanlu
+    zh_name: 生員錄（生员/低级功名名册）
+    tier: A
+    plan_role: exposure_side
+    coverage_years: "清（未见成体系的公开数字化名册）"
+    population: "生员（未入仕者占多数）；在官员群体中主要出现在同官录等履历类来源"
+    kin_scope: "无独立亲属记载；亲属信息只在履历类来源（同官录/硃卷）中出现"
+    kin_scope_grade: NONE
+    kin_population_coverage: NONE
+    career_scope: "功名层级（生员/庠生）可由 CBDB ENTRY 编码识别"
+    access_type: UNAVAILABLE
+    bulk_available: false
+    api_available: false
+    scan_available: false
+    machine_readable: false
+    terms: "未发现任何独立数字化产品；学政/县学名册多在地方志中，未成批量公开资源"
+    redistribution: "n/a"
+    local_cache_allowed: false
+    estimated_n: "unknown"
+    estimated_ocr_pages: "unknown"
+    automation_score: 0.05
+    research_value: 0.4
+    evidence_confidence: MEDIUM
+    notes: >
+      检索未见独立"生员录"数据库（Harvard Dataverse 'Tongnian' 0 命中；中文检索仅回到 CGED-Q 相关页面）。
+      替代路径：CBDB `/api/entry_list_by_name?eName=生員` 实测 200 JSON（eId 47 等），
+      以及同官录中记载的捐纳/生员功名者。故本条目记为 UNAVAILABLE（无独立来源），
+      但在 claim_source_map 中把"生员层级"映射到 cbdb / tongguanlu。
+
+  - source_name: lvli_dangan
+    zh_name: 履歷檔案（《清代官员履历档案全编》／宫中履历档案）
+    tier: A
+    plan_role: backfill_only
+    coverage_years: "乾隆–光绪为主（引见官员履历）；原档 1644–1912"
+    population: "《全编》约 4 万余人、55,883 件（论文口径，未独立核实原书）"
+    kin_scope: "履历折含三代脚色（曾祖/祖/父）及兄弟子侄，但只有影像或商业全文库"
+    kin_scope_grade: PARTIAL
+    kin_population_coverage: LOW
+    career_scope: "出身、历官、保举、捐纳等"
+    access_type: ACCESS_REQUEST_REQUIRED
+    bulk_available: false
+    api_available: false
+    scan_available: true
+    machine_readable: false
+    terms: "一史馆公开全文库仅《清实录》《清会典》；《全编》须到馆查阅或商业订阅（爱如生《中国谱牒库》）"
+    redistribution: "受版权/馆藏限制，不可再分发"
+    local_cache_allowed: false
+    estimated_n: "约 4 万余人（《全编》）；爱如生谱牒库自称影像 3,000 万页"
+    estimated_ocr_pages: "《全编》30 册，逐册数百页"
+    automation_score: 0.1
+    research_value: 0.6
+    evidence_confidence: HIGH
+    notes: >
+      probe: fhac.com.cn 首页/检索页 200（线上开放 44 个全宗**目录**检索，全文库仅《清实录》《清会典》）；
+      /ess/* 路径为后台管理页、匿名目录查询返回空；爱如生产品页 200（商业授权）；国图/超星为登录影像。
+
+  - source_name: keju_timulu
+    zh_name: 科舉題名錄（进士题名碑录／乡会试录／登科录）
+    tier: A
+    plan_role: backfill_only
+    coverage_years: "隋–清（题名录）；本项目关心 1644–1912"
+    population: "历代进士约 10 万余人；明清乡会试逐科名录"
+    kin_scope: "题名碑录多仅姓名/籍贯/名次；会试录常附三代脚色（亲属潜力中等）"
+    kin_scope_grade: PARTIAL
+    kin_population_coverage: MEDIUM
+    career_scope: "科第身份、名次、考官；非任官轨迹"
+    access_type: ACCESS_REQUEST_REQUIRED
+    bulk_available: false
+    api_available: false
+    scan_available: true
+    machine_readable: false
+    terms: "籍合网《历代进士登科数据库》与爱如生系列为机构订阅；DocuSky 为免费学术查询界面（无批量接口）"
+    redistribution: "订阅库禁止再分发；DocuSky 未见开放许可"
+    local_cache_allowed: false
+    estimated_n: "登科数据库称 10 万余条隋–清登科人物"
+    estimated_ocr_pages: "n/a"
+    automation_score: 0.15
+    research_value: 0.5
+    evidence_confidence: MEDIUM
+    notes: >
+      probe: examination.ancientbooks.cn/docDengke/ 200（机构订阅）；docusky.org.tw CBDB 进士库 200（免费 UI）；
+      台湾华文电子书库《清朝進士題名碑錄》SSL 失败（未取得内容）。替代：CBDB ENTRY 体系已含进士/举人/生员编码。
+
+  - source_name: familysearch_genealogy
+    zh_name: FamilySearch 家譜索引與影像
+    tier: C
+    plan_role: exposure_side
+    coverage_years: "跨期（含明清—民国中国族谱）"
+    population: "未披露"
+    kin_scope: "族谱世系（潜力大），但须登录/合作馆访问"
+    kin_scope_grade: PARTIAL
+    kin_population_coverage: UNKNOWN
+    career_scope: "弱（偶载功名/仕宦）"
+    access_type: ACCESS_REQUEST_REQUIRED
+    bulk_available: false
+    api_available: false
+    scan_available: true
+    machine_readable: false
+    terms: "需注册账号；影像通常仅对会员/合作馆开放；数据 API 需认证（匿名 401）"
+    redistribution: "受限；不得批量导出再分发"
+    local_cache_allowed: false
+    estimated_n: "unknown"
+    estimated_ocr_pages: "unknown"
+    automation_score: 0.1
+    research_value: 0.35
+    evidence_confidence: HIGH
+    notes: "probe: /service/search/hr/v2/collections/1787988 匿名返回 401；集合页为 JS 壳。不建议作为默认通道。"
+
+  - source_name: sinica_authority
+    zh_name: 中研院史語所 人名權威—人物傳記資料庫 與 清代職官資料庫
+    tier: C
+    plan_role: backfill_only
+    coverage_years: "明清（重点清）"
+    population: "人名权威库（权威号 SN）；清代职官库覆盖中央/地方官职与任期"
+    kin_scope: "人名权威库『關聯』区块含亲属（实测示例：父 周煌、子 周廷授）"
+    kin_scope_grade: PARTIAL
+    kin_population_coverage: LOW
+    career_scope: "人名权威库含履歷（历官年表）；职官库含任职者年表与任期"
+    access_type: PUBLIC_UI_ONLY
+    bulk_available: false
+    api_available: false
+    scan_available: false
+    machine_readable: false
+    terms: "页面标注版權所有 中央研究院歷史語言研究所；未见开放数据许可或批量授权说明"
+    redistribution: "未获授权，不应再分发抓取结果"
+    local_cache_allowed: false
+    estimated_n: "未披露"
+    estimated_ocr_pages: "0"
+    automation_score: 0.2
+    research_value: 0.5
+    evidence_confidence: HIGH
+    notes: >
+      probe: sncacFtp 与 officertp 均返回 200 **text/html**（ACTION=TQ,... GET 语法；详情页含亲属与履历）；
+      data.ascdc.tw/sparql 返回 218 KB HTML 落地页而非 JSON（与 v0.2 U03 sinica_probe.json 一致）。
+      字段最贴合本课题但只有 HTML → 小规模人工核验可行，批量须申请（史語所）。
+
+  - source_name: qingji_officials
+    zh_name: 《清季職官表附人物錄》查詢系統（中研院史語所×台大）
+    tier: C
+    plan_role: backfill_only
+    coverage_years: "清季（约 1850–1912）"
+    population: "清季京内外职官年表与人物录"
+    kin_scope: "无"
+    kin_scope_grade: NONE
+    kin_population_coverage: NONE
+    career_scope: "职官年表 + 人物录（任职与任期）"
+    access_type: PUBLIC_UI_ONLY
+    bulk_available: false
+    api_available: false
+    scan_available: false
+    machine_readable: false
+    terms: "页面明示『本資料庫免費開放…直接進入使用』"
+    redistribution: "未明示；仅免费开放使用"
+    local_cache_allowed: false
+    estimated_n: "未披露"
+    estimated_ocr_pages: "0"
+    automation_score: 0.2
+    research_value: 0.4
+    evidence_confidence: MEDIUM
+    notes: "probe: mhdb.mh.sinica.edu.tw/databaseinfo.php?b=012 返回 200 HTML，明示免费开放；无 JSON/SPARQL。"

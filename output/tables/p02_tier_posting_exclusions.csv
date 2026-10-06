@@ -1,0 +1,25 @@
+posting_dy,person_is_qing,n_postings,n_persons,included_in_universe,note
+19.0,0.0,4635,1743,False,excluded: neither the posting nor a usable posting dynasty marks it Qing
+0.0,0.0,2757,2007,False,excluded: neither the posting nor a usable posting dynasty marks it Qing
+20.0,1.0,1807,1173,True,"kept: posting is Qing, or posting dynasty unknown for a Qing person"
+19.0,1.0,185,66,False,excluded: neither the posting nor a usable posting dynasty marks it Qing
+6.0,0.0,44,32,False,excluded: neither the posting nor a usable posting dynasty marks it Qing
+20.0,0.0,41,26,True,"kept: posting is Qing, or posting dynasty unknown for a Qing person"
+15.0,0.0,35,26,False,excluded: neither the posting nor a usable posting dynasty marks it Qing
+80.0,0.0,29,21,False,excluded: neither the posting nor a usable posting dynasty marks it Qing
+0.0,1.0,25,11,True,"kept: posting is Qing, or posting dynasty unknown for a Qing person"
+,0.0,18,17,False,excluded: neither the posting nor a usable posting dynasty marks it Qing
+80.0,1.0,7,2,False,excluded: neither the posting nor a usable posting dynasty marks it Qing
+19.0,,5,4,False,excluded: neither the posting nor a usable posting dynasty marks it Qing
+17.0,0.0,4,2,False,excluded: neither the posting nor a usable posting dynasty marks it Qing
+18.0,0.0,4,3,False,excluded: neither the posting nor a usable posting dynasty marks it Qing
+0.0,,2,2,False,excluded: neither the posting nor a usable posting dynasty marks it Qing
+7.0,0.0,2,2,False,excluded: neither the posting nor a usable posting dynasty marks it Qing
+10.0,0.0,2,1,False,excluded: neither the posting nor a usable posting dynasty marks it Qing
+48.0,0.0,2,2,False,excluded: neither the posting nor a usable posting dynasty marks it Qing
+49.0,0.0,2,1,False,excluded: neither the posting nor a usable posting dynasty marks it Qing
+,1.0,1,1,True,"kept: posting is Qing, or posting dynasty unknown for a Qing person"
+21.0,0.0,1,1,False,excluded: neither the posting nor a usable posting dynasty marks it Qing
+34.0,0.0,1,1,False,excluded: neither the posting nor a usable posting dynasty marks it Qing
+47.0,0.0,1,1,False,excluded: neither the posting nor a usable posting dynasty marks it Qing
+52.0,0.0,1,1,False,excluded: neither the posting nor a usable posting dynasty marks it Qing

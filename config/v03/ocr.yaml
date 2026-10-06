@@ -1,0 +1,29 @@
+# V0.3 OCR 配置（config/v03/ocr.yaml）
+#
+# 主引擎：PaddleOCR-VL-1.6（经官方在线服务，SDK 在**外部 venv** 中，本仓库不安装 paddleocr）。
+# 凭证：只在 shell 环境变量 `PADDLEOCR_ACCESS_TOKEN` 中，本文件只登记变量名，绝不登记值。
+#
+# venv_python 是本机路径（PaddleOCR 依赖重、与项目 venv 隔离）；gate 在缺失时 SKIP 而非 FAIL。
+
+version: 1
+engine: PaddleOCR-VL-1.6
+sdk: paddleocr.PaddleOCRClient
+venv_python: /Users/wahrfreiheit/Claude/ocr_env/bin/python
+token_env: PADDLEOCR_ACCESS_TOKEN
+runner: scripts/ocr_runner.py
+# document = 版面感知 markdown（主路径）；ocr = 纯文本识别（第二遍/低置信复核用）
+modes:
+  primary: document
+  second_pass: ocr
+chunk_pages: 8
+max_attempts: 2
+retry_backoff_seconds: 5
+request_timeout_seconds: 600
+
+# 低置信判定（用于触发第二遍 OCR / vision verifier；不做固定比例人工复核）
+confidence:
+  min_cjk_ratio: 0.35
+  min_chars_per_page: 80
+  # 单页字符数上限：整块表格转储（如 5 万字符/页）与空页同样可疑
+  max_chars_per_page: 20000
+  max_replacement_ratio: 0.02

@@ -1,0 +1,63 @@
+source_ids,person_uid,claim_strength,corroboration,decision,reason,n_claimants
+清史稿/卷271#王鴻緒,cbdb:64906,name_plus_attribute,native province 江南 appears in the biography | banner marker 旗 appears in the biography | alias 季友 appears in the biography | office 工部尚書 appears in the biography | weak: career reign 康熙 is named in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷271#王鴻緒,cgedq:S41213,name_plus_attribute,banner marker 旗 appears in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷293#李紱,cbdb:499868,name_only,,confirmed_distinct,another claimant is corroborated by non-name evidence,2
+清史稿/卷293#李紱,cbdb:58985,name_plus_attribute,native province 江西 appears in the biography | alias 巨來 appears in the biography | office 吏部侍郎 appears in the biography | weak: career reign 康熙 is named in the biography,merge,native province 江西 appears in the biography,2
+清史稿/卷294#李衛,cbdb:499875,name_plus_attribute,office 總督 appears in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷294#李衛,cbdb:697577,name_plus_attribute,office 總督 appears in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷294#王士俊,cbdb:57118,name_plus_attribute,native province 貴州 appears in the biography | alias 灼三 appears in the biography | office 巡撫 appears in the biography | weak: career reign 康熙 is named in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷294#王士俊,cbdb:698753,name_plus_attribute,office 總督 appears in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷305#王昶,cbdb:33556,name_plus_attribute,native province 江南 appears in the biography | alias 德甫 appears in the biography | office 刑部侍郎 appears in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷305#王昶,cgedq:S8729,name_plus_attribute,native province 陝西 appears in the biography | weak: career reign 乾隆 is named in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷308#那蘇圖,cbdb:67884,name_plus_attribute,office 總督 appears in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷308#那蘇圖,cgedq:N6334,name_plus_attribute,banner marker 旗 appears in the biography | weak: career reign 乾隆 is named in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷310#顧琮,cbdb:499876,name_plus_attribute,banner marker 旗 appears in the biography | office 總督 appears in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷310#顧琮,cbdb:499911,name_plus_attribute,banner marker 旗 appears in the biography | office 河道總督 appears in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷314#富德,cbdb:62834,name_plus_attribute,banner marker 旗 appears in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷314#富德,cgedq:N3501,name_plus_attribute,banner marker 旗 appears in the biography | weak: career reign 乾隆 is named in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷316#福祿,cgedq:N3080,name_plus_attribute,banner marker 旗 appears in the biography | weak: career reign 乾隆 is named in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷316#福祿,cgedq:N4739,name_plus_attribute,banner marker 旗 appears in the biography | weak: career reign 乾隆 is named in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷317#李勳,cgedq:S1860,name_only,,quarantine,name-only claim; no corroborating evidence,2
+清史稿/卷317#李勳,cgedq:S6664,name_only,,quarantine,name-only claim; no corroborating evidence,2
+清史稿/卷325#蘭第錫,cbdb:56863,name_plus_attribute,native province 山西 appears in the biography | office 知縣 appears in the biography | weak: career reign 乾隆 is named in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷325#蘭第錫,cgedq:N3760,name_plus_attribute,native province 山西 appears in the biography | office 知縣 appears in the biography | weak: career reign 乾隆 is named in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷331#和隆武,cgedq:N1664,name_plus_attribute,banner marker 旗 appears in the biography | weak: career reign 乾隆 is named in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷331#和隆武,cgedq:S47170,name_plus_attribute,banner marker 旗 appears in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷332#富勒渾,cgedq:N1750,name_plus_attribute,office 知縣 appears in the biography | weak: career reign 乾隆 is named in the biography,merge,office 知縣 appears in the biography,2
+清史稿/卷332#富勒渾,cgedq:N378,name_plus_attribute,weak: career reign 乾隆 is named in the biography,confirmed_distinct,another claimant is corroborated by non-name evidence,2
+清史稿/卷333#成德,cgedq:N4815,name_plus_attribute,banner marker 旗 appears in the biography,quarantine,more than one claimant is corroborated,3
+清史稿/卷333#成德,cgedq:N602,name_plus_attribute,banner marker 旗 appears in the biography,quarantine,more than one claimant is corroborated,3
+清史稿/卷333#成德,cgedq:S39195,name_plus_attribute,banner marker 旗 appears in the biography,quarantine,more than one claimant is corroborated,3
+清史稿/卷334#觀音保,cgedq:N5126,name_plus_attribute,banner marker 旗 appears in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷334#觀音保,cgedq:N9251,name_plus_attribute,banner marker 旗 appears in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷337#圖爾炳阿,cgedq:N2108,name_plus_attribute,banner marker 旗 appears in the biography | office 知縣 appears in the biography | weak: career reign 乾隆 is named in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷337#圖爾炳阿,cgedq:N7212,name_plus_attribute,banner marker 旗 appears in the biography | weak: career reign 乾隆 is named in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷341#章煦,cbdb:499891,name_plus_attribute,office 總督 appears in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷341#章煦,cbdb:58905,name_plus_attribute,native province 浙江 appears in the biography | alias 文簡 appears in the biography | weak: career reign 乾隆 is named in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷343#書麟,cgedq:N2063,name_plus_attribute,banner marker 旗 appears in the biography | weak: career reign 乾隆 is named in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷343#書麟,cgedq:N3116,name_plus_attribute,banner marker 旗 appears in the biography | weak: career reign 乾隆 is named in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷349#穆克登布,cgedq:N3929,name_plus_attribute,banner marker 旗 appears in the biography | weak: career reign 乾隆 is named in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷349#穆克登布,cgedq:N4740,name_plus_attribute,banner marker 旗 appears in the biography | weak: career reign 乾隆 is named in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷350#陳步雲,cgedq:S18282,name_only,,quarantine,name-only claim; no corroborating evidence,2
+清史稿/卷350#陳步雲,cgedq:S31078,name_only,,quarantine,name-only claim; no corroborating evidence,2
+清史稿/卷351#黃鉞,cbdb:56885,name_plus_attribute,native province 安徽 appears in the biography | alias 勤敏 appears in the biography | office 戶部尚書 appears in the biography | weak: career reign 乾隆 is named in the biography,merge,native province 安徽 appears in the biography,2
+清史稿/卷351#黃鉞,cgedq:S48568,name_plus_attribute,weak: career reign 嘉慶 is named in the biography,confirmed_distinct,another claimant is corroborated by non-name evidence,2
+清史稿/卷358#常明,cgedq:N1874,name_plus_attribute,banner marker 旗 appears in the biography | office 知府 appears in the biography | weak: career reign 乾隆 is named in the biography,quarantine,more than one claimant is corroborated,3
+清史稿/卷358#常明,cgedq:N2238,name_plus_attribute,banner marker 旗 appears in the biography | weak: career reign 乾隆 is named in the biography,quarantine,more than one claimant is corroborated,3
+清史稿/卷358#常明,cgedq:S48891,name_plus_attribute,banner marker 旗 appears in the biography | office 知府 appears in the biography,quarantine,more than one claimant is corroborated,3
+清史稿/卷367#玉麟,cbdb:341512,name_plus_attribute,banner marker 旗 appears in the biography | office 兵部尚書 appears in the biography | weak: career reign 乾隆 is named in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷367#玉麟,cgedq:N1512,name_plus_attribute,banner marker 旗 appears in the biography | weak: career reign 乾隆 is named in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷368#巴哈布,cgedq:N7171,name_plus_attribute,banner marker 旗 appears in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷368#巴哈布,cgedq:N8277,name_plus_attribute,banner marker 旗 appears in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷370#伊里布,cbdb:478754,name_plus_attribute,banner marker 旗 appears in the biography | office 總督 appears in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷370#伊里布,cbdb:57380,name_plus_attribute,alias 文敏 appears in the biography | office 巡撫 appears in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷370#琦善,cbdb:478747,name_plus_attribute,banner marker 旗 appears in the biography | office 總督 appears in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷370#琦善,cbdb:499897,name_plus_attribute,banner marker 旗 appears in the biography | office 總督 appears in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷377#陳鴻,cgedq:S24185,name_plus_attribute,native province 山西 appears in the biography,merge,native province 山西 appears in the biography,2
+清史稿/卷377#陳鴻,cgedq:S48980,name_plus_attribute,weak: career reign 嘉慶 is named in the biography,confirmed_distinct,another claimant is corroborated by non-name evidence,2
+清史稿/卷381#陳鑾,cbdb:478751,name_plus_attribute,office 總督 appears in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷381#陳鑾,cbdb:54654,name_plus_attribute,native province 湖北 appears in the biography | alias 芝楣 appears in the biography | office 總督 appears in the biography | weak: career reign 道光 is named in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷392#賽尚阿,cgedq:N1190,name_plus_attribute,banner marker 旗 appears in the biography | weak: career reign 嘉慶 is named in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷392#賽尚阿,cgedq:N2529,name_plus_attribute,banner marker 旗 appears in the biography | office 知縣 appears in the biography | weak: career reign 嘉慶 is named in the biography,quarantine,more than one claimant is corroborated,2
+清史稿/卷399#黃琮,cgedq:S19326,name_only,,quarantine,name-only claim; no corroborating evidence,2
+清史稿/卷399#黃琮,cgedq:S22319,name_only,,quarantine,name-only claim; no corroborating evidence,2

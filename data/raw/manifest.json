@@ -1,0 +1,199 @@
+{
+  "project": "qing-elite-family-background",
+  "phase": "P01",
+  "generated_at_utc": "2026-09-13T15:44:56Z",
+  "policy": {
+    "raw_files": "read-only; never edited in place; never overwritten by later phases",
+    "pinning": "release is pinned by release id + checksum; no automatic update during the study",
+    "git": "raw files are excluded from git via .gitignore (data/raw/*); this manifest is the tracked record",
+    "secrets": "no API keys or credentials are recorded here"
+  },
+  "artifacts": [
+    {
+      "id": "cbdb_sqlite_20260912",
+      "kind": "sqlite_database",
+      "title": "China Biographical Database (CBDB) — SQLite release",
+      "provider": "CBDB Project (Harvard University / Academia Sinica / Peking University)",
+      "release_id": "cbdb_20260912",
+      "release_date": "2026-09-12",
+      "retrieved_at_utc": "2026-09-13T15:34Z",
+      "metadata_url": "https://raw.githubusercontent.com/cbdb-project/cbdb_sqlite/master/latest.json",
+      "download_url": "https://huggingface.co/datasets/cbdb/cbdb-sqlite/resolve/main/history/cbdb_202609/cbdb_20260912.zip",
+      "download_note": "official distribution channel named by the CBDB project's own cbdb_sqlite README; the legacy Harvard site returns HTTP 403 to scripted clients",
+      "format": "zip containing one sqlite3 file",
+      "primary_local_file": "data/raw/cbdb/cbdb_20260912.sqlite3",
+      "files": [
+        {
+          "path": "data/raw/cbdb/cbdb_20260912.zip",
+          "bytes": 139130577,
+          "sha256": "0f9ff7b93cd6b8b6c172f7edf03eaff66e8a593164f3047c3f4eff434d104678",
+          "md5": "691eb8d925d63d84a759c5d15ad52aa0",
+          "upstream_sha256": "0f9ff7b93cd6b8b6c172f7edf03eaff66e8a593164f3047c3f4eff434d104678",
+          "checksum_verified": true,
+          "checksum_note": "matches Hugging Face LFS oid for history/cbdb_202609/cbdb_20260912.zip and for latest.zip"
+        },
+        {
+          "path": "data/raw/cbdb/cbdb_20260912.sqlite3",
+          "bytes": 586194944,
+          "sha256": "604a4ce0872776a958b4f5b263ec10133644710524bcb1cb904d8866a04daa62",
+          "md5": "b7cdcf456e5bc8884a982ea7a0f7f849",
+          "upstream_sha256": "604a4ce0872776a958b4f5b263ec10133644710524bcb1cb904d8866a04daa62",
+          "checksum_verified": true,
+          "checksum_note": "matches the sha256 published in cbdb-project/cbdb_sqlite latest.json and inside the zip"
+        },
+        {
+          "path": "data/raw/cbdb/cbdb_20260912.json",
+          "bytes": 385,
+          "sha256": "bd215bc3033ab6db533bf3ba0c258479ecd23a6e2701235b4c2b3172bf204f83",
+          "md5": "7c991d98ab370a01054466581a728c8f",
+          "upstream_sha256": null,
+          "checksum_verified": null,
+          "checksum_note": "release metadata shipped inside the zip (copied from latest.json)"
+        },
+        {
+          "path": "data/raw/cbdb/cbdb_users_guide_2025-11-04_wayback.pdf",
+          "bytes": 8767479,
+          "sha256": "ee222b719232c226fd1b60321aabd6e570110d86898e78134f907f97d6c29c01",
+          "md5": "edf994bed221d256be456bcda7c26392",
+          "upstream_sha256": null,
+          "checksum_verified": null,
+          "checksum_note": "Internet Archive snapshot 20251104010037 of the official CBDB User Guide; live site returns HTTP 403 to scripted clients"
+        }
+      ],
+      "tables": 78,
+      "rows_total": 5620619,
+      "persons_total": 661659,
+      "qing_persons": 237826,
+      "read_only": true
+    },
+    {
+      "id": "cgedq_jsl_public_2026_08_28",
+      "kind": "tabular_dataset",
+      "title": "CGED-Q Jinshenlu Public Release (1760-1798, 1850-1864, 1900-1912) with person_id",
+      "provider": "Lee-Campbell Research Group, HKUST / Shanghai Jiao Tong University",
+      "release_id": "DataSpace@HKUST DOI 10.14711/dataset/E9GKRS, version 24.0",
+      "release_date": "2026-08-31",
+      "retrieved_at_utc": "2026-09-13T15:33Z",
+      "license": "CC0 1.0",
+      "api_url": "https://dataspace.hkust.edu.hk/api/datasets/:persistentId/?persistentId=doi:10.14711/dataset/E9GKRS",
+      "download_url": "https://dataspace.hkust.edu.hk/api/access/datafile/3014",
+      "download_note": "Dataverse API, no browser interaction required; recode tables must be fetched with ?format=original",
+      "primary_local_file": "data/raw/cgeq/cgedq_jsl_public_1760-1912_personid_2026-08-28.tab",
+      "files": [
+        {
+          "path": "data/raw/cgeq/cgedq_jsl_public_1760-1912_personid_2026-08-28.tab",
+          "bytes": 233703315,
+          "sha256": "92d74b4dbca2de3ad67a502f2cd2e14815d4ba0cc27776b1c06063873928d476",
+          "md5": "3aa263e87030f50d60f00912c4e82afb",
+          "upstream_md5": "3aa263e87030f50d60f00912c4e82afb",
+          "checksum_verified": true,
+          "checksum_note": "/api/access/datafile/3014 (default delivery) matched the Dataverse-recorded MD5"
+        },
+        {
+          "path": "data/raw/cgeq/cgedq_jsl_chushen_recodes.tab",
+          "bytes": 9527,
+          "sha256": "83860ac33840c22ae2d7aba33952d3d9bce6fe52588a7ad5f6d3e2fa87d20198",
+          "md5": "14efe7f3b3d7e308e3e15fee9ec44823",
+          "upstream_md5": "14efe7f3b3d7e308e3e15fee9ec44823",
+          "checksum_verified": true,
+          "checksum_note": "only /api/access/datafile/3011?format=original matched; the default endpoint returns Dataverse tabular re-ingestion (11328 bytes, MD5 db9c009b...)"
+        },
+        {
+          "path": "data/raw/cgeq/cgedq_jsl_province_recodes.tab",
+          "bytes": 999,
+          "sha256": "ed1a30e5fdf741c3f9084de88866da52261442df08050172859e0a86e4164775",
+          "md5": "fd678776d9959e9fab726fe4ae52b34c",
+          "upstream_md5": "fd678776d9959e9fab726fe4ae52b34c",
+          "checksum_verified": true,
+          "checksum_note": "only /api/access/datafile/3012?format=original matched"
+        },
+        {
+          "path": "data/raw/cgeq/cgedq_jsl_user_guide_v4_2025-07.pdf",
+          "bytes": 2743070,
+          "sha256": "6da8501a8f859428b14644a37a3c4d4386926eb959eb99889efa3533951ad02c",
+          "md5": "78e3877b9e2eab8442766c8a2679d9c8",
+          "upstream_md5": "78e3877b9e2eab8442766c8a2679d9c8",
+          "checksum_verified": true,
+          "checksum_note": "file id 2702"
+        },
+        {
+          "path": "data/raw/cgeq/cgedq_r_tutorial_v2_2025-06.pdf",
+          "bytes": 15258336,
+          "sha256": "2900263db5ff9a3ef473112777b94b40b55c0143e8f745e3c5fb24add1a6a149",
+          "md5": "d91a024523a640eba136772838ca1eab",
+          "upstream_md5": "d91a024523a640eba136772838ca1eab",
+          "checksum_verified": true,
+          "checksum_note": "file id 2703"
+        }
+      ],
+      "rows_total": 1261616,
+      "rows_1760_1798": 190472,
+      "persons_1760_1798": 54238,
+      "read_only": true,
+      "documentation": {
+        "user_guide": "data/raw/cgeq/cgedq_jsl_user_guide_v4_2025-07.pdf",
+        "user_guide_text_extract": "data/interim/cgeq/user_guide_v4_2025-07.txt (derived, not tracked in git)",
+        "r_tutorial": "data/raw/cgeq/cgedq_r_tutorial_v2_2025-06.pdf",
+        "note": "guide text extract kept under data/interim (git-ignored)"
+      }
+    },
+    {
+      "id": "sinica_person_authority",
+      "kind": "remote_database_api",
+      "title": "人名權威—人物傳記資料庫 (Academia Sinica IHP)",
+      "provider": "Institute of History and Philology, Academia Sinica",
+      "endpoint": "https://newarchive.ihp.sinica.edu.tw/sncaccgi/sncacFtp",
+      "query_protocol": "GET ACTION=TQ,sncacFtpqf,(<name>)@TM,1st,search_simple",
+      "verified_at_utc": "2026-09-13T15:45:02Z",
+      "verification": "張廷玉 2 hits; 鄂爾泰 and 陳宏謀 resolve to detail records (生卒 康熙16年-乾隆10年 / 康熙35年-乾隆36年; 權威號 000492 / 001018)",
+      "local_files": [],
+      "note": "no bulk download; small-sample verification only (3 names)"
+    },
+    {
+      "id": "sinica_qing_office",
+      "kind": "remote_database_api",
+      "title": "清代職官資料庫 (Academia Sinica IHP)",
+      "provider": "Institute of History and Philology, Academia Sinica",
+      "endpoint": "https://newarchive.ihp.sinica.edu.tw/officerc/officertp",
+      "query_protocol": "GET ACTION=TQ,officerdb,(<name>)@XE,officerdb/1st,officerdb/search ; detail ACTION=TQ,officerdb,XN=<record>,officerdb/2nd,officerdb/search",
+      "verified_at_utc": "2026-09-13T15:45:02Z",
+      "verification": "張廷玉 24 hits, 鄂爾泰 18, 陳宏謀 36; detail page exposes 職官名稱 + 任職者/類別/滿漢缺/任期/備註/參考文獻",
+      "local_files": [],
+      "note": "no bulk download; small-sample verification only (3 names + 1 detail record)"
+    },
+    {
+      "id": "qingshigao_machine_readable",
+      "kind": "remote_text_source",
+      "title": "《清史稿》machine-readable full text (Chinese Wikisource)",
+      "provider": "Wikimedia Foundation (zh.wikisource.org)",
+      "endpoint": "https://zh.wikisource.org/w/api.php?action=query&prop=revisions&titles=清史稿/卷<N>&rvprop=content&rvslots=main&format=json&formatversion=2",
+      "license": "public domain ({{PD-old}}); site contributions CC BY-SA 4.0 / GFDL",
+      "verified_at_utc": "2026-09-13T15:45:02Z",
+      "verification": "卷288 (列傳七十五) fetched: 張廷玉 and 鄂爾泰 biographies present; 卷307 (列傳九十四) fetched: 陳宏謀 present",
+      "local_files": [],
+      "note": "no bulk download; used for定位卷次+人物+原文窗口 only; ctext.org rejected (anti-scraping + authenticated API)"
+    }
+  ],
+  "sources_rejected_or_blocked": [
+    {
+      "source": "cbdb.hsites.harvard.edu (live CBDB site + download page)",
+      "status": "HTTP 403 to scripted clients (WAF); official download mirrored on Hugging Face",
+      "action": "used the Hugging Face channel"
+    },
+    {
+      "source": "documents.cbdb (CBDB User's Guide, live)",
+      "status": "HTTP 403 to scripted clients",
+      "action": "used Internet Archive snapshot 20251104010037"
+    },
+    {
+      "source": "github.com API (rate limit on shared IP)",
+      "status": "HTTP 403 rate limited",
+      "action": "used raw.githubusercontent.com and the releases/tags listing instead"
+    },
+    {
+      "source": "ctext.org",
+      "status": "anti-scraping challenge; api.ctext.org requires authentication",
+      "action": "not used"
+    }
+  ]
+}

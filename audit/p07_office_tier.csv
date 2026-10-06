@@ -1,0 +1,7 @@
+check,value,note
+tier_office_names_available,5,tier 词表条目数
+tier_office_names_total,75,含 canonical/别名
+llm_office_strings_matched,24,LLM 抽出的官职能归入 A1-C 的条数
+llm_office_strings_unmatched,30,未能归入层级（多为地方官/低阶官）
+structured_office_with_tier,64,CBDB 祖先任官中带 tier 的条数
+unmatched_examples,四川提督; 左春坊左諭德; 四川布政使; 詹事; 石匣副將; 防禦; 江安督糧道; 太僕寺卿; 鴻臚寺少卿; 頭等護衛; 直隸鉅鹿知縣; 吏部文選郎中,未匹配示例

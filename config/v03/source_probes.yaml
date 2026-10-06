@@ -1,0 +1,80 @@
+# V0.3 来源探测目标（config/v03/source_probes.yaml）
+#
+# 只登记**探测目标**（URL + method + 期望），实际状态由
+# `python -m qing_elite.v03.feasibility --probe` 现场请求后写入
+# data/interim_v03/probe_results.json。禁止手写探测结果。
+
+version: 1
+probe_version: probe-v2
+timeout_seconds: 45
+# 只取元数据页/接口根/最小查询，不批量下载任何内容
+forbidden_actions:
+  - bypass_login_or_captcha
+  - bulk_download
+  - paywall_access
+
+probes:
+  # ---------------------------------------------------------------- CBDB
+  - {id: cbdb_release_manifest, source: cbdb, url: "https://raw.githubusercontent.com/cbdb-project/cbdb_sqlite/master/latest.json", method: GET}
+  - {id: cbdb_hf_dataset_api, source: cbdb, url: "https://huggingface.co/api/datasets/cbdb/cbdb-sqlite", method: GET}
+  - {id: cbdb_api_docs, source: cbdb, url: "https://input.cbdb.fas.harvard.edu/cbdbapi/index.html", method: GET}
+  - {id: cbdb_api_kinship_docs, source: cbdb, url: "https://raw.githubusercontent.com/cbdb-project/cbdb-online-main-server/develop/API.md", method: GET}
+  - {id: cbdb_api_kinship_probe, source: cbdb, url: "https://input.cbdb.fas.harvard.edu/api/query_relatives_2?RequestPayload=%7B%22people%22%3A%5B1762%5D%2C%22mCircle%22%3A0%2C%22MAncGen%22%3A1%2C%22MDecGen%22%3A1%2C%22MColLink%22%3A1%2C%22MMarLink%22%3A1%2C%22MLoop%22%3A2%7D", method: GET}
+  - {id: cbdb_dataverse_bulk, source: cbdb, url: "https://dataverse.harvard.edu/api/datasets/:persistentId?persistentId=doi:10.7910/DVN/PAGGQS", method: GET}
+  - {id: cbdb_home, source: cbdb, url: "https://cbdb.fas.harvard.edu/", method: GET}
+
+  # ---------------------------------------------------------------- CGED-Q JSL
+  - {id: cgedq_dataverse_version, source: cgedq_jsl, url: "https://dataspace.hkust.edu.hk/api/info/version", method: GET}
+  - {id: cgedq_dataset_metadata, source: cgedq_jsl, url: "https://dataspace.hkust.edu.hk/api/datasets/:persistentId?persistentId=doi:10.14711/dataset/E9GKRS", method: GET}
+  - {id: cgedq_dataverse_harvard, source: cgedq_jsl, url: "https://dataverse.harvard.edu/api/datasets/:persistentId?persistentId=doi:10.7910/DVN/GMQWVZ", method: GET}
+  - {id: cgedq_dataverse_harvard_search, source: cgedq_jsl, url: "https://dataverse.harvard.edu/api/search?q=jinshenlu&type=dataset", method: GET}
+
+  # ---------------------------------------------------------------- Sinica
+  - {id: sinica_authority_ui, source: sinica_authority, url: "https://newarchive.ihp.sinica.edu.tw/sncaccgi/sncacFtp", method: GET}
+  - {id: sinica_authority_detail, source: sinica_authority, url: "https://newarchive.ihp.sinica.edu.tw/sncaccgi/sncacFtp?ACTION=TQ,sncacFtpqf,SN=002631,2nd,search_simple", method: GET}
+  - {id: sinica_office_ui, source: sinica_authority, url: "https://newarchive.ihp.sinica.edu.tw/officerc/officertp", method: GET}
+  - {id: sinica_office_detail, source: sinica_authority, url: "https://newarchive.ihp.sinica.edu.tw/officerc/officertp?ACTION=TQ,officerdb,XN=NO000001012,officerdb/2nd,officerdb/search", method: GET}
+  - {id: ascdc_sparql, source: sinica_authority, url: "https://data.ascdc.tw/sparql", method: GET}
+
+  # ---------------------------------------------------------------- Wikimedia
+  - {id: wikisource_dump_root, source: wikisource_dump, url: "https://dumps.wikimedia.org/zhwikisource/", method: GET}
+  - {id: wikisource_dump_latest, source: wikisource_dump, url: "https://dumps.wikimedia.org/zhwikisource/latest/", method: GET}
+
+  # ---------------------------------------------------------------- 上海图书馆 家谱/开放数据
+  - {id: shl_open_data_home, source: shl_genealogy, url: "https://data.library.sh.cn/", method: GET}
+  - {id: shl_sparql_query, source: shl_genealogy, url: "https://data.library.sh.cn/sparql/", method: POST, data: {query: "SELECT (COUNT(*) AS ?c) WHERE { GRAPH <http://gen.library.sh.cn/graph/person> { ?s ?p ?o } }"}, headers: {Content-Type: "application/x-www-form-urlencoded", Accept: "application/sparql-results+json"}}
+  - {id: shl_sparql_get_rejected, source: shl_genealogy, url: "https://data.library.sh.cn/sparql?query=SELECT%20*%20WHERE%20%7B%3Fs%20%3Fp%20%3Fo%7D%20LIMIT%201", method: GET}
+  - {id: jiapu_frontend, source: shl_genealogy, url: "http://jiapu.library.sh.cn/", method: GET}
+
+  # ---------------------------------------------------------------- 履历档案
+  - {id: fhac_home, source: lvli_dangan, url: "https://fhac.com.cn/", method: GET}
+  - {id: fhac_search_fulltext, source: lvli_dangan, url: "https://fhac.com.cn/search_fulltext.html", method: GET}
+  - {id: airusheng_pudie, source: lvli_dangan, url: "http://er07.com/home/pro_5.html", method: GET}
+
+  # ---------------------------------------------------------------- 科举题名录
+  - {id: ancientbooks_dengke, source: keju_timulu, url: "https://examination.ancientbooks.cn/docDengke/", method: GET}
+  - {id: docusky_jinshi, source: keju_timulu, url: "https://docusky.org.tw/DocuSky/projects/ntu/CBDB-JinShi/", method: GET}
+
+  # ---------------------------------------------------------------- 家谱（FamilySearch）
+  - {id: familysearch_api, source: familysearch_genealogy, url: "https://www.familysearch.org/service/search/hr/v2/collections/1787988", method: GET}
+
+  # ---------------------------------------------------------------- Lee-Campbell 检索平台（同年齿录亲属）
+  - {id: searchjsl_home, source: tongnianchilu_qer, url: "https://searchjsl.leecampbellgroup.blog/", method: GET}
+
+  # ---------------------------------------------------------------- 清季职官表
+  - {id: mhdb_qingji_http, source: qingji_officials, url: "http://mhdb.mh.sinica.edu.tw/databaseinfo.php?b=012", method: GET}
+  - {id: mhdb_qingji_https, source: qingji_officials, url: "https://mhdb.mh.sinica.edu.tw/databaseinfo.php?b=012", method: GET}
+
+  # ---------------------------------------------------------------- 明经通谱（同一编码数据集）
+  - {id: mingjingtongpu_blog, source: mingjingtongpu_qer, url: "https://camerondcampbell.blog/kinship-information-in-the-%E5%90%8C%E5%B9%B4%E9%BD%BF%E5%BD%95-and-related-sources-completed-in-august-2024/", method: GET}
+  - {id: mingjingtongpu_catalogue, source: mingjingtongpu_qer, url: "https://www.guoxuedashi.com/shumu/gj-3243763mp.html", method: GET}
+
+  # ---------------------------------------------------------------- 生员：无独立来源，记录替代路径
+  - {id: shengyuanlu_substitute_cbdb_entry, source: shengyuanlu, url: "https://input.cbdb.fas.harvard.edu/api/entry_list_by_name?eName=%E7%94%9F%E5%93%A1&start=1&list=2&accurate=0", method: GET}
+
+  # ---------------------------------------------------------------- 科举题名录（同官录/硃卷相关产品页）
+  - {id: tongguanlu_hkust_portal, source: tongguanlu, url: "https://researchportal.hkust.edu.hk/en/publications/kin-networks-of-local-officials-in-19th-and-early-20th-century-ch/", method: GET}
+  - {id: tongguanlu_dataverse_search, source: tongguanlu, url: "https://dataverse.harvard.edu/api/search?q=Tongguanlu&type=dataset", method: GET}
+  - {id: zhujuan_unican, source: zhujuan, url: "https://www.unihan.com.cn/books/mingqing/zjjc", method: GET}
+  - {id: keju_ancientbooks_help, source: keju_timulu, url: "http://examination.ancientbooks.cn/docDengke/dkHelp.jspx", method: GET}
+  - {id: shl_open_data_api_docs, source: shl_genealogy, url: "https://data.library.sh.cn/developguide", method: GET}

@@ -1,0 +1,91 @@
+{
+  "stage": "U10R",
+  "schema_version": "v0.3.0",
+  "gate": "PASS",
+  "failures": [],
+  "checks": {
+    "design_still_holds": {
+      "status": "PASS",
+      "evidence": [
+        "config/v03/research.yaml",
+        "config/v03/relations.yaml",
+        "config/v03/review_policy.yaml",
+        "config/v03/source_priority.yaml"
+      ]
+    },
+    "tier_is_outcome": {
+      "status": "PASS",
+      "evidence": {
+        "tier_columns_in_input_tables": {
+          "persons": [],
+          "career_events": []
+        },
+        "primary_outcomes": [
+          "highest_office_rank",
+          "highest_admin_level",
+          "central_local_route"
+        ],
+        "legacy_only": [
+          "highest_tier",
+          "tier_group"
+        ]
+      }
+    },
+    "legacy_d_layer_is_not_primary_estimand": {
+      "status": "PASS",
+      "evidence": {
+        "primary_estimand": "P(career outcome | family capital, credential class, cohort)：在同一来源框架、 同一进入资格层内，家庭资本与职业结果之间的描述性关联（association only）。",
+        "legacy_benchmark": "v0.2 的 P(documented ancestor office = 1 | tier) 文档率对比降级为来源偏差基准 （early/mid-Qing 与 late-Qing 源覆盖比较）。它可以被报告，但不得作为 V0.3 primary estimand，也不得重新变成\"寒门率\"。",
+        "sampling": {
+          "unit": "person",
+          "frame_rule": "source_frame",
+          "frame_dimensions": [
+            "source",
+            "cohort",
+            "region",
+            "credential"
+          ],
+          "forbidden": [
+            "sampling_on_outcome_tier",
+            "oversampling_by_final_office"
+          ],
+          "observability_requirement": "每个分析指标必须同时给出 numerator、denominator 与 observable_kin_count； 亲属记录不足时结果为 unknown，不得记为 0。\n"
+        }
+      }
+    },
+    "v02_untouched": {
+      "status": "PASS",
+      "evidence": {
+        "baseline_ref": "v0.2-u03-frozen-20260927",
+        "modified_frozen_paths": [
+          "tests/test_u02_linkage.py"
+        ],
+        "excused_paths": {
+          "tests/test_u02_linkage.py": "U11R added the missing-input skip guard; without it a clean checkout fails two tests for a file the public repository deliberately does not ship"
+        },
+        "violations": []
+      }
+    },
+    "extension_artifacts": {
+      "status": "PASS",
+      "evidence": {
+        "early_qing_persons": 1179,
+        "mapping_rows": 12,
+        "comparison_rows": 30,
+        "classification_counts": {
+          "PERIOD_SPECIFIC": 15,
+          "NOT_COMPARABLE": 13,
+          "CROSS_PERIOD_CONSISTENT": 2
+        },
+        "problems": []
+      }
+    },
+    "extension_tests": {
+      "status": "PASS",
+      "evidence": {
+        "command": "pytest tests/test_v03_extension.py",
+        "summary": "9 passed"
+      }
+    }
+  }
+}

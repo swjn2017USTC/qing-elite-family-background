@@ -1,0 +1,102 @@
+# CBDB 亲属码 → V0.3 关系本体（config/v03/cbdb_kin_map.yaml）
+#
+# 依据：CBDB `KINSHIP_CODES.c_kinrel_chn` 的实际标签 + `V03_DATA_MODEL` 的 relations-v1 代码。
+# 只映射语义明确的码；**语义不确定的一律留 unmapped**（不得静默丢弃，也不得猜测），
+# 例如 玄孫（比孫更深一代）、族弟（遠房同輩）、姪孫、始祖/始遷祖、外祖父、直系祖先。
+#
+# 覆盖统计（2026-09-27，清 c_dy=20 且 index_year 1644–1912 的 KIN_DATA 行）见 U05R 报告。
+
+version: 1
+map_version: cbdb-kin-map-v1
+
+#: 精确码映射（CBDB 主码 + v0.2 CODEBOOK 记录的变体）
+by_code:
+  75: father          # 父
+  82: father
+  98: father
+  107: father
+  363: father
+  571: father
+  62: grandfather     # 祖父
+  440: grandfather
+  563: grandfather
+  48: great_grandfather  # 曾祖
+  39: great_great_grandfather  # 高祖
+  111: mother         # 母
+  # 祖母类
+  63: grandmother
+  64: grandmother
+  # 旁系长辈
+  79: uncle_paternal  # 從父;伯叔父
+  517: uncle_paternal  # 叔;叔父
+  518: uncle_paternal  # 伯;伯父
+  90: great_uncle_paternal  # 伯叔祖类（如 62 的旁系变体在标签层处理）
+  # 同辈
+  125: brother        # 兄
+  126: brother        # 弟
+  118: brother        # 兄弟
+  164: sister
+  169: sister
+  374: sister         # 姊妹
+  165: brother        # 長兄
+  130: cousin_paternal  # 從兄弟
+  131: cousin_paternal  # 堂兄弟
+  # 晚辈
+  180: son            # 子
+  182: son
+  183: son
+  184: son
+  185: son
+  191: son            # 五子
+  186: son            # （六子类，若出现）
+  187: son
+  176: daughter       # 女兒
+  177: nephew_paternal  # 從子;姪子
+  178: nephew_paternal
+  243: grandson       # 孫
+  255: grandson       # 曾孫;重孫
+  # 婚姻
+  135: wife           # 妻子
+  344: wife           # 第三任妻
+  345: wife           # 繼妻类（如出现）
+  134: husband        # 丈夫
+  76: father_in_law   # 岳父
+  181: son_in_law     # 女婿
+
+#: 标签兜底（码未列出时按 `c_kinrel_chn` 的第一个别名匹配）
+by_label:
+  父: father
+  祖父: grandfather
+  曾祖: great_grandfather
+  高祖: great_great_grandfather
+  母: mother
+  祖母: grandmother
+  伯叔父: uncle_paternal
+  叔父: uncle_paternal
+  伯父: uncle_paternal
+  兄: brother
+  長兄: brother
+  弟: brother
+  五子: son
+  三子: son
+  四子: son
+  次子: son
+  長子: son
+  兄弟: brother
+  姊: sister
+  妹: sister
+  姊妹: sister
+  從兄弟: cousin_paternal
+  堂兄弟: cousin_paternal
+  子: son
+  女兒: daughter
+  從子: nephew_paternal
+  姪子: nephew_paternal
+  孫: grandson
+  曾孫: grandson
+  妻子: wife
+  第三任妻: wife
+  繼娶: wife
+  丈夫: husband
+  岳父: father_in_law
+  女婿: son_in_law

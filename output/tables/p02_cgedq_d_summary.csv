@@ -1,0 +1,2 @@
+jsl_rows_in_slice,jsl_persons_in_slice,rows_classified_d,rows_classified_not_d,persons_with_at_least_one_d_post,d_appointment_spells,spells_split_by_edition_gap,mean_observations_per_spell,median_observations_per_spell,acting_spells,concurrent_spells
+182884,54238,117850,65034,39573,54472,7743,2.16,1.0,0,985

@@ -1,0 +1,21 @@
+# Formal research LLM channel.
+#
+# This channel is the official DeepSeek API called by local Python only
+# (src/qing_elite/llm). The OMP `deepseek` provider is a conversational channel
+# and is NOT allowed to produce formal research data (OMP_PLAN.md section 2.2).
+
+provider: deepseek-official
+base_url: https://api.deepseek.com
+api_key_env: DEEPSEEK_API_KEY
+
+extraction:
+  model: deepseek-flash
+  thinking: disabled          # must be explicit; never rely on provider default
+  response_format: json_object
+  temperature: 0.0
+  reasoning_effort: null
+
+disambiguation:
+  model: deepseek-flash
+  thinking: enabled           # only when the rule-based pass cannot resolve a person
+  reasoning_effort: low       # high / max are forbidden by default

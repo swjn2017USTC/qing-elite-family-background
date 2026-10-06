@@ -1,0 +1,19 @@
+# U05R LLM 兜底配置（config/v03/llm_extraction.yaml）
+#
+# 只用**规则 parser 无法收敛**的残余条目（abstained）。凭证只在环境变量 DEEPSEEK_API_KEY。
+# 官方渠道：deepseek-flash，thinking 显式关闭，JSON output。
+
+version: 1
+model: deepseek-flash
+thinking_mode: disabled
+prompt_version: u05r-abstain-v1
+instruction: >
+  你是清代科举/职官史料的结构化抽取器。给你一段 OCR 后的原文窗口，请只抽取窗口内
+  **确实出现**的一位亲属记录；不要补充窗口外的信息，不要根据常识推断。
+window_radius: 220
+prompt_overhead_tokens: 260
+expected_output_tokens: 90
+max_tokens: 400
+max_calls: 20
+# 本阶段只做残余条目验证；批量前必须先打印 plan
+max_cost_rmb: 0.20

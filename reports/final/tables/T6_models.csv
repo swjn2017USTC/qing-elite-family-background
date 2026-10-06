@@ -1,0 +1,11 @@
+model,term,coef,odds_ratio,ci_low,ci_high,p_value,n,note
+common_window,Intercept,-0.0121,0.988,0.2745,3.5555,0.9852,442,
+common_window,C(tier_group)[T.B],1.5494,4.7089,1.1387,19.472,0.0324,442,
+common_window,C(tier_group)[T.C],1.9744,7.2025,1.3104,39.5881,0.0232,442,
+common_window,C(tier_group)[T.D],-0.055,0.9465,0.2835,3.16,0.9287,442,
+common_window,C(cohort)[T.1761-1820],-0.1874,0.8292,0.4888,1.4064,0.4871,442,
+long_run,Intercept,-0.3318,0.7176,0.3404,1.5127,0.3831,235,
+long_run,C(tier_group)[T.B],0.9927,2.6985,1.3316,5.4686,0.0059,235,
+long_run,C(tier_group)[T.C],1.215,3.3703,1.449,7.8394,0.0048,235,
+long_run,C(cohort)[T.1701-1760],-0.1879,0.8287,0.404,1.6998,0.6082,235,
+long_run,C(cohort)[T.1761-1820],0.6321,1.8816,0.8891,3.9818,0.0984,235,

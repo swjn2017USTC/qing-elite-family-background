@@ -1,0 +1,85 @@
+{
+  "stage": "U08R",
+  "schema_version": "v0.3.0",
+  "gate": "PASS",
+  "failures": [],
+  "checks": {
+    "design_still_holds": {
+      "status": "PASS",
+      "evidence": [
+        "config/v03/research.yaml",
+        "config/v03/relations.yaml",
+        "config/v03/review_policy.yaml",
+        "config/v03/source_priority.yaml"
+      ]
+    },
+    "tier_is_outcome": {
+      "status": "PASS",
+      "evidence": {
+        "tier_columns_in_input_tables": {
+          "persons": [],
+          "career_events": []
+        },
+        "primary_outcomes": [
+          "highest_office_rank",
+          "highest_admin_level",
+          "central_local_route"
+        ],
+        "legacy_only": [
+          "highest_tier",
+          "tier_group"
+        ]
+      }
+    },
+    "v02_untouched": {
+      "status": "PASS",
+      "evidence": {
+        "baseline_ref": "v0.2-u03-frozen-20260927",
+        "modified_frozen_paths": [
+          "tests/test_u02_linkage.py"
+        ],
+        "excused_paths": {
+          "tests/test_u02_linkage.py": "U11R added the missing-input skip guard; without it a clean checkout fails two tests for a file the public repository deliberately does not ship"
+        },
+        "violations": []
+      }
+    },
+    "career_panel": {
+      "status": "PASS",
+      "evidence": {
+        "events": 148288,
+        "outcomes": 53701,
+        "tier_rows": 53701,
+        "ontology": {
+          "version": "offices-v2",
+          "titles": 15725,
+          "with_rank": 7504,
+          "with_level": 9120,
+          "unmatched": 6605,
+          "rank_verification_status": "pending",
+          "rank_basis": "《清史稿·職官志》所载清代文职官品（策展，待与原书逐条核验）"
+        },
+        "problems": []
+      }
+    },
+    "career_validators": {
+      "status": "PASS",
+      "evidence": {
+        "flagged": 412,
+        "by_check": {
+          "same_year_rank_change": 399,
+          "impossible_transition": 11,
+          "chronology_out_of_window": 2
+        },
+        "unknown_checks": []
+      }
+    },
+    "career_tests": {
+      "status": "PASS",
+      "evidence": {
+        "command": "pytest tests/test_v03_career.py",
+        "summary": "12 passed"
+      }
+    }
+  }
+}

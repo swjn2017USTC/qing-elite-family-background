@@ -1,0 +1,35 @@
+# U05R pilot frame 配置（config/v03/pilot_frame.yaml）
+#
+# 抽样规则：source × cohort × region × credential（**不按 outcome 分层**）。
+# 总体：CBDB 清代（c_dy=20）且 index_year 1644–1912、且至少有 1 条亲属记录的人物。
+# 每格内按 person_id 排序后等距抽样，偏移量 = sha256(seed:cell)，因此同 seed 可复现。
+
+version: 1
+seed: 20260927
+target_size: 300
+min_per_cell: 2
+source: cbdb
+
+cohorts:
+  - {name: 1644-1735, start: 1644, end: 1735}
+  - {name: 1736-1795, start: 1736, end: 1795}
+  - {name: 1796-1860, start: 1796, end: 1860}
+  - {name: 1861-1912, start: 1861, end: 1912}
+
+# 宏观区域（按籍貫省名匹配）
+regions:
+  jiangnan: [江蘇, 浙江, 安徽]
+  north: [直隸, 山東, 河南, 山西, 陝西, 甘肅]
+  central: [湖北, 湖南, 江西]
+  coastal_south: [福建, 廣東, 廣西]
+  southwest: [四川, 雲南, 貴州]
+  other: []
+
+# 功名档次（由 CBDB ENTRY_CODES 中文标签判定，优先级 jinshi > juren > gongsheng > jiansheng > shengyuan）
+credentials:
+  jinshi: [進士]
+  juren: [舉人]
+  gongsheng: [貢生]
+  jiansheng: [監生]
+  shengyuan: [生員, 庠生, 廩生, 增生, 附生]
+  none: []

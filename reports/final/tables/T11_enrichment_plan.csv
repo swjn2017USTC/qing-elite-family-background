@@ -1,0 +1,2 @@
+eligible_persons,slot_gaps,mean_passage_chars,by_tier,estimated_calls,estimated_input_tokens,estimated_output_tokens,estimated_rmb_off_peak,estimated_rmb_peak,soft_budget_rmb,hard_budget_rmb
+321,838,850.4,"B:101, D:90, C:77, A1:49, A2:2, A3:2",321,308160,78966,0.624,1.248,20.0,30.0

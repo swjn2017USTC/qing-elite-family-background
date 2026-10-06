@@ -1,0 +1,82 @@
+{
+  "project": "qing-elite-family-background",
+  "version": "v0.3",
+  "generated_at": "2026-09-27",
+  "artifacts": [
+    {
+      "source": "cbdb",
+      "file": "data/raw/cbdb/cbdb_20260926.zip",
+      "release": "cbdb_20260926",
+      "retrieved_at": "2026-09-27",
+      "url": "https://huggingface.co/datasets/cbdb/cbdb-sqlite/resolve/main/history/cbdb_202609/cbdb_20260926.zip",
+      "sha256": "663f00a0aff375c352aa42b7cea6975db8e3a90f2ab96590b7e006bfdc1f1945",
+      "verified_against": "https://raw.githubusercontent.com/cbdb-project/cbdb_sqlite/master/latest.json (sha256 of the contained sqlite)",
+      "notes": "zip 与其中 sqlite3 的 sha256 均与上游 latest.json 一致"
+    },
+    {
+      "source": "cbdb",
+      "file": "data/raw/cbdb/cbdb_20260926.sqlite3",
+      "release": "cbdb_20260926",
+      "retrieved_at": "2026-09-27",
+      "url": "unzipped from the archive above",
+      "sha256": "3b8809b2e57d2ab89c837fd45fd53ec1b64779d2b428bd352ddcd8f730a2a62d",
+      "verified_against": "latest.json sha256 = 3b8809b2e57d2ab89c837fd45fd53ec1b64779d2b428bd352ddcd8f730a2a62d",
+      "notes": "仅本地只读使用；不入 Git；V0.3 使用 20260926 版（v0.1 冻结的是 20260912）"
+    },
+    {
+      "source": "tongguanlu_commons",
+      "file": "data/raw/tongguanlu/tongguanlu_jiangnan_lingshu_jinkuiguang.pdf",
+      "release": "WZLib-DB-143494",
+      "retrieved_at": "2026-09-27",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/58/WZLib-DB-143494_%E6%B1%9F%E5%8D%97%E5%AF%A7%E8%9C%80%E5%90%8C%E5%AE%98%E9%8C%84%E9%87%91%E5%A5%8E%E5%85%89.pdf",
+      "license": "PD-old-100-expired / CC-PD-Mark / PD-scan（Wikimedia Commons 文件页实测）",
+      "sha256": "fe0716c6ff1ec9dd2e260c535b8f3307a408942cb4f737f0c5b56f827f29bf13",
+      "notes": "《江南寧蜀同官錄·金奎光》91 页扫描件；U05R 的 OCR arm 使用；公版可再分发，但本仓库只登记不入 Git"
+    },
+    {
+      "source": "cgedq_jsl",
+      "file": "data/raw/cgeq/cgedq_jsl_public_1760-1912_personid_2026-08-28.tab",
+      "release": "CGED-Q JSL public release, Dataverse file 14184134 (2026-08-28, with person_id)",
+      "retrieved_at": "2026-09-27",
+      "url": "https://dataverse.harvard.edu/api/access/datafile/14184134",
+      "license": "CC0 1.0 (Harvard Dataverse doi:10.7910/DVN/GMQWVZ)",
+      "sha256": "92d74b4dbca2de3ad67a502f2cd2e14815d4ba0cc27776b1c06063873928d476",
+      "verified_against": "v0.1 frozen hash in data/raw/manifest.json",
+      "notes": "与 v0.1/v0.2 冻结的同名文件逐字节一致（sha256 命中）；U06R 据此验证官方 person_id 并建 crosswalk。"
+    },
+    {
+      "source": "cgedq_jsl",
+      "file": "data/raw/cgeq/cgedq_jsl_chushen_recodes.tab",
+      "release": "Dataverse file 5708952 (Chushen Recodes)",
+      "retrieved_at": "2026-09-27",
+      "url": "https://dataverse.harvard.edu/api/access/datafile/5708952",
+      "license": "CC0 1.0",
+      "sha256": "49b7e7f7bc93fb49a3dfaca187053be8b54cfefda35db1024654f51f4d32e7e7",
+      "notes": "出身归并表；v0.2 代码按此文件名读取。 上游原格式是 Stata dta；本地转成 UTF-8 TSV（v0.1 loader 读 UTF-8）。",
+      "upstream_format": "Stata .dta via ?format=original",
+      "local_transformation": "pandas.read_stata → to_csv(sep='\\t', encoding utf-8)"
+    },
+    {
+      "source": "cgedq_jsl",
+      "file": "data/raw/cgeq/cgedq_jsl_province_recodes.tab",
+      "release": "Dataverse file 5708951 (Province of Origin Recodes)",
+      "retrieved_at": "2026-09-27",
+      "url": "https://dataverse.harvard.edu/api/access/datafile/5708951",
+      "license": "CC0 1.0",
+      "sha256": "89905382fbd7d5cc016df8f32c31ad47a7be573381c1a180ee6680fcaa0ac1c3",
+      "notes": "籍贯省归并表。 上游原格式是 Stata dta；本地转成 UTF-8 TSV（v0.1 loader 读 UTF-8）。",
+      "upstream_format": "Stata .dta via ?format=original",
+      "local_transformation": "pandas.read_stata → to_csv(sep='\\t', encoding utf-8)"
+    },
+    {
+      "source": "cgedq_jsl",
+      "file": "data/raw/cgeq/cgedq_user_guide_v4_2025.pdf",
+      "release": "Dataverse file 11704482 (用户指南 v4, 2025-07)",
+      "retrieved_at": "2026-09-27",
+      "url": "https://dataverse.harvard.edu/api/access/datafile/11704482",
+      "license": "CC0 1.0",
+      "sha256": "6da8501a8f859428b14644a37a3c4d4386926eb959eb99889efa3533951ad02c",
+      "notes": "§5.4.16 是官方 person_id 语义的权威说明（U06R 引用）。"
+    }
+  ]
+}

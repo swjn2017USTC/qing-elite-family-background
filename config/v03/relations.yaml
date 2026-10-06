@@ -1,0 +1,97 @@
+# V0.3 亲属关系本体（config/v03/relations.yaml）
+#
+# v2（U05R）：补充 CBDB 实际出现的同辈/晚辈/婚姻关系（sister/daughter/grandson/husband/
+# son_in_law），因为在 300 人 pilot 的 CBDB KIN_DATA 中确实存在这些码；不补就只能记为 unmapped。
+#
+# 版本化：任何 relation code / class / generation_delta 的改动都必须升 ontology_version，
+# 并重跑 kin graph 构建（U07R）。kin_edges.relation_code 只能取本文件的 code。
+#
+# generation_delta 约定：**以 ego 为 0，正数表示 alter 是更早的一代（长辈）**。
+#   father = +1、grandfather = +2、great_grandfather = +3、son = -1、nephew = -2。
+#   同辈（brother/cousin）= 0。
+#
+# class 决定该 edge 进入哪个 family-capital 指标族：
+#   direct_line        → direct_3g_* / direct_elite_generations / max_direct_office_rank
+#   senior_collateral  → senior_collateral_* / all_senior_elite_kin_count
+#   same_generation    → 同辈嵌入（secondary）
+#   junior_collateral  → 子侄（secondary）
+#   female_line        → 母系（保留，不进入 V0.3 primary）
+#   marital / affinal  → 姻亲（保留，不进入 V0.3 primary）
+
+version: 1
+ontology_version: relations-v2
+generation_delta_convention: positive_means_alter_is_senior
+
+classes:
+  direct_line:
+    lineage_side: paternal
+    detail_projection: direct_line
+    generation_delta_sign: positive
+  senior_collateral:
+    lineage_side: paternal
+    detail_projection: senior_collateral
+    generation_delta_sign: positive
+  same_generation:
+    lineage_side: paternal
+    detail_projection: same_generation
+    generation_delta_sign: zero
+  junior_collateral:
+    lineage_side: paternal
+    detail_projection: junior_collateral
+    generation_delta_sign: negative
+  female_line:
+    lineage_side: maternal
+    detail_projection: reserved
+    generation_delta_sign: any
+  marital:
+    lineage_side: affinal
+    detail_projection: reserved
+    generation_delta_sign: any
+  affinal:
+    lineage_side: affinal
+    detail_projection: reserved
+    generation_delta_sign: any
+
+relations:
+  - {code: father, zh: 父, class: direct_line, generation_delta: 1}
+  - {code: grandfather, zh: 祖父, class: direct_line, generation_delta: 2}
+  - {code: great_grandfather, zh: 曾祖, class: direct_line, generation_delta: 3}
+  - {code: great_great_grandfather, zh: 高祖, class: direct_line, generation_delta: 4}
+  - {code: uncle_paternal, zh: 伯叔, class: senior_collateral, generation_delta: 1}
+  - {code: great_uncle_paternal, zh: 伯叔祖, class: senior_collateral, generation_delta: 2}
+  - {code: great_great_uncle_paternal, zh: 伯叔曾祖, class: senior_collateral, generation_delta: 3}
+  - {code: brother, zh: 兄弟, class: same_generation, generation_delta: 0}
+  - {code: cousin_paternal, zh: 從兄弟, class: same_generation, generation_delta: 0}
+  - {code: son, zh: 子, class: junior_collateral, generation_delta: -1}
+  - {code: nephew_paternal, zh: 姪, class: junior_collateral, generation_delta: -2}
+  - {code: mother, zh: 母, class: female_line, generation_delta: 1}
+  - {code: grandmother, zh: 祖母, class: female_line, generation_delta: 2}
+  - {code: wife, zh: 妻, class: marital, generation_delta: 0}
+  - {code: husband, zh: 丈夫, class: marital, generation_delta: 0}
+  - {code: sister, zh: 姊妹, class: same_generation, generation_delta: 0}
+  - {code: daughter, zh: 女, class: junior_collateral, generation_delta: -1}
+  - {code: grandson, zh: 孫, class: junior_collateral, generation_delta: -2}
+  - {code: son_in_law, zh: 女婿, class: affinal, generation_delta: -1}
+  - {code: father_in_law, zh: 岳父, class: affinal, generation_delta: 1}
+
+# 计量口径（U07R 实现，本阶段只登记定义，不实现计算）
+metric_families:
+  direct_line:
+    - direct_3g_degree_count
+    - direct_3g_office_count
+    - direct_elite_generations
+    - max_direct_office_rank
+  senior_collateral:
+    - senior_collateral_degree_count
+    - senior_collateral_office_count
+    - all_senior_elite_kin_count
+  density_secondary:
+    - kin_degree_density
+    - kin_office_density
+  new_entrant_definitions:
+    direct_line_new_entrant: >
+      仅当三代 direct line 全部可观测、且三代皆无功名、皆无任官时为 true；
+      信息不足一律 unknown，禁止用 0 填充。
+    extended_family_new_entrant: >
+      仅当 direct line 与 senior collateral 均在可观测范围内，且该范围内皆无
+      功名、皆无任官时为 true；信息不足一律 unknown。

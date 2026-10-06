@@ -1,0 +1,5 @@
+stratum,n_pilot,protocol_completion,protocol_completion_required_sources,identity_hit_rate,identity_attributed_rate,office_hit_rate,degree_hit_rate,effective_information_rate,ancestral_information_rate,machine_seconds_per_person,manual_minutes_per_person_assumed,frozen_sample_size,projected_manual_minutes_if_assumed,projected_machine_minutes,projected_api_cost_rmb
+A,30,0.0,1.0,1.0,1.0,1.0,0.8667,1.0,0.5667,0.04,0.5,85,42.5,0.1,0.0
+B,30,0.0,1.0,1.0,1.0,1.0,0.7,1.0,0.6333,0.03,0.5,200,100.0,0.1,0.0
+C,30,0.0,1.0,1.0,1.0,1.0,0.9,1.0,0.7333,0.03,0.5,200,100.0,0.1,0.0
+D,30,0.0,1.0,1.0,1.0,1.0,0.5,1.0,0.0,0.04,0.5,400,200.0,0.2,0.0

@@ -1,0 +1,7 @@
+check,value,note
+cbdb_universe_distinct_names,38475,研究总体内的不同姓名数
+cbdb_universe_names_shared_by_multiple_persons,1168,同名多人（CBDB 已按 personid 区分的不同人）
+cbdb_qing_population_names_shared,20143,CBDB 全体清代人物中的同名组数
+cbdb_merged_person_pairs,5994,CBDB MERGED_PERSON_DATA 记录的重复人物对（已用于 id 归一）
+cbdb_persons_linked_to_multiple_cgedq_persons,871,一个 CBDB 人被多个 JSL 人命中：可能是同一人拆分，也可能是误连
+cgedq_person_uid_with_multiple_spells_same_year,1864,同一 JSL 人在同一开始年有多段任期（含兼任）

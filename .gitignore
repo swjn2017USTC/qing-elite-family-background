@@ -1,0 +1,71 @@
+# Python / uv
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+
+# Secrets
+.env
+
+# macOS
+.DS_Store
+
+# Source data is never committed (OMP_PLAN.md section 17)
+# The acquisition manifest is metadata, not source data, and is tracked.
+data/raw/*
+!data/raw/.gitkeep
+!data/raw/manifest.json
+!data/raw/manifest_v03.json
+data/interim/*
+!data/interim/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+*.sqlite
+*.sqlite3
+*.db
+*.db3
+
+# Person-level derived research data is reconstructed locally from licensed
+# source copies. It is deliberately not redistributed by this public repo.
+data/processed_v02/*
+!data/processed_v02/.gitkeep
+
+# V0.3 derived data is rebuilt locally and is not redistributed either.
+data/processed_v03/*
+!data/processed_v03/.gitkeep
+data/interim_v03/*
+!data/interim_v03/.gitkeep
+
+# Literature pipeline: registry/digests/queues are tracked, copyrighted bodies are not
+sources/literature/public/*
+!sources/literature/public/.gitkeep
+sources/literature/private/
+sources/literature/candidates/*
+!sources/literature/candidates/.gitkeep
+sources/literature/manifests/*
+
+# Large candidate-level records are generated locally and are not publication
+# artifacts. Aggregated results remain under reports/final/ and output/tables/.
+output/tables/p03_linkage_candidates.csv
+
+# Per-person validation, source excerpts, and call records stay local. Public
+# releases retain only aggregated audit/result artefacts and metadata.
+audit/a_layer_verification.csv
+audit/manual_validation.csv
+audit/p07_replication_10pct.csv
+audit/p07_replication_calls.jsonl
+audit/llm_calls/calls.jsonl
+audit/v03/u03_search_log_sample.csv
+output/tables/failed_cases.csv
+output/tables/p03_passage_sample.csv
+output/tables/p04_calls.csv
+output/tables/p04_results.csv
+reports/final/tables/A1_a_layer_verification.csv
+reports/final/tables/A12_replication_10pct.csv
+reports/upgrade_v03/pilot/gold_ocr.jsonl
+
+# Snakemake runtime cache
+.snakemake/

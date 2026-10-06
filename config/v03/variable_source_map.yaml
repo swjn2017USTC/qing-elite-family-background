@@ -1,0 +1,84 @@
+# V0.3 变量 → 候选来源映射（config/v03/variable_source_map.yaml）
+#
+# 用途：把现代文献的 claim（LC ledger）映射到 V0.3 的实际测度量与可获取来源，
+# 并据此机械判定 testability（见 src/qing_elite/v03/lit/claim_map.py）。
+#
+# 每条只写"这个变量需要什么史料能力 + 哪些候选来源能提供"，不写结论。
+# 判定规则（脚本执行，不手写）：
+#   exposure 变量：来源需 kin 覆盖；PUBLIC_STRUCTURED + (bulk|api) + kin_population_coverage ∈ {HIGH,MEDIUM} → TESTABLE_NOW
+#                  PUBLIC_SCAN + bulk → TESTABLE_WITH_OCR
+#                  PUBLIC_UI_ONLY / ACCESS_REQUEST_REQUIRED / UNAVAILABLE → TESTABLE_WITH_ACCESS_REQUEST
+#   outcome 变量：PUBLIC_STRUCTURED + (bulk|api) → TESTABLE_NOW；其余同上；否则 NOT_TESTABLE_IN_V03
+
+version: 1
+map_version: variable-source-map-v1
+
+variables:
+  direct_3g_degree_count:
+    role: exposure
+    required_source_capability: "父/祖/曾祖三代的功名记录（逐人可回源）"
+    candidate_sources: [tongnianchilu_qer, mingjingtongpu_qer, tongguanlu, zhujuan, cbdb]
+  direct_3g_office_count:
+    role: exposure
+    required_source_capability: "父/祖/曾祖三代的任官记录"
+    candidate_sources: [tongguanlu, cbdb, sinica_authority, lvli_dangan]
+  direct_elite_generations:
+    role: exposure
+    required_source_capability: "三代各自的功名或任官二值"
+    candidate_sources: [tongnianchilu_qer, mingjingtongpu_qer, tongguanlu, cbdb]
+  max_direct_office_rank:
+    role: exposure
+    required_source_capability: "祖先官职 → 品级本体映射"
+    candidate_sources: [tongguanlu, cbdb, sinica_authority]
+  senior_collateral_degree_count:
+    role: exposure
+    required_source_capability: "伯叔/伯叔祖等长辈旁系的功名记录"
+    candidate_sources: [tongnianchilu_qer, mingjingtongpu_qer, tongguanlu, zhujuan]
+  senior_collateral_office_count:
+    role: exposure
+    required_source_capability: "长辈旁系的任官记录"
+    candidate_sources: [tongguanlu, zhujuan, cbdb]
+  all_senior_elite_kin_count:
+    role: exposure
+    required_source_capability: "全部长辈亲属（直系+旁系）的精英资格"
+    candidate_sources: [tongnianchilu_qer, mingjingtongpu_qer, tongguanlu, zhujuan]
+  kin_degree_density:
+    role: exposure
+    required_source_capability: "可观测亲属总数 + 其中具功名者数"
+    candidate_sources: [tongnianchilu_qer, mingjingtongpu_qer, tongguanlu]
+  kin_office_density:
+    role: exposure
+    required_source_capability: "可观测亲属总数 + 其中任官者数"
+    candidate_sources: [tongguanlu, zhujuan]
+  highest_office_rank:
+    role: outcome
+    required_source_capability: "纵向任职记录 + 官职品级"
+    candidate_sources: [cgedq_jsl, cbdb, lvli_dangan, sinica_authority]
+  highest_admin_level:
+    role: outcome
+    required_source_capability: "任职记录的行政层级（中央/省/府/县）"
+    candidate_sources: [cgedq_jsl, cbdb, lvli_dangan]
+  central_local_route:
+    role: outcome
+    required_source_capability: "任职序列的中央/地方轨迹"
+    candidate_sources: [cgedq_jsl, cbdb, lvli_dangan]
+  first_substantive_office:
+    role: outcome
+    required_source_capability: "实授/署理/候补状态 + 起任年份"
+    candidate_sources: [cgedq_jsl, lvli_dangan, tongguanlu]
+  time_to_rank:
+    role: outcome
+    required_source_capability: "功名年份 + 达到某品级的年份"
+    candidate_sources: [cgedq_jsl, lvli_dangan, tongguanlu]
+  career_length:
+    role: outcome
+    required_source_capability: "首次与末次任职年份"
+    candidate_sources: [cgedq_jsl, lvli_dangan]
+  appointment_regular_share:
+    role: outcome
+    required_source_capability: "选任方式（regular/expectant/acting）"
+    candidate_sources: [cgedq_jsl, tongguanlu, lvli_dangan]
+  acting_share:
+    role: outcome
+    required_source_capability: "署理标记"
+    candidate_sources: [cgedq_jsl, tongguanlu, lvli_dangan]

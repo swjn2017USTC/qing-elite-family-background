@@ -1,0 +1,20 @@
+........................................................................ [ 98%]
+.                                                                        [100%]
+=============================== warnings summary ===============================
+tests/test_p06_analysis.py::test_model_falls_back_when_the_full_formula_separates
+  /Users/wahrfreiheit/OMP/qing-elite-family-background/.venv/lib/python3.12/site-packages/statsmodels/regression/_tools.py:133: RuntimeWarning: divide by zero encountered in scalar divide
+    scale = np.dot(wresid, wresid) / df_resid
+
+tests/test_p06_analysis.py::test_model_falls_back_when_the_full_formula_separates
+  /Users/wahrfreiheit/OMP/qing-elite-family-background/.venv/lib/python3.12/site-packages/statsmodels/regression/_tools.py:133: RuntimeWarning: invalid value encountered in scalar divide
+    scale = np.dot(wresid, wresid) / df_resid
+
+tests/test_p06_analysis.py: 12 warnings
+  /Users/wahrfreiheit/OMP/qing-elite-family-background/.venv/lib/python3.12/site-packages/statsmodels/genmod/generalized_linear_model.py:1269: PerfectSeparationWarning: Perfect separation or prediction detected, parameter may not be identified
+    return self._fit_irls(
+
+tests/test_p06_analysis.py::test_model_falls_back_when_the_full_formula_separates
+  /Users/wahrfreiheit/OMP/qing-elite-family-background/.venv/lib/python3.12/site-packages/statsmodels/genmod/generalized_linear_model.py:1486: SingularMatrixWarning: The design matrix is rank-deficient. The model parameters are not uniquely determined.
+    wls_results = wls_model.fit(method=wls_method2)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
